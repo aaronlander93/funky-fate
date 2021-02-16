@@ -5,23 +5,25 @@ using UnityEngine;
 public class changeBg : MonoBehaviour
 {
     //Set these Textures in the Inspector
-    public Texture m_bg1, m_bg2;
-    Renderer m_Renderer;
-
-    // Use this for initialization
-    void Start () {
-        //Fetch the Renderer from the GameObject
-        m_Renderer = GetComponent<Renderer> ();
-
-        //Set the Texture you assign in the Inspector as the first bg
-        m_Renderer.material.SetTexture("m_bg1", m_bg1);
-        //Set the Texture you assign in the Inspector as the second bg
-        m_Renderer.material.SetTexture("m_bg2", m_bg2);
-    }
+    public Material[] mats = new Material[2];
+    public int currentTexture;
     
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0)){
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit)){
+                if (currentTexture == 0) {
+                    GetComponent<Renderer>().material = mats[0];
+                    currentTexture = 1;
+                }
+                else if (currentTexture == 1) {
+                    GetComponent<Renderer>().material = mats[1];
+                    currentTexture = 0;
+                }
+			}
+		}
     }
 }
