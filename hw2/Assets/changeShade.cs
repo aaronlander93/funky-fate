@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class changeBg : MonoBehaviour
+public class changeShade : MonoBehaviour
 {
     //Set these Textures in the Inspector
-    public Material[] mats = new Material[2];
-    public int curMat;
+    public Shader[] shade = new Shader[2];
+    public int curShader;
     
     // Update is called once per frame
     void Update()
@@ -15,13 +15,13 @@ public class changeBg : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)){
-                if (curMat == 0) {
-                    GetComponent<Renderer>().material = mats[0];
-                    curMat = 1;
+                if (curShader == 0) {
+                    GetComponent<Renderer>().material.shader = shade[0];
+                    curShader = 1;
                 }
-                else if (curMat == 1) {
-                    GetComponent<Renderer>().material = mats[1];
-                    curMat = 0;
+                else if (curShader == 1) {
+                    GetComponent<Renderer>().material.shader = shade[1];
+                    curShader = 0;
                 }
 			}
 		}
