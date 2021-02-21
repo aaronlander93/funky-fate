@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729f5368a521a534ebbe32b076b70fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: ade2
+  scene: acdeh2
 --- !u!4 &599629896
 Transform:
   m_ObjectHideFlags: 0
@@ -755,8 +755,8 @@ GameObject:
   - component: {fileID: 1536947074}
   - component: {fileID: 1536947073}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: FloorCube
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 1619712095}
   - component: {fileID: 1619712097}
   - component: {fileID: 1619712096}
+  - component: {fileID: 1619712098}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -910,6 +911,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1619712098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619712094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1a7942619da4a30bce7a5230dcf2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cube: {fileID: 2660992802222630274, guid: 6e0c06b8d4abc4f73a7acfcf9a39933e, type: 3}
 --- !u!1 &1831217074
 GameObject:
   m_ObjectHideFlags: 0
