@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ade.unity
+    path: Assets/Scenes/acdeh.unity
     guid: c27656f83587c664ca8b1d70322230d7
   - enabled: 1
-    path: Assets/Scenes/ade2.unity
+    path: Assets/Scenes/acdeh2.unity
     guid: 314b9b03ed81ad64faa47f3fecee2f27
   - enabled: 1
     path: Assets/Scenes/bfg.unity
