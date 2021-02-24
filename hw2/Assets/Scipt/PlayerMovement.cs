@@ -2,37 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-
-    public CharacterController controller;
-
-    public float speed = 12f;
-    public float gravity = -9.81f;
-
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
-
-    Vector3 velocity;
-    bool isGrounded;
-
+public class PlayerMovement : MonoBehaviour
+{
+    public CharacterController2D controller;
+    public Animator animator;
+    public float runSpeed = 40f;
+    public float horizontalMove = 0f;
+    bool jump = false;
+    bool crouch = false;
     // Update is called once per frame
-    void Update() {
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+    public float knockback;
+    public float knockbackLength;
+    public float knockbackCount;
+    public bool knockFromRight;
+    void Update()
+    {
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        if(isGrounded && velocity.y < 0) {
-            velocity.y = -2f;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+            animator.SetBool("isJumping", true);
         }
+        if (Input.GetButtonDown("Crouch"))
+        {
+            crouch = true;
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            crouch = false;
+        } 
+    }
+    public void OnLanding()
+    {
+        animator.SetBool("isJumping", false);
+    }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+    public void OnCrouching(bool isCrouching)
+    {
+        animator.SetBool("isCrouching", isCrouching);
+    }
+    private void FixedUpdate()
+    {
+        if (knockbackCount <= 0)
+        {
+            controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        }
+         else
+        {
+            if (knockFromRight)
+                controller.m_Rigidbody2D.velocity = new Vector2(-knockback, knockback);
+            if (!knockFromRight)
+                controller.m_Rigidbody2D.velocity = new Vector2(knockback, knockback);
+            knockbackCount -= Time.deltaTime;
+        }
+        jump = false;
+        
     }
 }
