@@ -12,9 +12,9 @@ public class Lighting : MonoBehaviour
         int night = 150;
         int day = 50;
 
-        if(Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.F))
         {
-            Debug.Log("W");
+            Debug.Log("F");
             Light.transform.eulerAngles = new Vector3(night, 0, 0);
         }
         else

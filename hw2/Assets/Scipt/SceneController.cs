@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public string scene = "acdeh";
+    public string scene = "abcdefgh";
 
     void Update()
     {
