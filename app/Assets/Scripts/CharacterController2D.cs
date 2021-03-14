@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿/*
+Code By: Andrew Sha
+This code moves the character around.
+Simply drag this code to the entity that wants to be controlled.
+There is also crouching that is determined by making a crouch
+in the game settings.
+This also flips the character when turning right to left.
+*/
+
+using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D: MonoBehaviour

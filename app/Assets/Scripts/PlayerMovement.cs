@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+This code is for the animation of the character.
+Drag this code to the entity that needs animation.
+Add variables in the animator:
+
+Speed
+isJumping
+isCrouching
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

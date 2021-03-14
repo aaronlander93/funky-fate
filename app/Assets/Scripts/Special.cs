@@ -1,4 +1,16 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+Code for special attack.
+Instantiates a "bullet" to fly out
+
+In Game settings, you can change Fire1 key
+
+IN ANIMATOR:
+
+make variable isSpecial
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

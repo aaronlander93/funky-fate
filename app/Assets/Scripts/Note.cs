@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+Apply weapon damage (which is a note)
+When note enters trigger box of enemy, deal damage to enemy
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
