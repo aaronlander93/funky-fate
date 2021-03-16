@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+Destroys weapon particles after playing it once
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

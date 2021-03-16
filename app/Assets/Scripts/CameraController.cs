@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+This code makes the camera follow a 2D entity around.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

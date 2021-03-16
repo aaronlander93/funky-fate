@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+Code By: Andrew Sha
+Enemy can get damaged code for testing purposes.
+Gives points to players.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
