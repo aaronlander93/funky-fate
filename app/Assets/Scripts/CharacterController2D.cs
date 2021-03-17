@@ -150,6 +150,6 @@ public class CharacterController2D: MonoBehaviour
         m_FacingRight = !m_FacingRight;
 
 
-        transform.Rotate(0f, 180, 0f);
+        transform.Rotate(0f, 180f, 0f);
     }
 }
