@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*
+Code By: Andrew Sha
+This code is for the animation of the character.
+Drag this code to the entity that needs animation.
+This code moves the character around.
+Simply drag this code to the entity that wants to be controlled.
+There is also crouching that is determined by making a crouch
+in the game settings.
+This also flips the character when turning right to left.
+Add variables in the animator:
+
+Speed
+isJumping
+isCrouching
+*/
 
 //////////SETUP INSTRUCTIONS//////////
 //Attach this script a RigidBody2D to the player GameObject
