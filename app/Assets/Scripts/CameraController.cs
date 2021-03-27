@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public CharacterController2D player;
+    public Movement2D player;
 
     public bool isFollowing;
 
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<CharacterController2D>();
+        player = FindObjectOfType<Movement2D>();
 
         isFollowing = true;
     }
