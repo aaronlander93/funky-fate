@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     public float knockbackLength;
     public float knockbackCount;
     public bool knockFromRight;
+
+    [SerializeField] private float jumpBufferTime = .1f;
+
+    private float jumpBufferCounter;
     void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -34,8 +38,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         if (Input.GetButtonDown("Jump"))
         {
+            jumpBufferCounter = jumpBufferTime;
             jump = true;
             animator.SetBool("isJumping", true);
+        }
+        else {
+            jumpBufferCounter -= Time.deltaTime;
         }
         if (Input.GetButtonDown("Crouch"))
         {
