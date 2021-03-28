@@ -74,9 +74,7 @@ public class TicTacToeController : MonoBehaviour {
             bool connected = networkManager.SendJoinRequest();
             if (!connected)
             {
-                messageBoxMsg.text = "Error starting game. Network returned invalid response.";
-				messageBox.SetActive(true);
-                //SetGameOverText("Unable to connect to server.", 40);
+                SetGameOverText("Unable to connect to server.", 40);
             }
 
             MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
