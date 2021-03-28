@@ -14,11 +14,7 @@ public class NetworkManager : MonoBehaviour
 
 		NetworkRequestTable.init();
 		NetworkResponseTable.init();
-	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
 		cManager = GetComponent<ConnectionManager>();
 
 		if (cManager)
