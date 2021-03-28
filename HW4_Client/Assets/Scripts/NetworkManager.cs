@@ -9,8 +9,6 @@ public class NetworkManager : MonoBehaviour
 
 	void Awake()
 	{
-		DontDestroyOnLoad(gameObject);
-
 		gameObject.AddComponent<MessageQueue>();
 		gameObject.AddComponent<ConnectionManager>();
 
@@ -26,8 +24,6 @@ public class NetworkManager : MonoBehaviour
 		if (cManager)
 		{
 			cManager.setupSocket();
-
-			StartCoroutine(RequestHeartbeat(0.1f));
 		}
 	}
 
@@ -49,18 +45,6 @@ public class NetworkManager : MonoBehaviour
 		{
 			RequestLeave request = new RequestLeave();
 			request.send();
-			cManager.send(request);
-			return true;
-		}
-		return false;
-	}
-
-	public bool SendSetNameRequest(string Name)
-	{
-		if (cManager && cManager.IsConnected())
-		{
-			RequestSetName request = new RequestSetName();
-			request.send(Name);
 			cManager.send(request);
 			return true;
 		}
@@ -89,31 +73,5 @@ public class NetworkManager : MonoBehaviour
 			return true;
 		}
 		return false;
-	}
-
-	public bool SendInteractRequest(int pieceIndex, int targetIndex)
-	{
-		if (cManager && cManager.IsConnected())
-		{
-			RequestInteract request = new RequestInteract();
-			request.send(pieceIndex, targetIndex);
-			cManager.send(request);
-			return true;
-		}
-		return false;
-	}
-
-	public IEnumerator RequestHeartbeat(float time)
-	{
-		yield return new WaitForSeconds(time);
-
-		if (cManager)
-		{
-			RequestHeartbeat request = new RequestHeartbeat();
-			request.send();
-			cManager.send(request);
-		}
-
-		StartCoroutine(RequestHeartbeat(time));
 	}
 }
