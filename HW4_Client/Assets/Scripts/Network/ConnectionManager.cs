@@ -86,10 +86,9 @@ public class ConnectionManager : MonoBehaviour
 		GamePacket packet = request.packet;
 		byte[] bytes = packet.getBytes();
 		theStream.Write(bytes, 0, bytes.Length);
-		if (request.request_id != Constants.CMSG_HEARTBEAT)
-		{
-			Debug.Log("Sent Request No. " + request.request_id + " [" + request.ToString() + "]");
-		}
+		
+		Debug.Log("Sent Request No. " + request.request_id + " [" + request.ToString() + "]");
+		
 	}
 
 	public bool IsConnected()

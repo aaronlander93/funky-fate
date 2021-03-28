@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: ce4b1140e8b5c3143829c5c2357f73c7
-  - enabled: 1
-    path: Assets/Scenes/Game.unity
+  - enabled: 0
+    path: Assets/Scenes/GameOld.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/TTTLocal.unity
+    guid: db43a0771f64d4aab8253643ba71c7b7
+  - enabled: 1
+    path: Assets/Scenes/TTTNetwork.unity
+    guid: 52a36954dfeda4d2e9121a3b3919beaa
   m_configObjects: {}
