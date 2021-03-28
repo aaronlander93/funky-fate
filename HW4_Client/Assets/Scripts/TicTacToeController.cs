@@ -74,9 +74,7 @@ public class TicTacToeController : MonoBehaviour {
             bool connected = networkManager.SendJoinRequest();
             if (!connected)
             {
-                messageBoxMsg.text = "Error starting game. Network returned invalid response.";
-				messageBox.SetActive(true);
-                //SetGameOverText("Unable to connect to server.", 40);
+                SetGameOverText("Unable to connect to server.", 40);
             }
 
             MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
@@ -186,15 +184,15 @@ public class TicTacToeController : MonoBehaviour {
 
     public void OnResponseJoin(ExtendedEventArgs eventArgs)
 	{
+        Debug.Log("RECEIVED JOIN RESPONSE");
 		ResponseJoinEventArgs args = eventArgs as ResponseJoinEventArgs;
 		if (args.status == 0)
 		{
-            // If you're already in the server, but recieve a join response
-			// i.e. the other player has joined
-			if(Constants.USER_ID != -1) {
-				// remove "waiting for opponent" message
-				gameOverPanel.SetActive(false);
-			}
+            if(Constants.USER_ID != -1)
+            {
+                Debug.Log("RECEIVED SECOND JOIN RESPONSE");
+                gameOverPanel.SetActive(false);
+            }
 			if(args.user_id != 1 && args.user_id != 2)
 			{
 				Debug.Log("ERROR: Invalid user_id in ResponseJoin: " + args.user_id);
@@ -255,6 +253,7 @@ public class TicTacToeController : MonoBehaviour {
     // TODO: add ready message box & button
 	public void OnResponseReady(ExtendedEventArgs eventArgs)
 	{
+        Debug.Log("RECEIVED READY RESPONSE");
 		ResponseReadyEventArgs args = eventArgs as ResponseReadyEventArgs;
 		if (Constants.USER_ID == -1) // Haven't joined, but got ready message
 		{
