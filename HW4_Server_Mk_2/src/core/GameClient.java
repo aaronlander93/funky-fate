@@ -159,6 +159,8 @@ public class GameClient implements Runnable {
         return player;
     }
 
+    public RegisteredUser getRegisteredUser() { return registeredUser; }
+
     public Player setPlayer(Player player) {
         return this.player = player;
     }
