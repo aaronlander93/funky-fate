@@ -15,16 +15,10 @@ public class Constants {
 	final public static short SMSG_JOIN = 201;
 	final public static short CMSG_LEAVE = 102;
 	final public static short SMSG_LEAVE = 202;
-	final public static short CMSG_SETNAME = 103;
-	final public static short SMSG_SETNAME = 203;
 	final public static short CMSG_READY = 104;
 	final public static short SMSG_READY = 204;
 	final public static short CMSG_MOVE = 105;
 	final public static short SMSG_MOVE = 205;
-	final public static short CMSG_INTERACT = 106;
-	final public static short SMSG_INTERACT = 206;
-
-	final public static short CMSG_HEARTBEAT = 111;
 
 	final public static int USER_ID = -1;
 	final public static int OP_ID = -1;

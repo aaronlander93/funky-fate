@@ -28,5 +28,7 @@ public class RequestLeave extends GameRequest {
         responseLeave.setPlayer(player);
 
         NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseLeave);
+        
+        client.end();
     }
 }

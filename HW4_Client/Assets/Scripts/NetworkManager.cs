@@ -53,6 +53,11 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
+	public void CloseNetworkSocket()
+    {
+		cManager.closeSocket();
+	}
+
 	public bool SendReadyRequest()
 	{
 		if (cManager && cManager.IsConnected())

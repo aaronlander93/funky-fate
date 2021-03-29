@@ -40,7 +40,7 @@ public class NetworkManager {
             if (player != null && client.getPlayer().getID() != player_id) {
                 System.out.println("SENDING RESPONSE TO " + client.getPlayer().getID());
                 System.out.println("THIS IS COMPARED TO " + player_id);                
-                client.sendResponse(response);
+                client.send(response);
             }
         }
     }

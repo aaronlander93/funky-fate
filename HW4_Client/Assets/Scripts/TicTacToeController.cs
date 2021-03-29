@@ -36,6 +36,7 @@ public class TicTacToeController : MonoBehaviour {
     private NetworkManager networkManager;
     private bool ready = false;
 	private bool opReady = false;
+    private bool opLeft = false;
     private GameObject messageBox;
     private GameObject readyMessageBox;
     private GameObject waitingForMoveMessage;
@@ -59,7 +60,9 @@ public class TicTacToeController : MonoBehaviour {
         SetPlayerColors(playerX, playerO);
 
         if(sceneName == "TTTNetwork") {
-            
+            Constants.USER_ID = -1;
+            Constants.OP_ID = -1;
+
             isNetworkGame = true;
             networkManager = GameObject.Find("Network Manager").GetComponent<NetworkManager>();
 
@@ -117,17 +120,7 @@ public class TicTacToeController : MonoBehaviour {
             networkManager.SendMoveRequest(buttonIndex);
             SetBoardInteractable(false);
         }
-
-        if (
-            buttonList [0].text == playerSide && buttonList [1].text == playerSide && buttonList [2].text == playerSide
-            || buttonList [3].text == playerSide && buttonList [4].text == playerSide && buttonList [5].text == playerSide
-            || buttonList [6].text == playerSide && buttonList [7].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [0].text == playerSide && buttonList [3].text == playerSide && buttonList [6].text == playerSide
-            || buttonList [1].text == playerSide && buttonList [4].text == playerSide && buttonList [7].text == playerSide
-            || buttonList [2].text == playerSide && buttonList [5].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [0].text == playerSide && buttonList [4].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [2].text == playerSide && buttonList [4].text == playerSide && buttonList [6].text == playerSide
-            ) {
+        if (CheckWin(playerSide)) {
             GameOver(playerSide);
         }
         else if(moveCount >= 9) {
@@ -135,12 +128,39 @@ public class TicTacToeController : MonoBehaviour {
         }
         else {
             ChangeSides();
+            if (isNetworkGame) {
+                waitingForMoveMessage.SetActive(true);
+            }
+        }
+    }
+
+    public bool CheckWin(string playerSide) {
+        if (
+            buttonList[0].text == playerSide && buttonList[1].text == playerSide && buttonList[2].text == playerSide
+            || buttonList[3].text == playerSide && buttonList[4].text == playerSide && buttonList[5].text == playerSide
+            || buttonList[6].text == playerSide && buttonList[7].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[0].text == playerSide && buttonList[3].text == playerSide && buttonList[6].text == playerSide
+            || buttonList[1].text == playerSide && buttonList[4].text == playerSide && buttonList[7].text == playerSide
+            || buttonList[2].text == playerSide && buttonList[5].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[0].text == playerSide && buttonList[4].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[2].text == playerSide && buttonList[4].text == playerSide && buttonList[6].text == playerSide
+            ) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     void GameOver(string winner) {
         SetBoardInteractable(false);
-        restartButton.SetActive(true);
+
+        if (isNetworkGame) {
+            ready = false;
+            opReady = false;
+            readyMessageBox.SetActive(true);
+        } else {
+            restartButton.SetActive(true);
+        }
 
         if(winner == "draw") { 
             SetGameOverText("It's a Draw!"); 
@@ -186,8 +206,10 @@ public class TicTacToeController : MonoBehaviour {
     public void OnResponseMove(ExtendedEventArgs eventArgs) {
         ResponseMoveEventArgs args = eventArgs as ResponseMoveEventArgs;
 
-        if(args.user_id != Constants.USER_ID) {
-            if(args.user_id == 1) {
+        //Debug.Log("args.user_id: " + args.user_id);
+        //Debug.Log("Constants.USER_ID: " + Constants.USER_ID);
+        if (args.user_id != Constants.USER_ID) {
+            if(args.user_id != 1) {
             buttonList[args.moveIndex].text = "O";
             }
             else {
@@ -196,13 +218,18 @@ public class TicTacToeController : MonoBehaviour {
 
             waitingForMoveMessage.SetActive(false);
 
-            for(int i = 0; i < buttonList.Length; i++) {
-                if(buttonList[i].text == "") {
-                    buttonList[i].transform.parent.gameObject.SetActive(true);
+            if (CheckWin(playerSide)) {
+                GameOver(playerSide);
+            } else {
+                for (int i = 0; i < buttonList.Length; i++)
+                {
+                    if (buttonList[i].text == "")
+                    {
+                        buttonList[i].GetComponentInParent<Button>().interactable = true;
+                    }
                 }
+                ChangeSides();
             }
-
-            ChangeSides();
         }
     }
 
@@ -278,12 +305,17 @@ public class TicTacToeController : MonoBehaviour {
 	public void OnResponseLeave(ExtendedEventArgs eventArgs)
 	{
 		ResponseLeaveEventArgs args = eventArgs as ResponseLeaveEventArgs;
-		if (args.user_id != Constants.USER_ID)
-		{
-			SetGameOverText("Waiting for opponent...", 40);
-			opReady = false;
-            RestartGame();
-		}
+        Debug.Log("args.user_id: " + args.user_id + " Constants.USER_ID: " + Constants.USER_ID);
+        if (args.user_id != Constants.USER_ID) {
+            SetBoardInteractable(false);
+            messageBoxMsg.text = "Opponent has left the game.";
+            messageBox.SetActive(true);
+            waitingForMoveMessage.SetActive(false);
+            opLeft = true;
+		} else {
+            networkManager.CloseNetworkSocket();
+            SceneManager.LoadScene("Main Menu");
+        }
 	}
 
 	public void OnResponseReady(ExtendedEventArgs eventArgs)
@@ -315,7 +347,15 @@ public class TicTacToeController : MonoBehaviour {
 
 		if (ready && opReady)
 		{
-            if(Constants.USER_ID == 1) {
+            playerSide = "X";
+            moveCount = 0;
+            gameOverPanel.SetActive(false);
+            for (int i = 0; i < buttonList.Length; i++)
+            {
+                buttonList[i].text = "";
+            }
+
+            if (Constants.USER_ID == 1) {
                 SetBoardInteractable(true);
             }
             else {
@@ -326,6 +366,9 @@ public class TicTacToeController : MonoBehaviour {
 
 	public void OnMessageButtonClick() {
 		messageBox.SetActive(false);
+        if (opLeft) {
+            networkManager.SendLeaveRequest();
+        }
 	}
 
     public void OnReadyClick() {
@@ -335,10 +378,10 @@ public class TicTacToeController : MonoBehaviour {
     }
 
     public void OnQuitToMenuClick() {
-        SceneManager.LoadScene("Main Menu");
-
-        if(isNetworkGame) {
+        if (isNetworkGame) {
             networkManager.SendLeaveRequest();
+        } else {
+            SceneManager.LoadScene("Main Menu");
         }
     }
 }

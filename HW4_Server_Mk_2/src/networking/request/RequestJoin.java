@@ -8,7 +8,6 @@ import core.GameServer;
 import core.NetworkManager;
 import model.Player;
 import networking.response.ResponseJoin;
-import networking.response.ResponseName;
 import utility.Log;
 
 /**
@@ -41,7 +40,6 @@ public class RequestJoin extends GameRequest {
             player.setID(id);
             gs.setActivePlayer(player);
 
-            player.setClient(client);
             // Pass Player reference into thread
             client.setPlayer(player);
             // Set response information

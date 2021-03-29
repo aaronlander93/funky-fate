@@ -163,12 +163,9 @@ public class GameClient implements Runnable {
     public boolean addResponseForUpdate(GameResponse response) {
         return updates.add(response);
     }
-    
-    public void sendResponse(GameResponse response) throws IOException {
-        send(response);
-    }
 
     public void send(GameResponse response) throws IOException {
+        System.out.println("SENDING RESPONSE TO: " + getID());
         outputStream.write(response.constructResponseInBytes());
     }
 
