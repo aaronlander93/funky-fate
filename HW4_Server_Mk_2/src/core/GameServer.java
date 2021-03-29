@@ -39,7 +39,6 @@ public class GameServer {
     // Reference Tables
     private Map<String, GameClient> activeThreads = new HashMap<String, GameClient>(); // Session ID -> Client
     private Map<Integer, Player> activePlayers = new HashMap<Integer, Player>(); // Player ID -> Player
-    private Map<String, String> registeredUsers = new HashMap<String, String>(); // Username -> Password
 
     private boolean[] occupied = new boolean[2];
     /**
@@ -172,7 +171,6 @@ public class GameServer {
         occupied[player_id - 1] = false;
     }
 
-    public  Map<String, String> getRegisteredUsers() { return this.registeredUsers; }
     public int getID() {
         int id = 0;
         int i = 0;
