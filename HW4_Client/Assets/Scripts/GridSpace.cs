@@ -7,6 +7,7 @@ public class GridSpace : MonoBehaviour {
     
     public Button button;
     public Text buttonText;
+    public int buttonIndex;
 
     private TicTacToeController controller;
 
@@ -17,6 +18,6 @@ public class GridSpace : MonoBehaviour {
     public void SetSpace() {
         buttonText.text = controller.GetPlayerSide();
         button.interactable = false;
-        controller.EndTurn();
+        controller.EndTurn(buttonIndex);
     }
 }

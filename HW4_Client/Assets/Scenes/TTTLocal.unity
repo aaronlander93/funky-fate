@@ -2082,7 +2082,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1335978236}
-        m_MethodName: QuitToMenuOnClick
+        m_MethodName: OnQuitToMenuClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
