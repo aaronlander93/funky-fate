@@ -76,7 +76,6 @@ public class GameClient implements Runnable {
             try {
                 // Extract the size of the package from the data stream
                 short requestLength = DataReader.readShort(dataInputStream);
-
                 if (requestLength > 0) {
                     lastActivity = System.currentTimeMillis();
                     // Separate the remaining package from the data stream
@@ -163,6 +162,10 @@ public class GameClient implements Runnable {
 
     public boolean addResponseForUpdate(GameResponse response) {
         return updates.add(response);
+    }
+    
+    public void sendResponse(GameResponse response) throws IOException {
+        send(response);
     }
 
     public void send(GameResponse response) throws IOException {

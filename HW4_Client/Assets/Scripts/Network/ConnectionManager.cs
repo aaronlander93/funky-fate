@@ -19,6 +19,7 @@ public class ConnectionManager : MonoBehaviour
 	}
 
 	public void setupSocket() {
+		Debug.Log("SETUPSOCKET");
 		if (socketReady)
 		{
 			Debug.Log("Already Connected");
@@ -61,6 +62,7 @@ public class ConnectionManager : MonoBehaviour
 				if (args != null)
 				{
 					MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
+					Debug.Log("MESSAGE RECEIVED " + args.event_id);
 					msgQueue.AddMessage(args.event_id, args);
 				}
 			}
