@@ -72,9 +72,14 @@ public class GameplayController : MonoBehaviour
                 p1_choice = "Scissors";
                 break;
         }
-        
-        //if p2 made choice first, call play and send results
         networkManager.SendMoveRequest(currentPlayer, p1_choice);
+        
+        print ("p2's choice is: " + p2_choice);
+
+        if (!string.IsNullOrEmpty(p2_choice)) {
+            print("p2 choice is not empty");
+            animationController.PlayerMadeChoice();
+        }
     }
 
     IEnumerator DisplayWinnerAndMoveOn(int player) {
@@ -104,7 +109,19 @@ public class GameplayController : MonoBehaviour
     }
 
     public void OnResponseMove(ExtendedEventArgs eventArgs) {
-        if (p1_choice != "")
-            animationController.PlayerMadeChoice();
+        ResponseMoveEventArgs args = eventArgs as ResponseMoveEventArgs;
+        if (args.user_id == Constants.OP_ID)
+		{
+            p2_choice = args.move;
+            print ("p1's choice is: " + p1_choice);
+            if (!string.IsNullOrEmpty(p1_choice)) {
+                print("p1 choice is not empty");
+                animationController.PlayerMadeChoice();
+            }
+		}
+		else if (args.user_id == Constants.USER_ID)
+		{
+			// Ignore
+		}
     }
 }

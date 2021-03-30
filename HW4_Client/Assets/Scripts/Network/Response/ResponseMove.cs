@@ -16,7 +16,7 @@ public class ResponseMoveEventArgs : ExtendedEventArgs
 public class ResponseMove : NetworkResponse
 {
 	private int user_id;
-	private string move;
+	private string move = "";
 
 	public ResponseMove()
 	{
