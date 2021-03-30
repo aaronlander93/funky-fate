@@ -80,8 +80,25 @@ public class GameplayController : MonoBehaviour
         print ("p2's choice is: " + p2_choice);
 
         if (!string.IsNullOrEmpty(p2_choice)) {
-            print("p2 choice is not empty");
+            setP2Choice();
             animationController.PlayerMadeChoice();
+        }
+    }
+
+    private void setP2Choice() {
+        switch(p2_choice) {
+            case "Rock":
+                p2_choice_img.sprite = rock;
+                p2_choice = "Rock";
+                break;
+            case "Paper":
+                p2_choice_img.sprite = paper;
+                p2_choice = "Paper";
+                break;
+            case "Scissors":
+                p2_choice_img.sprite = scissors;
+                p2_choice = "Scissors";
+                break;
         }
     }
 
@@ -116,9 +133,8 @@ public class GameplayController : MonoBehaviour
         if (args.user_id == Constants.OP_ID)
 		{
             p2_choice = args.move;
-            print ("p1's choice is: " + p1_choice);
             if (!string.IsNullOrEmpty(p1_choice)) {
-                print("p1 choice is not empty");
+                setP2Choice();
                 animationController.PlayerMadeChoice();
             }
 		}
