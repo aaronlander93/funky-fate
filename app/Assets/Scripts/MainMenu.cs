@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Author:      Niall
+// Purpose:     Manage the functions of the main menu buttons
+// Changelog:   3/29/21 - created
+
 public class MainMenu : MonoBehaviour
 {
     public void OnStartGameClick() {
