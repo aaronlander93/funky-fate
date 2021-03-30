@@ -72,3 +72,6 @@ crashlytics-build.properties
 
 # Wwise API folder
 /[Aa]ssets/Wwise/API/Runtime/Plugins
+
+# Wwise cache file
+/[Aa]ssets/Wwise/Editor/ProjectData
