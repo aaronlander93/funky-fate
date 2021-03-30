@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 	private GameObject rootMenuPanel;
-	private GameObject hotseatMenuPanel;
 	private GameObject networkMenuPanel;
 
 	private GameObject messageBox;
@@ -23,6 +22,7 @@ public class MainMenu : MonoBehaviour
 	private GameObject playerInput;
 	private GameObject opponentInput;
 
+    private GameplayController gameplayController;
 	private NetworkManager networkManager;
 	private MessageQueue msgQueue;
 
@@ -36,7 +36,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
 		rootMenuPanel = GameObject.Find("Root Menu");
-		hotseatMenuPanel = GameObject.Find("Hotseat Menu");
 		networkMenuPanel = GameObject.Find("Network Menu");
 
 		messageBox = GameObject.Find("Message Box");
@@ -56,18 +55,11 @@ public class MainMenu : MonoBehaviour
 		msgQueue.AddCallback(Constants.SMSG_READY, OnResponseReady);
 
 		rootMenuPanel.SetActive(true);
-		hotseatMenuPanel.SetActive(false);
 		networkMenuPanel.SetActive(false);
 		messageBox.SetActive(false);
 	}
 
 	#region RootMenu
-	public void OnHotseatClick()
-	{
-		rootMenuPanel.SetActive(false);
-		hotseatMenuPanel.SetActive(true);
-	}
-
 	public void OnNetworkClick()
 	{
 		Debug.Log("Send JoinReq");
@@ -87,22 +79,14 @@ public class MainMenu : MonoBehaviour
 		Application.Quit();
 #endif
 	}
-	#endregion
+    #endregion
 
-	#region HotseatMenu
-	public void OnStartClick()
-	{
-		StartHotseatGame();
-	}
-
-	public void OnBackClick()
-	{
-		rootMenuPanel.SetActive(true);
-		hotseatMenuPanel.SetActive(false);
-		networkMenuPanel.SetActive(false);
-		messageBox.SetActive(false);
-	}
-	#endregion
+    public void OnBackClick()
+    {
+        rootMenuPanel.SetActive(true);
+        networkMenuPanel.SetActive(false);
+        messageBox.SetActive(false);
+    }
 
 	#region NetworkMenu
 	public void OnResponseJoin(ExtendedEventArgs eventArgs)
@@ -263,29 +247,10 @@ public class MainMenu : MonoBehaviour
 		messageBox.SetActive(false);
 	}
 
-	private void StartHotseatGame()
-	{
-		GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-		string p1Name = GameObject.Find("HotPlayer1Name").GetComponent<TMPro.TextMeshProUGUI>().text;
-		if (p1Name.Length == 1)
-		{
-			p1Name = "Player 1";
-		}
-		string p2Name = GameObject.Find("HotPlayer2Name").GetComponent<TMPro.TextMeshProUGUI>().text;
-		if (p2Name.Length == 1)
-		{
-			p2Name = "Player 2";
-		}
-		Player player1 = new Player(1, p1Name, new Color(0.9f, 0.1f, 0.1f), true);
-		Player player2 = new Player(2, p2Name, new Color(0.2f, 0.2f, 1.0f), true);
-		gameManager.Init(player1, player2);
-		SceneManager.LoadScene("Game");
-	}
-
 	private void StartNetworkGame()
 	{
-		GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-		if (p1Name.Length == 0)
+        gameplayController = GameObject.Find("Game Manager").GetComponent<GameplayController>();
+        if (p1Name.Length == 0)
 		{
 			p1Name = "Player 1";
 		}
@@ -293,9 +258,9 @@ public class MainMenu : MonoBehaviour
 		{
 			p2Name = "Player 2";
 		}
-		Player player1 = new Player(1, p1Name, new Color(0.9f, 0.1f, 0.1f), Constants.USER_ID == 1);
-		Player player2 = new Player(2, p2Name, new Color(0.2f, 0.2f, 1.0f), Constants.USER_ID == 2);
-		gameManager.Init(player1, player2);
-		SceneManager.LoadScene("Game");
+		Player player1 = new Player(1, p1Name);
+		Player player2 = new Player(2, p2Name);
+		gameplayController.Init(player1, player2);
+		SceneManager.LoadScene("RockPaperScissors");
 	}
 }

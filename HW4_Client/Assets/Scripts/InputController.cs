@@ -18,17 +18,17 @@ public class InputController : MonoBehaviour
         string choice = UnityEngine.EventSystems.
             EventSystem.current.currentSelectedGameObject.name;
 
-        GameChoices selectedChoice = GameChoices.NONE;
+        string selectedChoice = "";
 
         switch(choice) {
             case "Rock":
-                selectedChoice = GameChoices.ROCK;
+                selectedChoice = "Rock";
                 break;
             case "Paper":
-                selectedChoice = GameChoices.PAPER;
+                selectedChoice = "Paper";
                 break;
             case "Scissors":
-                selectedChoice = GameChoices.SCISSORS;
+                selectedChoice = "Scissors";
                 break;
         }
 

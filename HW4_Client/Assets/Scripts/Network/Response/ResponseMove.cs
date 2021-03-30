@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using NetworkRequest.RequestMove;
-
 public class ResponseMoveEventArgs : ExtendedEventArgs
 {
 	public int user_id { get; set; } // The user_id of whom who sent the request
@@ -35,7 +33,7 @@ public class ResponseMove : NetworkResponse
 		ResponseMoveEventArgs args = new ResponseMoveEventArgs
 		{
 			user_id = user_id,
-			move = move;
+			move = move
 		};
 
 		return args;
