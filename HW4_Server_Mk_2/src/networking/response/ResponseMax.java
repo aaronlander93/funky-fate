@@ -6,6 +6,10 @@ import utility.GamePacket;
 
 public class ResponseMax extends GameResponse {
 
+    public ResponseMax() {
+        responseCode = Constants.SMSG_MAX;
+    }
+
     @Override
     public byte[] constructResponseInBytes() {
         GamePacket packet = new GamePacket(responseCode);

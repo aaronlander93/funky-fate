@@ -21,7 +21,7 @@ public class GameplayController : MonoBehaviour
 
     private AnimationController animationController;
 
-    private int max_score = 3;
+    private int max_score;
 
     private int p1_id, p2_id;
     private int p1_score = 0, p2_score = 0;
@@ -38,6 +38,9 @@ public class GameplayController : MonoBehaviour
         networkManager = GameObject.Find("Network Manager").GetComponent<NetworkManager>();
         MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
         msgQueue.AddCallback(Constants.SMSG_MOVE, OnResponseMove);
+        msgQueue.AddCallback(Constants.SMSG_MAX, OnResponseMax);
+
+        networkManager.SendMaxRequest();
     }
 
     public Player GetCurrentPlayer()
@@ -123,5 +126,12 @@ public class GameplayController : MonoBehaviour
 		{
 			// Ignore
 		}
+    }
+
+    public void OnResponseMax(ExtendedEventArgs eventArgs)
+    {
+        ResponseMaxEventArgs args = eventArgs as ResponseMaxEventArgs;
+
+        max_score = args.max;
     }
 }

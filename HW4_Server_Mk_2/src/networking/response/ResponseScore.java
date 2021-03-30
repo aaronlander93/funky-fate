@@ -1,5 +1,6 @@
 package networking.response;
 
+import metadata.Constants;
 import model.Player;
 import utility.GamePacket;
 import utility.Log;
@@ -7,6 +8,10 @@ import utility.Log;
 public class ResponseScore extends GameResponse {
 
     private Player player;
+
+    public ResponseScore() {
+        responseCode = Constants.SMSG_SCORE;
+    }
 
     @Override
     public byte[] constructResponseInBytes() {
