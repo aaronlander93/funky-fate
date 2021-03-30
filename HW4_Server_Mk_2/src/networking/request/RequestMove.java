@@ -27,12 +27,10 @@ public class RequestMove extends GameRequest {
     @Override
     public void doBusiness() throws Exception {
         Player player = client.getPlayer();
+        responseMove.setPlayer(player);
 
-        if(playerId == player.getID()) {
-            responseMove.setPlayer(player);
-            responseMove.setData(move);
+        responseMove.setData(move);
 
-            NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseMove);
-        }
+        NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseMove);
     }
 }

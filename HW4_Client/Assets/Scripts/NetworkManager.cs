@@ -79,24 +79,12 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
-	public bool SendMoveRequest(int pieceIndex, int x, int y)
+	public bool SendMoveRequest(int id, String move)
 	{
 		if (cManager && cManager.IsConnected())
 		{
 			RequestMove request = new RequestMove();
-			request.send(pieceIndex, x, y);
-			cManager.send(request);
-			return true;
-		}
-		return false;
-	}
-
-	public bool SendInteractRequest(int pieceIndex, int targetIndex)
-	{
-		if (cManager && cManager.IsConnected())
-		{
-			RequestInteract request = new RequestInteract();
-			request.send(pieceIndex, targetIndex);
+			request.send(id, move);
 			cManager.send(request);
 			return true;
 		}

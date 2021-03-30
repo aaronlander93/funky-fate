@@ -9,9 +9,10 @@ public class RequestMove : NetworkRequest
 		request_id = Constants.CMSG_MOVE;
 	}
 
-	public void send(string move)
+	public void send(int id, string move)
 	{
 		packet = new GamePacket(request_id);
+        packet.addInt32(id);
 		packet.addString(move);
 	}
 }
