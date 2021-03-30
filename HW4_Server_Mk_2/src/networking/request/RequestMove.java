@@ -10,8 +10,8 @@ import utility.DataReader;
 import core.NetworkManager;
 
 public class RequestMove extends GameRequest {
-    private int pieceIndex, x, y;
-    // Responses
+    private int playerId;
+    private String move;
     private ResponseMove responseMove;
 
     public RequestMove() {
@@ -20,17 +20,19 @@ public class RequestMove extends GameRequest {
 
     @Override
     public void parse() throws IOException {
-        pieceIndex = DataReader.readInt(dataInput);
-        x = DataReader.readInt(dataInput);
-        y = DataReader.readInt(dataInput);
+        playerId = DataReader.readInt(dataInput);
+        move = DataReader.readString(dataInput);
     }
 
     @Override
     public void doBusiness() throws Exception {
         Player player = client.getPlayer();
 
-        responseMove.setPlayer(player);
-        responseMove.setData(pieceIndex, x, y);
-        NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseMove);
+        if(playerId == player.getID()) {
+            responseMove.setPlayer(player);
+            responseMove.setData(move);
+
+            NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseMove);
+        }
     }
 }

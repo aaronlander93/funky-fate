@@ -23,11 +23,16 @@ public class Constants {
 	final public static short SMSG_MOVE = 205;
 	final public static short CMSG_INTERACT = 106;
 	final public static short SMSG_INTERACT = 206;
-	final public static short CMSG_REGISTRATION = 107;
-	final public static short SMSG_REGISTRATION = 207;
+	final public static short CMSG_SCORE = 107;
+	final public static short SMSG_SCORE = 207;
+	final public static short CMSG_MAX = 108;
+	final public static short SMSG_MAX = 208;
+	final public static short CMSG_RESULT = 109;
+	final public static short SMSG_RESULT = 209;
 
 	final public static short CMSG_HEARTBEAT = 111;
 
 	final public static int USER_ID = -1;
 	final public static int OP_ID = -1;
+	final public static int MAX_SCORE = 5;
 }
