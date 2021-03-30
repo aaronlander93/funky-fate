@@ -39,7 +39,7 @@ public class GameClient implements Runnable {
     private Queue<GameResponse> updates; // Temporarily store responses for client
     // Other Variables
     private Player player;
-
+    
     /**
      * Initialize the GameClient using the client socket and creating both input
      * and output streams.
