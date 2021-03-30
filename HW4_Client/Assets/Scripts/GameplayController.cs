@@ -17,7 +17,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private Text p1_score_text, p2_score_text;
 
-    private string p1_choice, p2_choice;
+    private string p1_choice = "", p2_choice = "";
 
     private AnimationController animationController;
 
@@ -34,10 +34,16 @@ public class GameplayController : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
         networkManager = GameObject.Find("Network Manager").GetComponent<NetworkManager>();
         MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
+        msgQueue.AddCallback(Constants.SMSG_MOVE, OnResponseMove);
     }
+
+    public Player GetCurrentPlayer()
+	{
+		return Players[currentPlayer - 1];
+	}
 
     void Awake() {
         animationController = GetComponent<AnimationController>();
@@ -66,7 +72,8 @@ public class GameplayController : MonoBehaviour
                 p1_choice = "Scissors";
                 break;
         }
-
+        
+        //if p2 made choice first, call play and send results
         networkManager.SendMoveRequest(currentPlayer, p1_choice);
     }
 
@@ -96,8 +103,8 @@ public class GameplayController : MonoBehaviour
         }
     }
 
-    public void OnResponseMove(ExtendedEventArgs eventArgs)
-    {
-
+    public void OnResponseMove(ExtendedEventArgs eventArgs) {
+        if (p1_choice != "")
+            animationController.PlayerMadeChoice();
     }
 }

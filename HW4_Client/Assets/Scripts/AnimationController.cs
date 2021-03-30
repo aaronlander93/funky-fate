@@ -14,7 +14,6 @@ public class AnimationController : MonoBehaviour
 
     public void PlayerMadeChoice() {
         playerChoiceHandlerAnimation.Play("RemoveHandler");
-        //requestMove/reponseMove
         choiceAnimation.Play("ShowChoices");
     }
 }
