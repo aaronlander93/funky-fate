@@ -9,12 +9,15 @@ public class NetworkRequestTable {
 	
 	public static void init() {
 		requestTable = new Dictionary<short, Type>();
-		add(Constants.CMSG_JOIN, "RequestJoin");
-		add(Constants.CMSG_LEAVE, "RequestLeave");
-		add(Constants.CMSG_SETNAME, "RequestSetName");
-		add(Constants.CMSG_READY, "RequestReady");
-		add(Constants.CMSG_MOVE, "RequestMove");
-		add(Constants.CMSG_INTERACT, "RequestInteract");
+		add(Constants.CMSG_JOIN, "RequestJoin"); 			//101
+		add(Constants.CMSG_LEAVE, "RequestLeave"); 			//102
+		add(Constants.CMSG_SETNAME, "RequestSetName"); 		//103
+		add(Constants.CMSG_READY, "RequestReady"); 			//104
+		add(Constants.CMSG_MOVE, "RequestMove"); 			//105
+		add(Constants.CMSG_INTERACT, "RequestInteract");	//106
+		add(Constants.CMSG_SCORE, "RequestScore");			//107
+		add(Constants.CMSG_MAX, "RequestMax");				//108
+		add(Constants.CMSG_RESULT, "RequestResult");		//109
 	}
 	
 	public static void add(short request_id, string name) {
