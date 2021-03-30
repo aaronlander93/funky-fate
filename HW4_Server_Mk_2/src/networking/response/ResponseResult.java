@@ -1,9 +1,14 @@
 package networking.response;
 
+import metadata.Constants;
 import utility.GamePacket;
 
 public class ResponseResult extends GameResponse {
     private int result;
+
+    public ResponseResult() {
+        responseCode = Constants.SMSG_RESULT;
+    }
 
     @Override
     public byte[] constructResponseInBytes() {

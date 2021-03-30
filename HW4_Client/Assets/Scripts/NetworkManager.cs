@@ -79,6 +79,18 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
+    public bool SendMaxRequest()
+    {
+        if (cManager && cManager.IsConnected())
+        {
+            RequestMax request = new RequestMax();
+            request.send();
+            cManager.send(request);
+            return true;
+        }
+        return false;
+    }
+
 	public bool SendMoveRequest(int id, String move)
 	{
 		if (cManager && cManager.IsConnected())
