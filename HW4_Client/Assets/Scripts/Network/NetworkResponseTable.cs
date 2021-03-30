@@ -9,12 +9,15 @@ public class NetworkResponseTable {
 	
 	public static void init() {
 		responseTable = new Dictionary<short, Type>();
-		add(Constants.SMSG_JOIN, "ResponseJoin");
-		add(Constants.SMSG_LEAVE, "ResponseLeave");
-		add(Constants.SMSG_SETNAME, "ResponseSetName");
-		add(Constants.SMSG_READY, "ResponseReady");
-		add(Constants.SMSG_MOVE, "ResponseMove");
-		add(Constants.SMSG_INTERACT, "ResponseInteract");
+		add(Constants.SMSG_JOIN, "ResponseJoin"); 			//201
+		add(Constants.SMSG_LEAVE, "ResponseLeave"); 		//202
+		add(Constants.SMSG_SETNAME, "ResponseSetName"); 	//203
+		add(Constants.SMSG_READY, "ResponseReady"); 		//204
+		add(Constants.SMSG_MOVE, "ResponseMove"); 			//205
+		add(Constants.SMSG_INTERACT, "ResponseInteract"); 	//206
+		add(Constants.SMSG_SCORE, "ResponseScore"); 		//207
+		add(Constants.SMSG_MAX, "ResponseMax"); 			//208
+		add(Constants.SMSG_RESULT, "ResponseResult"); 		//209
 	}
 	
 	public static void add(short response_id, string name) {
