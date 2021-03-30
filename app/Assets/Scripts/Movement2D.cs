@@ -35,6 +35,7 @@ public class Movement2D : MonoBehaviour
     bool crouch = false;
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+    [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 
     [Header("Layer Masks")]
     [SerializeField] private LayerMask _groundLayer;
@@ -185,21 +186,22 @@ public class Movement2D : MonoBehaviour
 
     private void MoveCharacter()
     {
-        _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
-
-        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
-        if (!crouch)
+        
+       //only control the player if grounded or airControl is turned on
+        if (_onGround || m_AirControl)
+        {
+            if (!crouch)
         {
             // If the character has a ceiling preventing them from standing up, keep them crouching
             if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, _groundLayer))
             {
                 crouch = true;
             }
+            else
+            {
+                crouch = false;
+            }
         }
-        //only control the player if grounded or airControl is turned on
-        if (_onGround)
-        {
 
             // If crouching
             if (crouch)
@@ -223,6 +225,7 @@ public class Movement2D : MonoBehaviour
                 if (m_CrouchDisableCollider != null)
                     m_CrouchDisableCollider.enabled = true;
 
+                    
                 if (m_wasCrouching)
                 {
                     m_wasCrouching = false;
@@ -231,6 +234,10 @@ public class Movement2D : MonoBehaviour
             }
 
     }
+    _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+
+        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
     }
 
     private void ApplyLinearDrag()
@@ -464,16 +471,22 @@ public class Movement2D : MonoBehaviour
 
     private void CheckCollisions()
     {
+        
         //Ground Collisions
         _onGround = Physics2D.Raycast(transform.position + _groundRaycastOffset, Vector2.down, _groundRaycastLength, _groundLayer) ||
                     Physics2D.Raycast(transform.position - _groundRaycastOffset, Vector2.down, _groundRaycastLength, _groundLayer);
 
         //Corner Collisions
+        if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, _groundLayer))
+            {
+                crouch = true;
+                if(!crouch){
         _canCornerCorrect = Physics2D.Raycast(transform.position + _edgeRaycastOffset, Vector2.up, _topRaycastLength, _groundLayer) &&
                             !Physics2D.Raycast(transform.position + _innerRaycastOffset, Vector2.up, _topRaycastLength, _groundLayer) ||
                             Physics2D.Raycast(transform.position - _edgeRaycastOffset, Vector2.up, _topRaycastLength, _groundLayer) &&
                             !Physics2D.Raycast(transform.position - _innerRaycastOffset, Vector2.up, _topRaycastLength, _groundLayer);
-
+        }
+        }
         //Wall Collisions
         _onWall = Physics2D.Raycast(transform.position, Vector2.right, _wallRaycastLength, _wallLayer) ||
                     Physics2D.Raycast(transform.position, Vector2.left, _wallRaycastLength, _wallLayer);
