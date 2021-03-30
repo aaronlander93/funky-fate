@@ -331,7 +331,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1434981247}
+      - m_Target: {fileID: 1129285359}
         m_MethodName: GetChoice
         m_Mode: 1
         m_Arguments:
@@ -761,6 +761,85 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1129285358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129285362}
+  - component: {fileID: 1129285361}
+  - component: {fileID: 1129285360}
+  - component: {fileID: 1129285359}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1129285359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129285358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb59ad28fd34b2742a1d6ceee717e3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1129285360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129285358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2395e3148be8b041a5801a75c3b5671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rock: {fileID: 21300000, guid: 06d8c651c7f7e5a47a516eadc46dac2c, type: 3}
+  paper: {fileID: 21300000, guid: dfcc7324594b8f34e953106aa4fe25a7, type: 3}
+  scissors: {fileID: 21300000, guid: 3d134e77ef40560419e61c798e4b0905, type: 3}
+  p1_choice_img: {fileID: 1883096282}
+  p2_choice_img: {fileID: 645851189}
+  info: {fileID: 560147427}
+  p1_score_text: {fileID: 503334867}
+  p2_score_text: {fileID: 421088131}
+--- !u!114 &1129285361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129285358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f1722a807547c4ebca9f460376c9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerChoiceHandlerAnimation: {fileID: 197947027}
+  choiceAnimation: {fileID: 1239913581}
+--- !u!4 &1129285362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129285358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.377357, y: -140.83054, z: 1324.6155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239913579
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,85 +975,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348075172}
   m_CullTransparentMesh: 0
---- !u!1 &1434981244
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1434981246}
-  - component: {fileID: 1434981245}
-  - component: {fileID: 1434981248}
-  - component: {fileID: 1434981247}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1434981245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434981244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f1722a807547c4ebca9f460376c9ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerChoiceHandlerAnimation: {fileID: 197947027}
-  choiceAnimation: {fileID: 1239913581}
---- !u!4 &1434981246
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434981244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.377357, y: -140.83054, z: 1324.6155}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1434981247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434981244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb59ad28fd34b2742a1d6ceee717e3e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1434981248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434981244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2395e3148be8b041a5801a75c3b5671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rock: {fileID: 21300000, guid: 06d8c651c7f7e5a47a516eadc46dac2c, type: 3}
-  paper: {fileID: 21300000, guid: dfcc7324594b8f34e953106aa4fe25a7, type: 3}
-  scissors: {fileID: 21300000, guid: 3d134e77ef40560419e61c798e4b0905, type: 3}
-  p1_choice_img: {fileID: 1883096282}
-  p2_choice_img: {fileID: 645851189}
-  info: {fileID: 560147427}
-  p1_score_text: {fileID: 503334867}
-  p2_score_text: {fileID: 421088131}
 --- !u!1 &1542067155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1434981247}
+      - m_Target: {fileID: 1129285359}
         m_MethodName: GetChoice
         m_Mode: 1
         m_Arguments:
@@ -1428,7 +1428,7 @@ GameObject:
   - component: {fileID: 1947596206}
   - component: {fileID: 1947596205}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Game Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1434981247}
+      - m_Target: {fileID: 1129285359}
         m_MethodName: GetChoice
         m_Mode: 1
         m_Arguments:

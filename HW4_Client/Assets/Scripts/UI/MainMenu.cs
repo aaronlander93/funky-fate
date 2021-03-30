@@ -247,8 +247,14 @@ public class MainMenu : MonoBehaviour
 		messageBox.SetActive(false);
 	}
 
-	private void StartNetworkGame()
+	private void StartNetworkGame() {
+		StartCoroutine(StartNetworkGame_coroutine());
+	}
+
+	IEnumerator StartNetworkGame_coroutine()
 	{
+		SceneManager.LoadScene("RockPaperScissors");
+		yield return null;
         gameplayController = GameObject.Find("Game Manager").GetComponent<GameplayController>();
         if (p1Name.Length == 0)
 		{
@@ -261,6 +267,5 @@ public class MainMenu : MonoBehaviour
 		Player player1 = new Player(1, p1Name);
 		Player player2 = new Player(2, p2Name);
 		gameplayController.Init(player1, player2);
-		SceneManager.LoadScene("RockPaperScissors");
 	}
 }
