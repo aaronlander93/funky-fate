@@ -39,8 +39,12 @@ public class GameplayController : MonoBehaviour
         MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
         msgQueue.AddCallback(Constants.SMSG_MOVE, OnResponseMove);
         msgQueue.AddCallback(Constants.SMSG_MAX, OnResponseMax);
+        msgQueue.AddCallback(Constants.SMSG_SCORE, OnResponseScore);
+        msgQueue.AddCallback(Constants.SMSG_RESULT, OnResponseResult);
 
-        networkManager.SendMaxRequest();
+        //networkManager.SendMaxRequest();
+        //networkManager.SendScoreRequest(1, 3);
+        //networkManager.SendResultRequest("Rock", "Paper");
     }
 
     public Player GetCurrentPlayer()
@@ -133,5 +137,28 @@ public class GameplayController : MonoBehaviour
         ResponseMaxEventArgs args = eventArgs as ResponseMaxEventArgs;
 
         max_score = args.max;
+    }
+
+    public void OnResponseScore(ExtendedEventArgs eventArgs)
+    {
+        ResponseScoreEventArgs args = eventArgs as ResponseScoreEventArgs;
+
+        if (args.user_id == Constants.OP_ID)
+        {
+            p2_score = args.score;
+            print("p2 score is: " + p2_score);
+            // Maybe update scoreboard here
+        }
+        else if (args.user_id == Constants.USER_ID)
+        {
+            // Ignore
+        }
+    }
+
+    public void OnResponseResult(ExtendedEventArgs eventArgs)
+    {
+        ResponseResultEventArgs args = eventArgs as ResponseResultEventArgs;
+
+        // Play result animation
     }
 }
