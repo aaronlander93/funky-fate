@@ -42,9 +42,9 @@ public class GameplayController : MonoBehaviour
         msgQueue.AddCallback(Constants.SMSG_SCORE, OnResponseScore);
         msgQueue.AddCallback(Constants.SMSG_RESULT, OnResponseResult);
 
+        // networkManager.SendResultRequest("Rock", "Paper");
         //networkManager.SendMaxRequest();
         //networkManager.SendScoreRequest(1, 3);
-        //networkManager.SendResultRequest("Rock", "Paper");
     }
 
     public Player GetCurrentPlayer()
@@ -86,6 +86,7 @@ public class GameplayController : MonoBehaviour
         if (!string.IsNullOrEmpty(p2_choice)) {
             setP2Choice();
             animationController.PlayerMadeChoice();
+            networkManager.SendResultRequest(p1_choice, p2_choice);
         }
     }
 
@@ -140,6 +141,7 @@ public class GameplayController : MonoBehaviour
             if (!string.IsNullOrEmpty(p1_choice)) {
                 setP2Choice();
                 animationController.PlayerMadeChoice();
+                networkManager.SendResultRequest(p1_choice, p2_choice);
             }
 		}
 		else if (args.user_id == Constants.USER_ID)
@@ -163,18 +165,41 @@ public class GameplayController : MonoBehaviour
         {
             p2_score = args.score;
             print("p2 score is: " + p2_score);
-            // Maybe update scoreboard here
+            p2_score_text.text = "Their score: " + p2_score;
         }
         else if (args.user_id == Constants.USER_ID)
         {
-            // Ignore
+            p1_score = args.score;
+            p1_score_text.text = "Your score: " + p1_score;
         }
     }
 
     public void OnResponseResult(ExtendedEventArgs eventArgs)
     {
         ResponseResultEventArgs args = eventArgs as ResponseResultEventArgs;
+        StartCoroutine(handleResult(args.result));
+    }
 
-        // Play result animation
+    IEnumerator handleResult(int result) {
+        switch(result) {
+            case 0:
+                print("HERE!");
+                info.text = "WIN!";
+                networkManager.SendScoreRequest(Constants.USER_ID, p1_score + 1);
+                break;
+            case 1:
+                info.text = "LOSE...";
+                break;
+            case 2:
+                info.text = "DRAW";
+                break;
+        }
+        yield return new WaitForSeconds(2f);
+        info.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        info.gameObject.SetActive(false);
+        animationController.ResetAnimations();
+        p1_choice = "";
+        p2_choice = "";
     }
 }
