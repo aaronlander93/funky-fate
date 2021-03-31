@@ -9,12 +9,6 @@ public class TicTacToePlayer {
     public int userID { get; set; }
     public Image panel;
     public Text text;
-
-    public TicTacToePlayer(int userID, Image panel, Text text) {
-        this.userID = userID;
-        this.panel = panel;
-        this.text = text;
-    }
 }
 
 [System.Serializable]
@@ -42,8 +36,10 @@ public class TicTacToeController : MonoBehaviour {
     private NetworkManager networkManager;
     private bool ready = false;
 	private bool opReady = false;
+    private bool opLeft = false;
     private GameObject messageBox;
     private GameObject readyMessageBox;
+    private GameObject waitingForMoveMessage;
 	private TMPro.TextMeshProUGUI messageBoxMsg;
 
     void Start() {
@@ -54,19 +50,26 @@ public class TicTacToeController : MonoBehaviour {
         messageBoxMsg = messageBox.transform.Find("Message").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         messageBox.SetActive(false);
 
-        readyMessageBox = GameObject.Find("ReadyMessage");
-        readyMessageBox.SetActive(false);
-
         SetGameControllerReferenceOnButtons();
         gameOverPanel.SetActive(false);
         restartButton.SetActive(false);
         playerSide = "X";
         moveCount = 0;
+        playerX.userID = 1;
+        playerO.userID = 2;
         SetPlayerColors(playerX, playerO);
 
         if(sceneName == "TTTNetwork") {
+            Constants.USER_ID = -1;
+            Constants.OP_ID = -1;
+
             isNetworkGame = true;
             networkManager = GameObject.Find("Network Manager").GetComponent<NetworkManager>();
+
+            waitingForMoveMessage = GameObject.Find("Waiting Message");
+            waitingForMoveMessage.SetActive(false);
+            readyMessageBox = GameObject.Find("ReadyMessage");
+            readyMessageBox.SetActive(false);
             
             // Prevent input before the connection is ready
             SetBoardInteractable(false);
@@ -74,9 +77,7 @@ public class TicTacToeController : MonoBehaviour {
             bool connected = networkManager.SendJoinRequest();
             if (!connected)
             {
-                messageBoxMsg.text = "Error starting game. Network returned invalid response.";
-				messageBox.SetActive(true);
-                //SetGameOverText("Unable to connect to server.", 40);
+                SetGameOverText("Unable to connect to server.", 40);
             }
 
             MessageQueue msgQueue = networkManager.GetComponent<MessageQueue>();
@@ -112,19 +113,14 @@ public class TicTacToeController : MonoBehaviour {
         }
     }
 
-    public void EndTurn () {
+    public void EndTurn(int buttonIndex) {
         moveCount++;
 
-        if (
-            buttonList [0].text == playerSide && buttonList [1].text == playerSide && buttonList [2].text == playerSide
-            || buttonList [3].text == playerSide && buttonList [4].text == playerSide && buttonList [5].text == playerSide
-            || buttonList [6].text == playerSide && buttonList [7].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [0].text == playerSide && buttonList [3].text == playerSide && buttonList [6].text == playerSide
-            || buttonList [1].text == playerSide && buttonList [4].text == playerSide && buttonList [7].text == playerSide
-            || buttonList [2].text == playerSide && buttonList [5].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [0].text == playerSide && buttonList [4].text == playerSide && buttonList [8].text == playerSide
-            || buttonList [2].text == playerSide && buttonList [4].text == playerSide && buttonList [6].text == playerSide
-            ) {
+        if(isNetworkGame) {
+            networkManager.SendMoveRequest(buttonIndex);
+            SetBoardInteractable(false);
+        }
+        if (CheckWin(playerSide)) {
             GameOver(playerSide);
         }
         else if(moveCount >= 9) {
@@ -132,12 +128,39 @@ public class TicTacToeController : MonoBehaviour {
         }
         else {
             ChangeSides();
+            if (isNetworkGame) {
+                waitingForMoveMessage.SetActive(true);
+            }
+        }
+    }
+
+    public bool CheckWin(string playerSide) {
+        if (
+            buttonList[0].text == playerSide && buttonList[1].text == playerSide && buttonList[2].text == playerSide
+            || buttonList[3].text == playerSide && buttonList[4].text == playerSide && buttonList[5].text == playerSide
+            || buttonList[6].text == playerSide && buttonList[7].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[0].text == playerSide && buttonList[3].text == playerSide && buttonList[6].text == playerSide
+            || buttonList[1].text == playerSide && buttonList[4].text == playerSide && buttonList[7].text == playerSide
+            || buttonList[2].text == playerSide && buttonList[5].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[0].text == playerSide && buttonList[4].text == playerSide && buttonList[8].text == playerSide
+            || buttonList[2].text == playerSide && buttonList[4].text == playerSide && buttonList[6].text == playerSide
+            ) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     void GameOver(string winner) {
         SetBoardInteractable(false);
-        restartButton.SetActive(true);
+
+        if (isNetworkGame) {
+            ready = false;
+            opReady = false;
+            readyMessageBox.SetActive(true);
+        } else {
+            restartButton.SetActive(true);
+        }
 
         if(winner == "draw") { 
             SetGameOverText("It's a Draw!"); 
@@ -181,21 +204,42 @@ public class TicTacToeController : MonoBehaviour {
     }
 
     public void OnResponseMove(ExtendedEventArgs eventArgs) {
+        ResponseMoveEventArgs args = eventArgs as ResponseMoveEventArgs;
 
+        //Debug.Log("args.user_id: " + args.user_id);
+        //Debug.Log("Constants.USER_ID: " + Constants.USER_ID);
+        if (args.user_id != Constants.USER_ID) {
+            if(args.user_id != 1) {
+            buttonList[args.moveIndex].text = "O";
+            }
+            else {
+                buttonList[args.moveIndex].text = "X";
+            }
+
+            waitingForMoveMessage.SetActive(false);
+
+            if (CheckWin(playerSide)) {
+                GameOver(playerSide);
+            } else {
+                for (int i = 0; i < buttonList.Length; i++)
+                {
+                    if (buttonList[i].text == "")
+                    {
+                        buttonList[i].GetComponentInParent<Button>().interactable = true;
+                    }
+                }
+                ChangeSides();
+            }
+        }
     }
 
     public void OnResponseJoin(ExtendedEventArgs eventArgs)
 	{
+        Debug.Log("RECEIVED JOIN RESPONSE");
 		ResponseJoinEventArgs args = eventArgs as ResponseJoinEventArgs;
 		if (args.status == 0)
 		{
-            // If you're already in the server, but recieve a join response
-			// i.e. the other player has joined
-			if(Constants.USER_ID != -1) {
-				// remove "waiting for opponent" message
-				gameOverPanel.SetActive(false);
-			}
-			if(args.user_id != 1 && args.user_id != 2)
+            if(args.user_id != 1 && args.user_id != 2)
 			{
 				Debug.Log("ERROR: Invalid user_id in ResponseJoin: " + args.user_id);
 				messageBoxMsg.text = "Error joining game. Network returned invalid response.";
@@ -203,9 +247,25 @@ public class TicTacToeController : MonoBehaviour {
 				return;
 			}
 
+            // if already in server and recieve join response
+            // i.e. another player has connected
+            if(Constants.USER_ID != -1) {
+                Debug.Log("RECEIVED SECOND JOIN RESPONSE");
+                // hide "waiting for opponent" message
+                gameOverPanel.SetActive(false);
+            }
+            else {
             // Not so constant, huh?
 			Constants.USER_ID = args.user_id;
 			Constants.OP_ID = 3 - args.user_id;
+
+            // if we are playing as O
+            if(args.user_id == 2) {
+                // move the "waiting for opponent's move" message so it's under the X icon
+                RectTransform waitingMessageTransform = waitingForMoveMessage.GetComponent<RectTransform>();
+                var pos = waitingMessageTransform.anchoredPosition;
+                waitingMessageTransform.anchoredPosition = new Vector2(pos.x * -1, pos.y);
+            }
 
 			if (args.op_id > 0)
 			{
@@ -227,6 +287,7 @@ public class TicTacToeController : MonoBehaviour {
 			}
 
             readyMessageBox.SetActive(true);
+            }
 		}
 		else
 		{
@@ -244,17 +305,22 @@ public class TicTacToeController : MonoBehaviour {
 	public void OnResponseLeave(ExtendedEventArgs eventArgs)
 	{
 		ResponseLeaveEventArgs args = eventArgs as ResponseLeaveEventArgs;
-		if (args.user_id != Constants.USER_ID)
-		{
-			SetGameOverText("Waiting for opponent...", 40);
-			opReady = false;
-            RestartGame();
-		}
+        Debug.Log("args.user_id: " + args.user_id + " Constants.USER_ID: " + Constants.USER_ID);
+        if (args.user_id != Constants.USER_ID) {
+            SetBoardInteractable(false);
+            messageBoxMsg.text = "Opponent has left the game.";
+            messageBox.SetActive(true);
+            waitingForMoveMessage.SetActive(false);
+            opLeft = true;
+		} else {
+            networkManager.CloseNetworkSocket();
+            SceneManager.LoadScene("Main Menu");
+        }
 	}
 
-    // TODO: add ready message box & button
 	public void OnResponseReady(ExtendedEventArgs eventArgs)
 	{
+        Debug.Log("RECEIVED READY RESPONSE");
 		ResponseReadyEventArgs args = eventArgs as ResponseReadyEventArgs;
 		if (Constants.USER_ID == -1) // Haven't joined, but got ready message
 		{
@@ -281,18 +347,28 @@ public class TicTacToeController : MonoBehaviour {
 
 		if (ready && opReady)
 		{
-			//StartNetworkGame();
-            if(Constants.USER_ID == 1) {
+            playerSide = "X";
+            moveCount = 0;
+            gameOverPanel.SetActive(false);
+            for (int i = 0; i < buttonList.Length; i++)
+            {
+                buttonList[i].text = "";
+            }
+
+            if (Constants.USER_ID == 1) {
                 SetBoardInteractable(true);
             }
             else {
-
+                waitingForMoveMessage.SetActive(true);
             }
 		}
 	}
 
 	public void OnMessageButtonClick() {
 		messageBox.SetActive(false);
+        if (opLeft) {
+            networkManager.SendLeaveRequest();
+        }
 	}
 
     public void OnReadyClick() {
@@ -301,7 +377,11 @@ public class TicTacToeController : MonoBehaviour {
 		networkManager.SendReadyRequest();
     }
 
-    public void QuitToMenuOnClick() {
-        SceneManager.LoadScene("Main Menu");
+    public void OnQuitToMenuClick() {
+        if (isNetworkGame) {
+            networkManager.SendLeaveRequest();
+        } else {
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 }

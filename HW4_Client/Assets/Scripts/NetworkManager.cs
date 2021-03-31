@@ -14,17 +14,19 @@ public class NetworkManager : MonoBehaviour
 
 		NetworkRequestTable.init();
 		NetworkResponseTable.init();
-	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
 		cManager = GetComponent<ConnectionManager>();
 
 		if (cManager)
 		{
 			cManager.setupSocket();
 		}
+	}
+
+	// Start is called before the first frame update
+	void Start()
+    {
+
 	}
 
 	public bool SendJoinRequest()
@@ -51,6 +53,11 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
+	public void CloseNetworkSocket()
+    {
+		cManager.closeSocket();
+	}
+
 	public bool SendReadyRequest()
 	{
 		if (cManager && cManager.IsConnected())
@@ -63,12 +70,12 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
-	public bool SendMoveRequest(int pieceIndex, int x, int y)
+	public bool SendMoveRequest(int moveIndex)
 	{
 		if (cManager && cManager.IsConnected())
 		{
 			RequestMove request = new RequestMove();
-			request.send(pieceIndex, x, y);
+			request.send(moveIndex);
 			cManager.send(request);
 			return true;
 		}

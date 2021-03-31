@@ -12,7 +12,6 @@ public class Player {
     private boolean isReady = false;
     private int player_id;
     private String name;
-    private GameClient client; // References GameClient instance
 
     public Player(int player_id) {
         this.player_id = player_id;
@@ -39,21 +38,12 @@ public class Player {
         return this.name = name;
     }
 
-    public GameClient getClient() {
-        return client;
-    }
-
     public boolean getReadyStatus() {
         return isReady;
     }
 
     public void setReadyStatusOn(boolean status) {
         isReady = status;
-    }
-    
-
-    public GameClient setClient(GameClient client) {
-        return this.client = client;
     }
 
     @Override

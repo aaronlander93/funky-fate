@@ -8,7 +8,6 @@ import core.GameServer;
 import core.NetworkManager;
 import model.Player;
 import networking.response.ResponseJoin;
-import networking.response.ResponseName;
 import utility.Log;
 
 /**
@@ -41,7 +40,6 @@ public class RequestJoin extends GameRequest {
             player.setID(id);
             gs.setActivePlayer(player);
 
-            player.setClient(client);
             // Pass Player reference into thread
             client.setPlayer(player);
             // Set response information
@@ -49,9 +47,7 @@ public class RequestJoin extends GameRequest {
             responseJoin.setPlayer(player);
             Log.printf("User '%s' has successfully logged in.", player.getName());
 
-            ResponseName responseName = new ResponseName();
-            responseName.setPlayer(player);
-            NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseName);
+            NetworkManager.addResponseForAllOnlinePlayers(player.getID(), responseJoin);
         } else {
             Log.printf("A user has tried to join, but failed to do so.");
             responseJoin.setStatus((short) 1); 
