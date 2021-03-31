@@ -47,6 +47,7 @@ public class GameplayController : MonoBehaviour
         game_end = false;
 
         networkManager.SendMaxRequest();
+
     }
 
     public Player GetCurrentPlayer()
@@ -93,6 +94,7 @@ public class GameplayController : MonoBehaviour
             setP2Choice();
             animationController.PlayerMadeChoice();
             networkManager.SendResultRequest(Constants.USER_ID, p1_choice, p2_choice);
+
         }
     }
 
@@ -158,6 +160,7 @@ public class GameplayController : MonoBehaviour
                 setP2Choice();
                 animationController.PlayerMadeChoice();
                 networkManager.SendResultRequest(Constants.USER_ID, p1_choice, p2_choice);
+
             }
         }
         else if (args.user_id == Constants.USER_ID)
@@ -188,6 +191,7 @@ public class GameplayController : MonoBehaviour
                 info.text = "You lose...";
                 game_end = true;
             }
+
         }
         else if (args.user_id == Constants.USER_ID)
         {
@@ -199,6 +203,7 @@ public class GameplayController : MonoBehaviour
                 info.text = "You win!";
                 game_end = true;
             }
+
         }
 
 
@@ -246,5 +251,6 @@ public class GameplayController : MonoBehaviour
             p1_choice = "";
             p2_choice = "";
         }
+
     }
 }
