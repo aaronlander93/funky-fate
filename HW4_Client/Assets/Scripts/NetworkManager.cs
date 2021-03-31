@@ -103,7 +103,31 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
-	public IEnumerator RequestHeartbeat(float time)
+    public bool SendResultRequest(string m1, string m2)
+    {
+        if (cManager && cManager.IsConnected())
+        {
+            RequestResult request = new RequestResult();
+            request.send(m1, m2);
+            cManager.send(request);
+            return true;
+        }
+        return false;
+    }
+
+    public bool SendScoreRequest(int id, int score)
+    {
+        if (cManager && cManager.IsConnected())
+        {
+            RequestScore request = new RequestScore();
+            request.send(id, score);
+            cManager.send(request);
+            return true;
+        }
+        return false;
+    }
+
+    public IEnumerator RequestHeartbeat(float time)
 	{
 		yield return new WaitForSeconds(time);
 

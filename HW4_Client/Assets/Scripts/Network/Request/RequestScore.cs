@@ -9,9 +9,10 @@ public class RequestScore : NetworkRequest
 		request_id = Constants.CMSG_SCORE;
 	}
 
-	public void send(int score)
+	public void send(int id, int score)
 	{
 		packet = new GamePacket(request_id);
+        packet.addInt32(id);
         packet.addInt32(score);
 	}
 }
