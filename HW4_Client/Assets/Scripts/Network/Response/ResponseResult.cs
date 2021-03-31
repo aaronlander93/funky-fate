@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ResponseResultEventArgs : ExtendedEventArgs
 {
+    public int user_id { get; set; }
     public int result { get; set; } 
 
     public ResponseResultEventArgs()
@@ -14,6 +15,7 @@ public class ResponseResultEventArgs : ExtendedEventArgs
 
 public class ResponseResult : NetworkResponse
 {
+    private int user_id;
     private int result;
 
     public ResponseResult()
@@ -22,6 +24,7 @@ public class ResponseResult : NetworkResponse
 
     public override void parse()
     {
+        user_id = DataReader.ReadInt(dataStream);
         result = DataReader.ReadInt(dataStream);
     }
 
@@ -29,6 +32,7 @@ public class ResponseResult : NetworkResponse
     {
         ResponseResultEventArgs args = new ResponseResultEventArgs
         {
+            user_id = user_id,
             result = result
         };
 

@@ -103,12 +103,12 @@ public class NetworkManager : MonoBehaviour
 		return false;
 	}
 
-    public bool SendResultRequest(string m1, string m2)
+    public bool SendResultRequest(int id, string m1, string m2)
     {
         if (cManager && cManager.IsConnected())
         {
             RequestResult request = new RequestResult();
-            request.send(m1, m2);
+            request.send(id, m1, m2);
             cManager.send(request);
             return true;
         }

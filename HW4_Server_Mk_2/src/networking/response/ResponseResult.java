@@ -4,7 +4,9 @@ import metadata.Constants;
 import utility.GamePacket;
 
 public class ResponseResult extends GameResponse {
+    private int playerId;
     private int result;
+    private boolean set = false;
 
     public ResponseResult() {
         responseCode = Constants.SMSG_RESULT;
@@ -14,9 +16,20 @@ public class ResponseResult extends GameResponse {
     public byte[] constructResponseInBytes() {
         GamePacket packet = new GamePacket(responseCode);
 
-        packet.addInt32(result);
+        if(set){
+            packet.addInt32(playerId);
+        }
+        else{
+            packet.addInt32(-1);
+        }
 
+        packet.addInt32(result);
         return packet.getBytes();
+    }
+
+    public void setPlayerId(int id) {
+        this.playerId = id;
+        set = true;
     }
 
     public void setResult(int result){ this.result = result; }
