@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Joey\Desktop\Projects\Unity\Unity CH1 Project\Unity CH1 Project_WwiseProject\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Joey\Desktop\Projects\Unity\Unity CH1 Project\Unity CH1 Project_WwiseProject\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Joey\Desktop\Projects\Unity\Unity CH1 Project\Unity CH1 Project_WwiseProject\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Joey\Desktop\Projects\Unity\Unity CH1 Project\Unity CH1 Project_WwiseProject\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
