@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -114,10 +114,10 @@ TextureImporter:
       name: bossidle_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 30
-        height: 52
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,10 +135,10 @@ TextureImporter:
       name: bossidle_1
       rect:
         serializedVersion: 2
-        x: 41
+        x: 39
         y: 0
-        width: 31
-        height: 52
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +156,10 @@ TextureImporter:
       name: bossidle_2
       rect:
         serializedVersion: 2
-        x: 80
+        x: 78
         y: 0
-        width: 32
-        height: 51
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,10 +177,10 @@ TextureImporter:
       name: bossidle_3
       rect:
         serializedVersion: 2
-        x: 119
+        x: 117
         y: 0
-        width: 32
-        height: 50
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,10 +198,10 @@ TextureImporter:
       name: bossidle_4
       rect:
         serializedVersion: 2
-        x: 158
+        x: 156
         y: 0
-        width: 32
-        height: 50
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,10 +219,10 @@ TextureImporter:
       name: bossidle_5
       rect:
         serializedVersion: 2
-        x: 197
+        x: 195
         y: 0
-        width: 31
-        height: 50
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,10 +240,10 @@ TextureImporter:
       name: bossidle_6
       rect:
         serializedVersion: 2
-        x: 236
+        x: 234
         y: 0
-        width: 30
-        height: 51
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -261,10 +261,10 @@ TextureImporter:
       name: bossidle_7
       rect:
         serializedVersion: 2
-        x: 275
+        x: 273
         y: 0
-        width: 30
-        height: 52
+        width: 39
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
