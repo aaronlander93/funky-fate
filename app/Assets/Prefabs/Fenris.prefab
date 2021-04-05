@@ -194,7 +194,7 @@ MonoBehaviour:
   _wallJumpXVelocityHaltDelay: 0.2
   _dashForce: 10
   _dashLength: 0.07
-  _dashBufferLength: 0.05
+  _dashBufferLength: 0.1
   _groundRaycastLength: 0.53
   _groundRaycastOffset: {x: 0.11, y: 0, z: 0}
   _wallRaycastLength: 0
