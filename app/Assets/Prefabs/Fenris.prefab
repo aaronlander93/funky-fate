@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7651860447111223430}
   - component: {fileID: 7651860447111223550}
-  - component: {fileID: 7651860447111223551}
   - component: {fileID: 7651860447111223426}
   - component: {fileID: 7651860447111223424}
   - component: {fileID: 7651860447111223431}
   - component: {fileID: 7651860447111223429}
   - component: {fileID: 7651860447111223428}
   - component: {fileID: 1647084134}
+  - component: {fileID: 161477475}
   m_Layer: 8
   m_Name: Fenris
   m_TagString: Untagged
@@ -91,32 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7651860447111223551
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7651860447111223432}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f24a8f8c032224245b01e7bf081d34eb, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.11233183}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.0625}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51169515, y: 0.7149075}
-  m_EdgeRadius: 0
 --- !u!58 &7651860447111223426
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -194,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5f0ef53f12ae54c8ee92b09739b6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CrouchDisableCollider: {fileID: 7651860447111223551}
+  m_CrouchDisableCollider: {fileID: 161477475}
   m_CeilingCheck: {fileID: 7651860448325789400}
   m_AirControl: 0
   _groundLayer:
@@ -220,7 +194,7 @@ MonoBehaviour:
   _wallJumpXVelocityHaltDelay: 0.2
   _dashForce: 10
   _dashLength: 0.07
-  _dashBufferLength: 0.1
+  _dashBufferLength: 0.05
   _groundRaycastLength: 0.53
   _groundRaycastOffset: {x: 0.11, y: 0, z: 0}
   _wallRaycastLength: 0
@@ -246,6 +220,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &161477475
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651860447111223432}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.52, y: 1}
+  m_Direction: 0
 --- !u!1 &7651860447454018273
 GameObject:
   m_ObjectHideFlags: 0
