@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7651860447111223430}
   - component: {fileID: 7651860447111223550}
-  - component: {fileID: 7651860447111223551}
   - component: {fileID: 7651860447111223426}
   - component: {fileID: 7651860447111223424}
   - component: {fileID: 7651860447111223431}
@@ -18,6 +17,7 @@ GameObject:
   - component: {fileID: 7651860447111223428}
   - component: {fileID: 1647084134}
   - component: {fileID: -8490121841421758535}
+  - component: {fileID: 1650787271}
   m_Layer: 8
   m_Name: Fenris
   m_TagString: Player
@@ -80,8 +80,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 75a431d1aabb18843986be573c6ba77f, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 4465233794471676273, guid: 6e8440cb8c620084081b7907b3fe9691,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,32 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7651860447111223551
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7651860447111223432}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f24a8f8c032224245b01e7bf081d34eb, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.11233183}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.0625}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51169515, y: 0.7149075}
-  m_EdgeRadius: 0
 --- !u!58 &7651860447111223426
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5f0ef53f12ae54c8ee92b09739b6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CrouchDisableCollider: {fileID: 7651860447111223551}
+  m_CrouchDisableCollider: {fileID: 1650787271}
   m_CeilingCheck: {fileID: 7651860448325789400}
   m_AirControl: 0
   _groundLayer:
@@ -208,6 +183,10 @@ MonoBehaviour:
   _maxMoveSpeed: 3.5
   _groundLinearDrag: 7
   m_CrouchSpeed: 0.34
+  slopeCheckDistance: 0.2
+  maxSlopeAngle: 60
+  noFriction: {fileID: 6200000, guid: f24a8f8c032224245b01e7bf081d34eb, type: 2}
+  fullFriction: {fileID: 6200000, guid: 7da5a6e3cb8c4294a915e499171e7dc6, type: 2}
   _jumpForce: 10
   _airLinearDrag: 2.5
   _fallMultiplier: 5
@@ -261,6 +240,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRangeHorizontal: 5
   attackRangeVertical: 1
+--- !u!70 &1650787271
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651860447111223432}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.51, y: 1.002}
+  m_Direction: 0
 --- !u!1 &7651860447454018273
 GameObject:
   m_ObjectHideFlags: 0
