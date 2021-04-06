@@ -59,6 +59,23 @@ public class Movement2D : MonoBehaviour
     private bool _canMove => !_wallGrab || !_isDashing;
     private bool m_wasCrouching = false;
 
+    [Header("Slope Variables")]
+    [SerializeField] private float slopeCheckDistance;
+    [SerializeField] private float maxSlopeAngle;
+    [SerializeField] private PhysicsMaterial2D noFriction;
+    [SerializeField] private PhysicsMaterial2D fullFriction;
+    private float slopeDownAngle;
+    private float slopeSideAngle;
+    private float lastSlopeAngle;
+    private bool isOnSlope;
+    private bool canWalkOnSlope;
+    private Vector2 slopeNormalPerp;
+    private Vector2 capsuleColliderSize;
+    private CapsuleCollider2D _cc;
+    private Vector2 newVelocity;
+
+
+
 
     [Header("Jump Variables")]
     [SerializeField] private float _jumpForce = 12f;
@@ -112,7 +129,10 @@ public class Movement2D : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _cc = GetComponent<CapsuleCollider2D>();
         _anim = GetComponent<Animator>();
+
+        capsuleColliderSize = _cc.size;
     }
 
     private void Update()
@@ -143,6 +163,7 @@ public class Movement2D : MonoBehaviour
         CheckCollisions();
         FallMultiplier();
         ApplyLinearDrag();
+        SlopeCheck();
         if (_canMove) MoveCharacter();
         if (_onGround)
         {
@@ -239,10 +260,98 @@ public class Movement2D : MonoBehaviour
             }
 
     }
+    if(_onGround && !isOnSlope && !_isJumping){
     _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
 
         if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
             _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+    }
+    else if (_onGround && isOnSlope && canWalkOnSlope && !_isJumping) //If on slope
+        {
+            newVelocity.Set(_maxMoveSpeed * slopeNormalPerp.x * -_horizontalDirection, _maxMoveSpeed * slopeNormalPerp.y * -_horizontalDirection);
+            _rb.velocity = newVelocity;
+        }
+    else if (!_onGround) //If in air
+    {
+_rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+
+        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+    }
+    }
+    private void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, capsuleColliderSize.y / 2));
+
+        SlopeCheckHorizontal(checkPos);
+        SlopeCheckVertical(checkPos);
+    }
+
+    private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, _groundLayer);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, _groundLayer);
+
+        if (slopeHitFront)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+        }
+        else if (slopeHitBack)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            isOnSlope = false;
+        }
+
+    }
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {      
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, _groundLayer);
+
+        if (hit)
+        {
+
+            slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
+
+            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if(slopeDownAngle != lastSlopeAngle)
+            {
+                isOnSlope = true;
+            }                       
+
+            lastSlopeAngle = slopeDownAngle;
+           
+            Debug.DrawRay(hit.point, slopeNormalPerp, Color.blue);
+            Debug.DrawRay(hit.point, hit.normal, Color.green);
+
+        }
+
+        if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)
+        {
+            canWalkOnSlope = false;
+        }
+        else
+        {
+            canWalkOnSlope = true;
+        }
+
+        if (isOnSlope && canWalkOnSlope && _horizontalDirection == 0.0f)
+        {
+            _rb.sharedMaterial = fullFriction;
+        }
+        else
+        {
+            _rb.sharedMaterial = noFriction;
+        }
     }
 
     private void ApplyLinearDrag()
@@ -449,6 +558,13 @@ public class Movement2D : MonoBehaviour
                 _anim.SetBool("WallGrab", false);
                 _anim.SetFloat("verticalDirection", Mathf.Abs(_verticalDirection));
             }
+        }
+        if(_isDashing)
+        {
+            _anim.SetBool("isDashing", _isDashing);
+        }
+        else{
+            _anim.SetBool("isDashing", false);
         }
     }
 

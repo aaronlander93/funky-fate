@@ -1781,17 +1781,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fenris
       objectReference: {fileID: 0}
-    - target: {fileID: 7651860447111223550, guid: b33f76c7813b2e84badaa1b76c8c4312,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 4465233794471676273, guid: 6e8440cb8c620084081b7907b3fe9691,
-        type: 3}
-    - target: {fileID: 7651860447111223550, guid: b33f76c7813b2e84badaa1b76c8c4312,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b33f76c7813b2e84badaa1b76c8c4312, type: 3}
 --- !u!1 &953578154
