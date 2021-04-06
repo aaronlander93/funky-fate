@@ -180,10 +180,10 @@ TextureImporter:
       name: Heckleridle_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 5
-        width: 33
-        height: 53
+        x: 0
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Heckleridle_1
       rect:
         serializedVersion: 2
-        x: 47
-        y: 5
-        width: 33
-        height: 52
+        x: 43
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,10 +222,10 @@ TextureImporter:
       name: Heckleridle_2
       rect:
         serializedVersion: 2
-        x: 91
-        y: 5
-        width: 32
-        height: 51
+        x: 86
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +243,10 @@ TextureImporter:
       name: Heckleridle_3
       rect:
         serializedVersion: 2
-        x: 134
-        y: 5
-        width: 32
-        height: 49
+        x: 129
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,10 +264,10 @@ TextureImporter:
       name: Heckleridle_4
       rect:
         serializedVersion: 2
-        x: 177
-        y: 5
-        width: 32
-        height: 51
+        x: 172
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,10 +285,10 @@ TextureImporter:
       name: Heckleridle_5
       rect:
         serializedVersion: 2
-        x: 219
-        y: 5
-        width: 33
-        height: 52
+        x: 215
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

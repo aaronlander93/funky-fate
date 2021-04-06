@@ -20,12 +20,17 @@ public class EnemyAI : MonoBehaviour
 
     private System.Random rand;
 
+    private Animator _anim;
+    private bool _facingRight = true;
+
     // Start is called before the first frame update
     void Start()
 
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         rand = new System.Random();
+        
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,6 +54,12 @@ public class EnemyAI : MonoBehaviour
         {
             WalkAimlessly();
         }
+    }
+
+    void Flip()
+    {
+        _facingRight = !_facingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     private void AttackPlayer()

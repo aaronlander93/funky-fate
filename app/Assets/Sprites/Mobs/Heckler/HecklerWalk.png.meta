@@ -20,6 +20,12 @@ TextureImporter:
   - first:
       213: -633156147999912488
     second: HecklerWalk_5
+  - first:
+      213: 5675967979549059155
+    second: HecklerWalk_6
+  - first:
+      213: -6266858101797329103
+    second: HecklerWalk_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -180,10 +186,10 @@ TextureImporter:
       name: HecklerWalk_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 5
-        width: 33
-        height: 53
+        x: 0
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +207,10 @@ TextureImporter:
       name: HecklerWalk_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 5
-        width: 33
-        height: 52
+        x: 43
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,10 +228,10 @@ TextureImporter:
       name: HecklerWalk_2
       rect:
         serializedVersion: 2
-        x: 90
-        y: 5
-        width: 33
-        height: 54
+        x: 86
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +249,10 @@ TextureImporter:
       name: HecklerWalk_3
       rect:
         serializedVersion: 2
-        x: 133
-        y: 5
-        width: 33
-        height: 54
+        x: 129
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,10 +270,10 @@ TextureImporter:
       name: HecklerWalk_4
       rect:
         serializedVersion: 2
-        x: 176
-        y: 5
-        width: 33
-        height: 53
+        x: 172
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,10 +291,10 @@ TextureImporter:
       name: HecklerWalk_5
       rect:
         serializedVersion: 2
-        x: 219
-        y: 5
-        width: 33
-        height: 53
+        x: 215
+        y: 0
+        width: 43
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
