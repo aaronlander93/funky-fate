@@ -310,6 +310,8 @@ public class Movement2D : MonoBehaviour
             if (_rb.velocity.y < 0)
             {
                 _rb.gravityScale = _fallMultiplier;
+                // TEMPORARY FIX TO BONKING YOUR HEAD AND SLOWING MOVEMENT
+                crouch = false;
             }
             else if (_rb.velocity.y > 0 && !Input.GetButton("Jump"))
             {
@@ -435,7 +437,7 @@ public class Movement2D : MonoBehaviour
                 _anim.SetBool("isFalling", false);
                 _anim.SetFloat("verticalDirection", 0f);
             }
-            else if (_rb.velocity.y < 0f)
+            else if (_rb.velocity.y < -0.1f)
             {
                 _anim.SetBool("isFalling", true);
                 _anim.SetBool("WallGrab", false);
