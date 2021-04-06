@@ -71,6 +71,12 @@ TextureImporter:
   - first:
       213: -7321170820115778516
     second: spritesheet_fenris_22
+  - first:
+      213: 633475833191197536
+    second: spritesheet_fenris_23
+  - first:
+      213: -1058538263164988509
+    second: spritesheet_fenris_24
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -634,6 +640,48 @@ TextureImporter:
       bones: []
       spriteID: c243b07ade9f56a90800000000000000
       internalID: -7321170820115778516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_23
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06be72bf9ee8ac800800000000000000
+      internalID: 633475833191197536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_24
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a354eade015f41f0800000000000000
+      internalID: -1058538263164988509
       vertices: []
       indices: 
       edges: []
