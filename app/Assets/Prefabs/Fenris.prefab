@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 7651860447111223429}
   - component: {fileID: 7651860447111223428}
   - component: {fileID: 1647084134}
+  - component: {fileID: -8490121841421758535}
   m_Layer: 8
   m_Name: Fenris
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +247,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8490121841421758535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651860447111223432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8dc835ee42627445a25d0bf7fa5c668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRangeHorizontal: 5
+  attackRangeVertical: 1
 --- !u!1 &7651860447454018273
 GameObject:
   m_ObjectHideFlags: 0

@@ -107,7 +107,7 @@ public class Movement2D : MonoBehaviour
     [SerializeField] private Vector3 _innerRaycastOffset;
     private bool _canCornerCorrect;
     public class BoolEvent : UnityEvent<bool> { }
-    public BoolEvent OnCrouchEvent;
+    //public BoolEvent OnCrouchEvent;
 
     private void Start()
     {
@@ -214,7 +214,7 @@ public class Movement2D : MonoBehaviour
                 if (!m_wasCrouching)
                 {
                     m_wasCrouching = true;
-                    OnCrouchEvent.Invoke(true);
+                    //OnCrouchEvent.Invoke(true);
                 }
 
                 // Reduce the speed by the crouchSpeed multiplier
@@ -234,7 +234,7 @@ public class Movement2D : MonoBehaviour
                 if (m_wasCrouching)
                 {
                     m_wasCrouching = false;
-                    OnCrouchEvent.Invoke(false);
+                    //OnCrouchEvent.Invoke(false);
                 }
             }
 

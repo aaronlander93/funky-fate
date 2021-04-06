@@ -28,11 +28,11 @@ public class Enemy : MonoBehaviour
     {
         if (damageFromRight)
         {
-            rb.AddForce(new Vector2(-50f, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(-10f, 0), ForceMode2D.Impulse);
         }
         else
         {
-            rb.AddForce(new Vector2(50f, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(10f, 0), ForceMode2D.Impulse);
         }
         
     }
