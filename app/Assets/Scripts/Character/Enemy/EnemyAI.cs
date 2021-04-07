@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     private System.Random rand;
 
     private Animator _anim;
-    private bool _facingRight = true;
+    private bool _facingRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +59,11 @@ public class EnemyAI : MonoBehaviour
     void Flip()
     {
         _facingRight = !_facingRight;
-        transform.Rotate(0f, 180f, 0f);
+        
+        // Multiply the player's x local scale by -1
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     private void AttackPlayer()
@@ -91,6 +95,9 @@ public class EnemyAI : MonoBehaviour
 
             idle = false;
             walkingAimlessly = true;
+
+            _anim.SetBool("isIdle", false);
+            _anim.SetBool("isWalking", true);
         }
         else
         {
@@ -108,6 +115,9 @@ public class EnemyAI : MonoBehaviour
 
             walkingAimlessly = false;
             idle = true;
+            
+            _anim.SetBool("isIdle", true);
+            _anim.SetBool("isWalking", false);
         }
         else
         {
@@ -149,6 +159,11 @@ public class EnemyAI : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
             gameObject.transform.position = new Vector2(currX - speed, currY);
         }
+        
+    }
+
+    void animate() 
+    {
         
     }
 }
