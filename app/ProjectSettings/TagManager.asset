@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 233990525
+    locked: 0
+  - name: Platforms
+    uniqueID: 2548181399
+    locked: 0
+  - name: Environment
+    uniqueID: 2377352107
+    locked: 0
+  - name: Players
+    uniqueID: 2451821529
+    locked: 0
+  - name: Mobs
+    uniqueID: 2986656905
+    locked: 0
+  - name: Items
+    uniqueID: 612876105
+    locked: 0
