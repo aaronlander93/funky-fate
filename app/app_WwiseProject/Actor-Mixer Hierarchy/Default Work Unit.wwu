@@ -29,6 +29,29 @@
 						<ActiveSource Name="level1groove" ID="{6662EF63-2DD2-443E-91C1-F264A9BF3E3C}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="jump" ID="{3E805671-BCB5-4781-B89F-A66C99B60BC0}" ShortID="980524217">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{687DDB27-F7F3-4891-B883-DEE02A356ED8}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BF1AAD0D-4993-4D94-8E99-74A4CBD3F746}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="funkjump" ID="{247E5594-1083-4B3F-B4D2-18314D403A24}">
+							<Language>SFX</Language>
+							<AudioFile>funkjump.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="35421127"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="funkjump" ID="{247E5594-1083-4B3F-B4D2-18314D403A24}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

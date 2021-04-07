@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="12" SoundbankVersion="140">
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\.cache\Mac\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\Assets\StreamingAssets\Audio\GeneratedSoundBanks\</SoundBanksRoot>
+		<ProjectRoot>A:\UNITY\funky-fate\funky-fate\app\app_WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>A:\UNITY\funky-fate\funky-fate\app\app_WwiseProject\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>A:\UNITY\funky-fate\funky-fate\app\Assets\StreamingAssets\Audio\GeneratedSoundBanks\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\GeneratedSoundBanks\Mac</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>A:\UNITY\funky-fate\funky-fate\app\app_WwiseProject\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="2754342975">
+		<SoundBank Id="1355168291" Language="SFX" Hash="3690994985">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="4293352328">
+		<SoundBank Id="3161908922" Language="SFX" Hash="1877742666">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2209143526" Name="Music_Level1" ObjectPath="\Events\Default Work Unit\Music_Level1" DurationType="Infinite">
+				<Event Id="1407168414" Name="Guitar_Jump" ObjectPath="\Events\Default Work Unit\Guitar_Jump" DurationType="OneShot" DurationMin="0.299683" DurationMax="0.299683">
 					<IncludedMemoryFiles>
-						<File Id="358892595" Language="SFX">
-							<ShortName>level1groove.wav</ShortName>
-							<Path>SFX\level1groove_D79FB2B7.wem</Path>
+						<File Id="35421127" Language="SFX">
+							<ShortName>funkjump.wav</ShortName>
+							<Path>SFX\funkjump_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="3991942870" Name="Music" ObjectPath="\Events\Default Work Unit\Music" DurationType="Infinite"/>
 			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="35421127" Language="SFX">
+					<ShortName>funkjump.wav</ShortName>
+					<Path>SFX\funkjump_10C4C929.wem</Path>
+				</File>
+				<File Id="520628151" Language="SFX">
+					<ShortName>level1groove.wav</ShortName>
+					<Path>SFX\level1groove_D79FB2B7.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>

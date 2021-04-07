@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{8D805D5B-AC3E-47A4-AD2B-690B79CA8818}" SchemaVersion="103">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{8D805D5B-AC3E-47A4-AD2B-690B79CA8818}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{8D805D5B-AC3E-47A4-AD2B-690B79CA8818}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Music" ID="{0964AB35-247F-419B-9854-D030A6B6CAFA}">
+					<ChildrenList>
+						<Action Name="" ID="{88F38A4F-3E82-46DB-AEEA-ACFDF309DA0A}" ShortID="674820032">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="level1groove" ID="{C3AFA4A9-6684-4C60-BC61-E5578F8DB415}" WorkUnitID="{2696ED44-2D06-45B6-B6BD-A29782AC9B05}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Guitar_Jump" ID="{A6F71A45-F917-49B1-8B31-FDBEAEEB39C1}">
+					<ChildrenList>
+						<Action Name="" ID="{4630658E-964E-4B00-9D71-7D0268FE72F9}" ShortID="740437497">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="jump" ID="{3E805671-BCB5-4781-B89F-A66C99B60BC0}" WorkUnitID="{2696ED44-2D06-45B6-B6BD-A29782AC9B05}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
