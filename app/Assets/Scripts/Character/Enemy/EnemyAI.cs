@@ -21,8 +21,10 @@ public class EnemyAI : MonoBehaviour
     private System.Random rand;
 
     //time between attacks
+    public float initCooldownTime;
     private float attCooldown;
 
+    public GameObject projectile;
     private Animator _anim;
 
     // Start is called before the first frame update
@@ -55,11 +57,13 @@ public class EnemyAI : MonoBehaviour
             //attack or approach player depending on distance
             if (Math.Abs(closestDist) < 5)
             {
+                //Debug.Log(attCooldown);
                 _anim.SetBool("isWalking", false);
                 AttackPlayer();
             }
             else
             {
+                //Debug.Log("tracking player");
                 _anim.SetBool("isWalking", true);
                 WalkTowardsPlayer();
             }
@@ -81,15 +85,22 @@ public class EnemyAI : MonoBehaviour
         // Do nothing for now
 
         //need to implement projectile
-        //if (attCooldown > 0)
-        // {
-        //     attCooldown -= Time.deltaTime;
-        // }
-        // else
-        // {
-        //     Instantiate(projectile, transform.position, Quaternion.identity);
-        //     attCooldown = initCooldownTime;
-        // }
+        if (attCooldown > 0)
+        {
+            //Debug.Log("Going to attack!");
+            attCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            //Debug.Log("attacking!");
+            _anim.SetTrigger("attack");
+            attCooldown = initCooldownTime;
+        }
+    }
+
+    private void throwTomato()
+    {
+        Instantiate(projectile, transform.position, Quaternion.identity);
     }
 
     private void FindNearestPlayer()

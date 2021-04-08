@@ -164,6 +164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a792edf10c4b46e469be46b0db2ea540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initCooldownTime: 3
+  projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
+    type: 3}
 --- !u!114 &-8537439814938549050
 MonoBehaviour:
   m_ObjectHideFlags: 0
