@@ -20,8 +20,10 @@ public class EnemyAI : MonoBehaviour
 
     private System.Random rand;
 
+    //time between attacks
+    private float attCooldown;
+
     private Animator _anim;
-    private bool _facingRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,37 +40,56 @@ public class EnemyAI : MonoBehaviour
     {
         FindNearestPlayer();
 
-        if(Math.Abs(closestDist) < 5)
+        if (Math.Abs(closestDist) < 8)
         {
-            AttackPlayer();
-        }
-        else if (Math.Abs(closestDist) < 8)
-        {
-            WalkTowardsPlayer();
+            //face player in range
+            if (closestDist < 0)
+            {
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            //attack or approach player depending on distance
+            if (Math.Abs(closestDist) < 5)
+            {
+                _anim.SetBool("isWalking", false);
+                AttackPlayer();
+            }
+            else
+            {
+                _anim.SetBool("isWalking", true);
+                WalkTowardsPlayer();
+            }
         }
         else if (idle)
         {
+            _anim.SetBool("isWalking", false);
             Idle();
         }
         else
         {
+            _anim.SetBool("isWalking", true);
             WalkAimlessly();
         }
-    }
-
-    void Flip()
-    {
-        _facingRight = !_facingRight;
-        
-        // Multiply the player's x local scale by -1
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
     }
 
     private void AttackPlayer()
     {
         // Do nothing for now
+
+        //need to implement projectile
+        //if (attCooldown > 0)
+        // {
+        //     attCooldown -= Time.deltaTime;
+        // }
+        // else
+        // {
+        //     Instantiate(projectile, transform.position, Quaternion.identity);
+        //     attCooldown = initCooldownTime;
+        // }
     }
 
     private void FindNearestPlayer()
@@ -95,9 +116,6 @@ public class EnemyAI : MonoBehaviour
 
             idle = false;
             walkingAimlessly = true;
-
-            _anim.SetBool("isIdle", false);
-            _anim.SetBool("isWalking", true);
         }
         else
         {
@@ -115,9 +133,6 @@ public class EnemyAI : MonoBehaviour
 
             walkingAimlessly = false;
             idle = true;
-            
-            _anim.SetBool("isIdle", true);
-            _anim.SetBool("isWalking", false);
         }
         else
         {
@@ -150,13 +165,11 @@ public class EnemyAI : MonoBehaviour
         if (closestDist < 0)
         {
             // Walk to the right
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
             gameObject.transform.position = new Vector2(currX + speed, currY);
         }
         else
         {
             // Walk to the left
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
             gameObject.transform.position = new Vector2(currX - speed, currY);
         }
         

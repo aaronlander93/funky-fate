@@ -10,16 +10,16 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: isWalking
-    m_EventTreshold: 0
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3949669173571534207}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.03504762
+  m_TransitionDuration: 0.03504759
   m_TransitionOffset: 0
-  m_ExitTime: 0.6511627
+  m_ExitTime: 0.75591326
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -86,12 +86,6 @@ AnimatorController:
   m_Name: Heckler
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isIdle
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 1
-    m_Controller: {fileID: 0}
   - m_Name: isWalking
     m_Type: 4
     m_DefaultFloat: 0
@@ -146,18 +140,18 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isWalking
-    m_EventTreshold: 0
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5039057671616901708}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.039514244
-  m_TransitionOffset: 0.35031244
-  m_ExitTime: 1.0020461
+  m_TransitionDuration: 0.045396626
+  m_TransitionOffset: 0.27644098
+  m_ExitTime: 0.8995792
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
