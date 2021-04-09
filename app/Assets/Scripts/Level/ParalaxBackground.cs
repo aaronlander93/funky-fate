@@ -20,6 +20,11 @@ public class ParalaxBackground : MonoBehaviour {
     }
 
     void LateUpdate() {
+        if (!cameraTransform)
+        {
+            cameraTransform = Camera.main.transform;
+            lastCameraPosition = cameraTransform.position;
+        }
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
         transform.position += deltaMovement * paralaxMultiplier;
         lastCameraPosition = cameraTransform.position;
