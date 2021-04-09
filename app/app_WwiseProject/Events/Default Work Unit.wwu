@@ -5,10 +5,10 @@
 			<ChildrenList>
 				<Event Name="Music" ID="{0964AB35-247F-419B-9854-D030A6B6CAFA}">
 					<ChildrenList>
-						<Action Name="" ID="{88F38A4F-3E82-46DB-AEEA-ACFDF309DA0A}" ShortID="674820032">
+						<Action Name="" ID="{3BD650E0-8E12-4370-B5B5-9E02CA0B0B59}" ShortID="376880270">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="level1groove" ID="{C3AFA4A9-6684-4C60-BC61-E5578F8DB415}" WorkUnitID="{2696ED44-2D06-45B6-B6BD-A29782AC9B05}"/>
+									<ObjectRef Name="level1groove" ID="{19B52D57-AE20-4DFA-A82A-ED982E587692}" WorkUnitID="{62AF5F7D-0FE3-4456-A620-60E35A578241}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
