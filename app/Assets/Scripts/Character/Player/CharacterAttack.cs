@@ -7,12 +7,12 @@ public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private float attackRangeHorizontal;
     [SerializeField] private float attackRangeVertical;
-    private CharacterTracker characterTracker;
+    private GameSetupController gsc;
 
     // Start is called before the first frame update
     void Start()
     {
-        characterTracker = GameObject.Find("Characters").GetComponent<CharacterTracker>();
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Attack()
     {
-        List<GameObject> enemies = characterTracker.GetEnemies();
+        List<GameObject> enemies = gsc.GetEnemies();
         List<GameObject> enemiesWithinRange = new List<GameObject>();
 
         float dirFacing = gameObject.transform.rotation.y;
