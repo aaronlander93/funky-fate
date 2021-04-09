@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private GameObject[] players;
+    public GameSetupController gsc;
 
     private GameObject closestPlayer;
 
@@ -22,9 +22,8 @@ public class EnemyAI : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rand = new System.Random();
     }
 
@@ -58,10 +57,13 @@ public class EnemyAI : MonoBehaviour
 
     private void FindNearestPlayer()
     {
+        List<GameObject> players = gsc.GetPlayers();
+
         float dist;
         closestDist = float.MaxValue;
 
-        foreach(GameObject player in players)
+
+        foreach (GameObject player in players)
         {
             dist = gameObject.transform.position.x - player.transform.position.x;
             if (Math.Abs(dist) < Math.Abs(closestDist))

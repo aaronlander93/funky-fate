@@ -19,19 +19,21 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_healthIndex = m_CharacterHealth.GetCharacterHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int health = m_CharacterHealth.GetCharacterHealth();
-
-        if(health != m_healthIndex)
+        if (m_CharacterHealth)
         {
-            // Characer health has changed, update UI
-            m_healthIndex = health;
-            UpdateHealthImage();
+            int health = m_CharacterHealth.GetCharacterHealth();
+
+            if (health != m_healthIndex)
+            {
+                // Characer health has changed, update UI
+                m_healthIndex = health;
+                UpdateHealthImage();
+            }
         }
     }
 

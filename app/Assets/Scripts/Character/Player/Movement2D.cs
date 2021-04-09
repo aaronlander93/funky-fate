@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class Movement2D : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D _rb;
     private Animator _anim;
+    
     [SerializeField] private Collider2D m_CrouchDisableCollider;
     bool crouch = false;
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
@@ -126,11 +128,28 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
+    public PhotonView _pv;
+    public PhotonTransformViewClassic _ptv;
+
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _cc = GetComponent<CapsuleCollider2D>();
         _anim = GetComponent<Animator>();
+
+        if (_pv && !_pv.IsMine)
+        {
+            Destroy(gameObject.GetComponent<Movement2D>());
+            
+            foreach(Transform child in gameObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
 
         capsuleColliderSize = _cc.size;
     }
@@ -156,6 +175,19 @@ public class Movement2D : MonoBehaviour
         }
 
         Animation();
+
+        if (_pv && _pv.IsMine && _ptv)
+        {
+            if(_rb.velocity.x > -.2f || _rb.velocity.x < .2f)
+            {
+                _ptv.SetSynchronizedValues(Vector3.zero, 0);
+            }
+            else
+            {
+                _ptv.SetSynchronizedValues(_rb.velocity, 0);
+            }
+        }
+
     }
     
     private void FixedUpdate()
@@ -202,7 +234,7 @@ public class Movement2D : MonoBehaviour
             if (_wallRun) WallRun();
             if (_onWall && !_onGround) StickToWall();
         }
-        if (_canDash) Dash(_horizontalDirection, _verticalDirection);
+        if (_canDash) Dash(_horizontalDirection, _verticalDirection); 
     }
 
     private Vector2 GetInput()
