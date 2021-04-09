@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,8 +129,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 1
-  m_AngularDrag: 0.01
-  m_GravityScale: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: c41fa634c8fe2ca468f45ea42d8a16e3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
