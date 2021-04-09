@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     private Vector2 direction;
     public float moveSpeed;
+    public float yOffset;
 
     void Awake()
     {
@@ -24,7 +25,7 @@ public class Projectile : MonoBehaviour
         FindNearestPlayer();
         
         direction = (closestPlayer.transform.position - transform.position).normalized * moveSpeed;
-        _rb.velocity = new Vector2(direction.x, direction.y);
+        _rb.velocity = new Vector2(direction.x, direction.y + yOffset);
     }
 
     // Update is called once per frame
