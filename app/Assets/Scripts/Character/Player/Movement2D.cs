@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class Movement2D : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D _rb;
     private Animator _anim;
+    
     [SerializeField] private Collider2D m_CrouchDisableCollider;
     bool crouch = false;
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
@@ -58,6 +60,23 @@ public class Movement2D : MonoBehaviour
     private bool _facingRight = true;
     private bool _canMove => !_wallGrab || !_isDashing;
     private bool m_wasCrouching = false;
+
+    [Header("Slope Variables")]
+    [SerializeField] private float slopeCheckDistance;
+    [SerializeField] private float maxSlopeAngle;
+    [SerializeField] private PhysicsMaterial2D noFriction;
+    [SerializeField] private PhysicsMaterial2D fullFriction;
+    private float slopeDownAngle;
+    private float slopeSideAngle;
+    private float lastSlopeAngle;
+    private bool isOnSlope;
+    private bool canWalkOnSlope;
+    private Vector2 slopeNormalPerp;
+    private Vector2 capsuleColliderSize;
+    private CapsuleCollider2D _cc;
+    private Vector2 newVelocity;
+
+
 
 
     [Header("Jump Variables")]
@@ -109,10 +128,30 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
+    public PhotonView _pv;
+    public PhotonTransformViewClassic _ptv;
+
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _cc = GetComponent<CapsuleCollider2D>();
         _anim = GetComponent<Animator>();
+
+        if (_pv && !_pv.IsMine)
+        {
+            Destroy(gameObject.GetComponent<Movement2D>());
+            
+            foreach(Transform child in gameObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        capsuleColliderSize = _cc.size;
     }
 
     private void Update()
@@ -136,6 +175,19 @@ public class Movement2D : MonoBehaviour
         }
 
         Animation();
+
+        if (_pv && _pv.IsMine && _ptv)
+        {
+            if(_rb.velocity.x > -.2f || _rb.velocity.x < .2f)
+            {
+                _ptv.SetSynchronizedValues(Vector3.zero, 0);
+            }
+            else
+            {
+                _ptv.SetSynchronizedValues(_rb.velocity, 0);
+            }
+        }
+
     }
     
     private void FixedUpdate()
@@ -143,6 +195,7 @@ public class Movement2D : MonoBehaviour
         CheckCollisions();
         FallMultiplier();
         ApplyLinearDrag();
+        SlopeCheck();
         if (_canMove) MoveCharacter();
         if (_onGround)
         {
@@ -181,7 +234,7 @@ public class Movement2D : MonoBehaviour
             if (_wallRun) WallRun();
             if (_onWall && !_onGround) StickToWall();
         }
-        if (_canDash) Dash(_horizontalDirection, _verticalDirection);
+        if (_canDash) Dash(_horizontalDirection, _verticalDirection); 
     }
 
     private Vector2 GetInput()
@@ -239,10 +292,98 @@ public class Movement2D : MonoBehaviour
             }
 
     }
+    if(_onGround && !isOnSlope && !_isJumping){
     _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
 
         if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
             _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+    }
+    else if (_onGround && isOnSlope && canWalkOnSlope && !_isJumping) //If on slope
+        {
+            newVelocity.Set(_maxMoveSpeed * slopeNormalPerp.x * -_horizontalDirection, _maxMoveSpeed * slopeNormalPerp.y * -_horizontalDirection);
+            _rb.velocity = newVelocity;
+        }
+    else if (!_onGround) //If in air
+    {
+_rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+
+        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+    }
+    }
+    private void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, capsuleColliderSize.y / 2));
+
+        SlopeCheckHorizontal(checkPos);
+        SlopeCheckVertical(checkPos);
+    }
+
+    private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, _groundLayer);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, _groundLayer);
+
+        if (slopeHitFront)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+        }
+        else if (slopeHitBack)
+        {
+            isOnSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            isOnSlope = false;
+        }
+
+    }
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {      
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, _groundLayer);
+
+        if (hit)
+        {
+
+            slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
+
+            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if(slopeDownAngle != lastSlopeAngle)
+            {
+                isOnSlope = true;
+            }                       
+
+            lastSlopeAngle = slopeDownAngle;
+           
+            Debug.DrawRay(hit.point, slopeNormalPerp, Color.blue);
+            Debug.DrawRay(hit.point, hit.normal, Color.green);
+
+        }
+
+        if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)
+        {
+            canWalkOnSlope = false;
+        }
+        else
+        {
+            canWalkOnSlope = true;
+        }
+
+        if (isOnSlope && canWalkOnSlope && _horizontalDirection == 0.0f)
+        {
+            _rb.sharedMaterial = fullFriction;
+        }
+        else
+        {
+            _rb.sharedMaterial = noFriction;
+        }
     }
 
     private void ApplyLinearDrag()
@@ -310,6 +451,8 @@ public class Movement2D : MonoBehaviour
             if (_rb.velocity.y < 0)
             {
                 _rb.gravityScale = _fallMultiplier;
+                // TEMPORARY FIX TO BONKING YOUR HEAD AND SLOWING MOVEMENT
+                crouch = false;
             }
             else if (_rb.velocity.y > 0 && !Input.GetButton("Jump"))
             {
@@ -435,7 +578,7 @@ public class Movement2D : MonoBehaviour
                 _anim.SetBool("isFalling", false);
                 _anim.SetFloat("verticalDirection", 0f);
             }
-            else if (_rb.velocity.y < 0f)
+            else if (_rb.velocity.y < -0.1f)
             {
                 _anim.SetBool("isFalling", true);
                 _anim.SetBool("WallGrab", false);
@@ -447,6 +590,13 @@ public class Movement2D : MonoBehaviour
                 _anim.SetBool("WallGrab", false);
                 _anim.SetFloat("verticalDirection", Mathf.Abs(_verticalDirection));
             }
+        }
+        if(_isDashing)
+        {
+            _anim.SetBool("isDashing", _isDashing);
+        }
+        else{
+            _anim.SetBool("isDashing", false);
         }
     }
 

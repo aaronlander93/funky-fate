@@ -9,16 +9,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void OnStartGameClick() {
+    public void OnStartGameClick()
+    {
         Debug.Log("Start Game clicked");
+        GameConfig.Multiplayer = false;
         SceneManager.LoadScene("LV00-Backstage");
     }
 
-    public void OnOptionsClick() {
+    public void OnMultiplayerClick()
+    {
+        GameConfig.Multiplayer = true;
+        SceneManager.LoadScene("MultiplayerMenu");
+    }
+
+    public void OnOptionsClick()
+    {
 
     }
 
-    public void OnQuitGameClick() {
+    public void OnQuitGameClick()
+    {
         #if UNITY_EDITOR
 		    UnityEditor.EditorApplication.isPlaying = false;
         #else
