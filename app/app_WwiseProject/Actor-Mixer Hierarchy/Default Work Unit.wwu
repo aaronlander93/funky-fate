@@ -3,9 +3,21 @@
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{2696ED44-2D06-45B6-B6BD-A29782AC9B05}" PersistMode="Standalone">
 			<ChildrenList>
-				<Sound Name="level1groove" ID="{C3AFA4A9-6684-4C60-BC61-E5578F8DB415}" ShortID="91199017">
+				<Sound Name="jump" ID="{3E805671-BCB5-4781-B89F-A66C99B60BC0}" ShortID="980524217">
 					<PropertyList>
-						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{AD0958CE-98E0-4EBC-9F14-2DA85D88A484}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="152"/>
+											<Property Name="Min" Type="Real64" Value="-152"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -16,17 +28,17 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AudioFileSource Name="level1groove" ID="{6662EF63-2DD2-443E-91C1-F264A9BF3E3C}">
+						<AudioFileSource Name="funkjump" ID="{247E5594-1083-4B3F-B4D2-18314D403A24}">
 							<Language>SFX</Language>
-							<AudioFile>level1groove.wav</AudioFile>
+							<AudioFile>funkjump.wav</AudioFile>
 							<MediaIDList>
-								<MediaID ID="520628151"/>
+								<MediaID ID="35421127"/>
 							</MediaIDList>
 						</AudioFileSource>
 					</ChildrenList>
 					<ObjectLists/>
 					<ActiveSourceList>
-						<ActiveSource Name="level1groove" ID="{6662EF63-2DD2-443E-91C1-F264A9BF3E3C}" Platform="Linked"/>
+						<ActiveSource Name="funkjump" ID="{247E5594-1083-4B3F-B4D2-18314D403A24}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
 			</ChildrenList>
