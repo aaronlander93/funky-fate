@@ -42,7 +42,19 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Parallax Far
+    uniqueID: 2111528221
+    locked: 0
+  - name: Parallax Mid
+    uniqueID: 1505642761
+    locked: 0
+  - name: Parallax Close
+    uniqueID: 42418127
+    locked: 0
+  - name: Inside
+    uniqueID: 3448449837
+    locked: 0
+  - name: Buildings
     uniqueID: 233990525
     locked: 0
   - name: Platforms
