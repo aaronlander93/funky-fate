@@ -36,11 +36,15 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             player.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
             player.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
             player.GetComponentInChildren<MovementLagSync>().enabled = false;
+
+            players.Add(player);
         }
         else
         {
             // Game is in multiplayer
             var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), new Vector2(5f, .6f), Quaternion.identity);
+
+            players.Add(player);
         } 
     }
 
