@@ -56,13 +56,13 @@ public class EnemyAI : MonoBehaviour
             //attack or approach player depending on distance
             if (Math.Abs(closestDist) < 5)
             {
-                Debug.Log(attCooldown);
+                // Debug.Log(attCooldown);
                 _anim.SetBool("isWalking", false);
                 AttackPlayer();
             }
             else
             {
-                Debug.Log("tracking player");
+                // Debug.Log("tracking player");
                 _anim.SetBool("isWalking", true);
                 WalkTowardsPlayer();
             }
@@ -83,12 +83,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (attCooldown > 0)
         {
-            Debug.Log("Going to attack!");
+            // Debug.Log("Going to attack!");
             attCooldown -= Time.deltaTime;
         }
         else
         {
-            Debug.Log("attacking!");
+            // Debug.Log("attacking!");
             _anim.SetTrigger("attack"); //throwTomato() on animation event
             attCooldown = initCooldownTime;
         }
