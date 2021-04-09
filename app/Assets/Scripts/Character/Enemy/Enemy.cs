@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
         dead = true;
 
         gameObject.transform.Rotate(0, 0, 90);
+        //animate death
+        //either destroy enemy object or leave no collider object
         Destroy(GetComponent<EnemyAI>());
     }
 

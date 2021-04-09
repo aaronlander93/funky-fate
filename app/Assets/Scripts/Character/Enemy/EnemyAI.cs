@@ -20,11 +20,20 @@ public class EnemyAI : MonoBehaviour
 
     private System.Random rand;
 
+    //time between attacks
+    public float initCooldownTime;
+    private float attCooldown;
+
+    public GameObject projectile;
+    private Animator _anim;
+
     // Start is called before the first frame update
     void Start()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rand = new System.Random();
+        
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,27 +41,63 @@ public class EnemyAI : MonoBehaviour
     {
         FindNearestPlayer();
 
-        if(Math.Abs(closestDist) < 5)
+        if (Math.Abs(closestDist) < 8)
         {
-            AttackPlayer();
-        }
-        else if (Math.Abs(closestDist) < 8)
-        {
-            WalkTowardsPlayer();
+            //face player in range
+            if (closestDist < 0)
+            {
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            //attack or approach player depending on distance
+            if (Math.Abs(closestDist) < 5)
+            {
+                // Debug.Log(attCooldown);
+                _anim.SetBool("isWalking", false);
+                AttackPlayer();
+            }
+            else
+            {
+                // Debug.Log("tracking player");
+                _anim.SetBool("isWalking", true);
+                WalkTowardsPlayer();
+            }
         }
         else if (idle)
         {
+            _anim.SetBool("isWalking", false);
             Idle();
         }
         else
         {
+            _anim.SetBool("isWalking", true);
             WalkAimlessly();
         }
     }
 
     private void AttackPlayer()
     {
-        // Do nothing for now
+        if (attCooldown > 0)
+        {
+            // Debug.Log("Going to attack!");
+            attCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            // Debug.Log("attacking!");
+            _anim.SetTrigger("attack"); //throwTomato() on animation event
+            attCooldown = initCooldownTime;
+        }
+    }
+
+    private void throwTomato()
+    {
+        Debug.Log("tomato thrown!");
+        Instantiate(projectile, transform.position, Quaternion.identity);
     }
 
     private void FindNearestPlayer()
@@ -131,15 +176,18 @@ public class EnemyAI : MonoBehaviour
         if (closestDist < 0)
         {
             // Walk to the right
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
             gameObject.transform.position = new Vector2(currX + speed, currY);
         }
         else
         {
             // Walk to the left
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
             gameObject.transform.position = new Vector2(currX - speed, currY);
         }
+        
+    }
+
+    void animate() 
+    {
         
     }
 }

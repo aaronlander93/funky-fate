@@ -488,13 +488,13 @@ _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
     void Dash(float x, float y)
     {
         _isDashing = true;
-        Debug.Log("Start Dash...");
+        //Debug.Log("Start Dash...");
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = 0;
         _rb.drag = 0f;
         Vector2 dir = new Vector2(x, y);
-        Debug.Log("Direction Vector: " + dir);
-        Debug.Log("Dash Force: " + _dashForce);
+        //Debug.Log("Direction Vector: " + dir);
+        //Debug.Log("Dash Force: " + _dashForce);
 
         if (dir != Vector2.zero)
         {
@@ -515,7 +515,7 @@ _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
         _rb.gravityScale = 0;
         _rb.drag = 0f;
         _isDashing = false;
-        Debug.Log("End Dash!");
+        //Debug.Log("End Dash!");
     }
 
     void StickToWall()
