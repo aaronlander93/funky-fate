@@ -176,7 +176,7 @@ public class Movement2D : MonoBehaviour
 
         Animation();
 
-        if (_pv && _pv.IsMine && _ptv)
+        if (GameConfig.Multiplayer)
         {
             if(_rb.velocity.x > -.2f || _rb.velocity.x < .2f)
             {
