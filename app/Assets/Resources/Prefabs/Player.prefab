@@ -337,7 +337,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Speed
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: isJumping
   - Type: 4
     SynchronizeType: 1

@@ -141,7 +141,7 @@ public class Movement2D : MonoBehaviour
         _cc = GetComponent<CapsuleCollider2D>();
         _anim = GetComponent<Animator>();
 
-        if (_pv && !_pv.IsMine)
+        if (GameConfig.Multiplayer && !_pv.IsMine)
         {
             Destroy(gameObject.GetComponent<Movement2D>());
             
@@ -176,7 +176,7 @@ public class Movement2D : MonoBehaviour
 
         Animation();
 
-        if (GameConfig.Multiplayer)
+        if (GameConfig.Multiplayer && _pv.IsMine)
         {
             if(_rb.velocity.x > -.2f || _rb.velocity.x < .2f)
             {
