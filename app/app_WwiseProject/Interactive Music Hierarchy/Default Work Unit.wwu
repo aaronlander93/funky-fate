@@ -46,6 +46,7 @@
 											<PropertyList>
 												<Property Name="IsFolder" Type="bool" Value="True"/>
 											</PropertyList>
+											<ReferenceList/>
 											<TransitionInfo/>
 										</MusicTransition>
 									</TransitionList>
@@ -113,7 +114,17 @@
 					</TransitionList>
 					<ObjectLists/>
 					<Playlist>
-						<MusicPlaylistItem Name="" ID="{C5750337-439C-4550-AEC2-CF1C4DEE3C33}" ShortID="734542305"/>
+						<MusicPlaylistItem Name="" ID="{C5750337-439C-4550-AEC2-CF1C4DEE3C33}" ShortID="734542305">
+							<ChildrenList>
+								<MusicPlaylistItem Name="" ID="{CF27E45F-AA9B-4CBC-98DE-F5C7D37A205B}" ShortID="361040960">
+									<PropertyList>
+										<Property Name="LoopCount" Type="int16" Value="0"/>
+										<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+									</PropertyList>
+									<SegmentRef Name="level1groove" ID="{19B52D57-AE20-4DFA-A82A-ED982E587692}"/>
+								</MusicPlaylistItem>
+							</ChildrenList>
+						</MusicPlaylistItem>
 					</Playlist>
 				</MusicPlaylistContainer>
 			</ChildrenList>
