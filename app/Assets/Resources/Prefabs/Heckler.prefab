@@ -170,7 +170,7 @@ MonoBehaviour:
   gsc: {fileID: 0}
   attackRange: 3
   aggroRange: 4
-  speed: 0.05
+  speed: 0.03
 --- !u!114 &-8537439814938549050
 MonoBehaviour:
   m_ObjectHideFlags: 0

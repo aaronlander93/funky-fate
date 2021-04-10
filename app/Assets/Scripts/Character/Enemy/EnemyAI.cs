@@ -18,9 +18,7 @@ public class EnemyAI : MonoBehaviour
 
     private Rigidbody2D closestPlayer;
     private float closestDist;
-    private float aimlessDist;
-
-    private Vector3 aimlessDirection = new Vector3(1, 0, 0);
+    private float aimlessDist = 2;
 
     private Rigidbody2D rb;
 
@@ -68,7 +66,6 @@ public class EnemyAI : MonoBehaviour
         float dist;
         closestDist = float.MaxValue;
 
-
         foreach (Rigidbody2D player in players)
         {
             dist = rb.position.x - player.transform.position.x;
@@ -85,7 +82,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(idleTime == 0)
         {
-            idleTime = rand.Next(120, 300);
+            idleTime = rand.Next(50, 200);
 
             idle = false;
         }
