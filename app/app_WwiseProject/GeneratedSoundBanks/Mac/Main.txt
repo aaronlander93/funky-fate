@@ -1,6 +1,0 @@
-Event	ID	Name			Wwise Object Path	Notes
-	2209143526	Music_Level1			\Default Work Unit\Music_Level1	
-
-In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	358892595	level1groove	C:\Users\Xyguy\Desktop\infection\github repo\funky-fate\app\app_WwiseProject\.cache\Mac\SFX\level1groove_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\level1groove		7953472
-
