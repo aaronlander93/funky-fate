@@ -128,6 +128,9 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
+    [Header("Wwise Stuff")]
+    public AK.Wwise.Event JumpSound;
+
     public PhotonView _pv;
     public PhotonTransformViewClassic _ptv;
 
@@ -160,8 +163,8 @@ public class Movement2D : MonoBehaviour
         _verticalDirection = GetInput().y;
 
         if (Input.GetButtonDown("Jump")) _jumpBufferCounter = _jumpBufferLength;
-        else _jumpBufferCounter -= Time.deltaTime;
-
+        else { _jumpBufferCounter -= Time.deltaTime;
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift)) _dashBufferCounter = _dashBufferLength;
         else _dashBufferCounter -= Time.deltaTime;
 
@@ -224,6 +227,7 @@ public class Movement2D : MonoBehaviour
             else
             {
                 Jump(Vector2.up);
+                JumpSound.Post(gameObject);
             }
         }
         if (_canCornerCorrect) CornerCorrect(_rb.velocity.y);
@@ -484,13 +488,13 @@ _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
     void Dash(float x, float y)
     {
         _isDashing = true;
-        Debug.Log("Start Dash...");
+        //Debug.Log("Start Dash...");
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = 0;
         _rb.drag = 0f;
         Vector2 dir = new Vector2(x, y);
-        Debug.Log("Direction Vector: " + dir);
-        Debug.Log("Dash Force: " + _dashForce);
+        //Debug.Log("Direction Vector: " + dir);
+        //Debug.Log("Dash Force: " + _dashForce);
 
         if (dir != Vector2.zero)
         {
@@ -511,7 +515,7 @@ _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
         _rb.gravityScale = 0;
         _rb.drag = 0f;
         _isDashing = false;
-        Debug.Log("End Dash!");
+        //Debug.Log("End Dash!");
     }
 
     void StickToWall()
