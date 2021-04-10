@@ -26,8 +26,8 @@ public class CharacterAttack : MonoBehaviour
 
     private void Attack()
     {
-        List<GameObject> enemies = gsc.GetEnemies();
-        List<GameObject> enemiesWithinRange = new List<GameObject>();
+        List<Rigidbody2D> enemies = gsc.GetEnemies();
+        List<Rigidbody2D> enemiesWithinRange = new List<Rigidbody2D>();
 
         float dirFacing = gameObject.transform.rotation.y;
         float ownX = gameObject.transform.position.x;
@@ -41,7 +41,7 @@ public class CharacterAttack : MonoBehaviour
         }
 
         // Find enemies within attack range
-        foreach(GameObject enemy in enemies)
+        foreach(Rigidbody2D enemy in enemies)
         {
             float enemyX= enemy.transform.position.x;
             float enemyY = enemy.transform.position.y;
@@ -67,7 +67,7 @@ public class CharacterAttack : MonoBehaviour
         }
 
         // Apply damage to enemies
-        foreach(GameObject enemy in enemiesWithinRange)
+        foreach(Rigidbody2D enemy in enemiesWithinRange)
         {
             enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
         }

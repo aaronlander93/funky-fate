@@ -7,16 +7,22 @@ public class EnemyAI : MonoBehaviour
 {
     public GameSetupController gsc;
 
-    private GameObject closestPlayer;
+    public float attackRange;
+    public float aggroRange;
+    public float speed;
+    
 
-    private bool walkingAimlessly = false;
     private bool idle = true;
 
-    private int idleTime;
+    private int idleTime = 0;
 
+    private Rigidbody2D closestPlayer;
     private float closestDist;
-    private float speed = .01f;
-    private float aimlessDist = 0f;
+    private float aimlessDist;
+
+    private Vector3 aimlessDirection = new Vector3(1, 0, 0);
+
+    private Rigidbody2D rb;
 
     private System.Random rand;
 
@@ -24,19 +30,19 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
         rand = new System.Random();
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindNearestPlayer();
 
-        if(Math.Abs(closestDist) < 5)
+        if(Math.Abs(closestDist) < attackRange)
         {
             AttackPlayer();
         }
-        else if (Math.Abs(closestDist) < 8)
+        else if (Math.Abs(closestDist) < aggroRange)
         {
             WalkTowardsPlayer();
         }
@@ -57,15 +63,16 @@ public class EnemyAI : MonoBehaviour
 
     private void FindNearestPlayer()
     {
-        List<GameObject> players = gsc.GetPlayers();
+        List<Rigidbody2D> players = gsc.GetPlayers();
 
         float dist;
         closestDist = float.MaxValue;
 
 
-        foreach (GameObject player in players)
+        foreach (Rigidbody2D player in players)
         {
-            dist = gameObject.transform.position.x - player.transform.position.x;
+            dist = rb.position.x - player.transform.position.x;
+
             if (Math.Abs(dist) < Math.Abs(closestDist))
             {
                 closestDist = dist;
@@ -81,7 +88,6 @@ public class EnemyAI : MonoBehaviour
             idleTime = rand.Next(120, 300);
 
             idle = false;
-            walkingAimlessly = true;
         }
         else
         {
@@ -94,16 +100,15 @@ public class EnemyAI : MonoBehaviour
         if (aimlessDist < .3f && aimlessDist > -.3f)
         {
             // Determine distance
-            
-            aimlessDist = (float) rand.Next(-2, 3);
 
-            walkingAimlessly = false;
+            aimlessDist = (float)rand.Next(-2, 3);
+
             idle = true;
         }
         else
         {
-            float currX = gameObject.transform.position.x;
-            float currY = gameObject.transform.position.y;
+            float currX = rb.position.x;
+            float currY = rb.position.y;
 
             // Move
             if (aimlessDist < 0)
@@ -125,8 +130,8 @@ public class EnemyAI : MonoBehaviour
 
     private void WalkTowardsPlayer()
     {
-        float currX = gameObject.transform.position.x;
-        float currY = gameObject.transform.position.y;
+        float currX = rb.position.x;
+        float currY = rb.position.y;
 
         if (closestDist < 0)
         {
@@ -140,6 +145,6 @@ public class EnemyAI : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
             gameObject.transform.position = new Vector2(currX - speed, currY);
         }
-        
+
     }
 }
