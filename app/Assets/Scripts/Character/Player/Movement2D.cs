@@ -128,8 +128,7 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
-    [Header("Wwise Stuff")]
-    public AK.Wwise.Event JumpSound;
+   
 
     public PhotonView _pv;
     public PhotonTransformViewClassic _ptv;
@@ -227,7 +226,6 @@ public class Movement2D : MonoBehaviour
             else
             {
                 Jump(Vector2.up);
-                JumpSound.Post(gameObject);
             }
         }
         if (_canCornerCorrect) CornerCorrect(_rb.velocity.y);
