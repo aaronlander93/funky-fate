@@ -52,7 +52,6 @@ GameObject:
   - component: {fileID: 7818587385564899100}
   - component: {fileID: 4576218035295100940}
   - component: {fileID: 6744845166112750618}
-  - component: {fileID: 3674167345186742287}
   m_Layer: 8
   m_Name: MainPlayer
   m_TagString: Player
@@ -242,11 +241,6 @@ MonoBehaviour:
   _topRaycastLength: 0.49
   _edgeRaycastOffset: {x: 0.15, y: 0, z: 0}
   _innerRaycastOffset: {x: -0.09, y: 0, z: 0}
-  JumpSound:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f7a999af6a0662942979c2a83ded3761,
-      type: 2}
   _pv: {fileID: 1642426809078068347}
   _ptv: {fileID: 4576218035295100940}
 --- !u!95 &7469038050537146829
@@ -407,28 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8a6c6710d6f0346ae8da8ed88b4dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3674167345186742287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979396586606236451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9d4e30bea3ab004dac65a1234713bab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,10 +472,8 @@ GameObject:
   - component: {fileID: 1914223353232151007}
   - component: {fileID: 8548381323917930288}
   - component: {fileID: 3660217328871020085}
-  - component: {fileID: 1504162297972167289}
-  - component: {fileID: 7287185413766997623}
-  - component: {fileID: 5771527999431722204}
   - component: {fileID: 7196328631741139407}
+  - component: {fileID: 3897675134599507163}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -585,68 +555,6 @@ MonoBehaviour:
   smoothSpeed: 0.125
   xOffSet: 0
   yOffSet: 0
---- !u!114 &1504162297972167289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195345903949312446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9d4e30bea3ab004dac65a1234713bab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList:
-    - {fileID: 7287185413766997623}
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
---- !u!114 &7287185413766997623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195345903949312446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ffd5ebba87efc44b813fef126d3d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDefaultListener: 1
-  listenerId: 0
---- !u!114 &5771527999431722204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195345903949312446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a926698c7c879c45b15394229013bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 98bfff14e5caa1345a618756ef442763,
-      type: 2}
-  decodeBank: 0
-  loadAsynchronous: 0
-  saveDecodedBank: 0
-  unloadTriggerList: 958ca0ea
-  bankNameInternal: 
-  valueGuidInternal: 
 --- !u!114 &7196328631741139407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +586,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &3897675134599507163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195345903949312446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 979396586606236451}
+  ListenerNumber: -1
 --- !u!1 &6393483158543109020
 GameObject:
   m_ObjectHideFlags: 0
