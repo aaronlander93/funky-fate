@@ -1190,44 +1190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paralaxMultiplier: 0.4
---- !u!1 &1043906361 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -3132299955304415820, guid: f5fe795c4b237a04aa756a0c9bac1a38,
-    type: 3}
-  m_PrefabInstance: {fileID: 1435335885}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1043906367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043906361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a843ee9a2a1014f41bc73d0863ca778b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paralaxMultiplier: 0.2
---- !u!1 &1173040315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3869650387010478024, guid: f5fe795c4b237a04aa756a0c9bac1a38,
-    type: 3}
-  m_PrefabInstance: {fileID: 1435335885}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1173040321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173040315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a843ee9a2a1014f41bc73d0863ca778b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paralaxMultiplier: 0.6
 --- !u!1 &1221710884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1268,25 @@ MonoBehaviour:
   - {x: -1.5289097, y: -2.778067, z: 0}
   - {x: -1.0400887, y: -3.2562618, z: 0}
   - {x: 0.638958, y: -3.2532053, z: 0}
+--- !u!1 &1276953008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3869650387010478024, guid: f5fe795c4b237a04aa756a0c9bac1a38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1435335885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1276953010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276953008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a843ee9a2a1014f41bc73d0863ca778b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paralaxMultiplier: 0.6
 --- !u!1001 &1318632717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3069,6 +3050,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1771368123}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1938640362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3132299955304415820, guid: f5fe795c4b237a04aa756a0c9bac1a38,
+    type: 3}
+  m_PrefabInstance: {fileID: 1435335885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1938640364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938640362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a843ee9a2a1014f41bc73d0863ca778b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paralaxMultiplier: 0.2
 --- !u!1 &1942731248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,38 +3174,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d049b2afceba84e4cb35144ee9260e39, type: 3}
---- !u!1 &2019560062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6678800028046516245, guid: f5fe795c4b237a04aa756a0c9bac1a38,
-    type: 3}
-  m_PrefabInstance: {fileID: 1435335885}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &2019560063
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019560062}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 10.99626, y: 0.53671825}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.000786, y: 0.1140219}
-  m_EdgeRadius: 0
 --- !u!1001 &2083173984
 PrefabInstance:
   m_ObjectHideFlags: 0
