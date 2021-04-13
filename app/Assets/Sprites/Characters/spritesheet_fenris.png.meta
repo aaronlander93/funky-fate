@@ -77,6 +77,21 @@ TextureImporter:
   - first:
       213: -1058538263164988509
     second: spritesheet_fenris_24
+  - first:
+      213: -3790084431982655524
+    second: spritesheet_fenris_25
+  - first:
+      213: 3915923338495831590
+    second: spritesheet_fenris_26
+  - first:
+      213: -6243168645284712961
+    second: spritesheet_fenris_27
+  - first:
+      213: -3074550859990756118
+    second: spritesheet_fenris_28
+  - first:
+      213: 367366812749918856
+    second: spritesheet_fenris_29
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -166,7 +181,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
+        y: 180
         width: 36
         height: 36
       alignment: 0
@@ -187,7 +202,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 144
+        y: 180
         width: 36
         height: 36
       alignment: 0
@@ -208,7 +223,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 144
+        y: 180
         width: 36
         height: 36
       alignment: 0
@@ -229,7 +244,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 108
-        y: 144
+        y: 180
         width: 36
         height: 36
       alignment: 0
@@ -250,7 +265,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 144
+        y: 180
         width: 36
         height: 36
       alignment: 0
@@ -271,7 +286,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
+        y: 144
         width: 36
         height: 36
       alignment: 0
@@ -292,7 +307,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 108
+        y: 144
         width: 36
         height: 36
       alignment: 0
@@ -313,7 +328,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 108
+        y: 144
         width: 36
         height: 36
       alignment: 0
@@ -334,7 +349,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 108
-        y: 108
+        y: 144
         width: 36
         height: 36
       alignment: 0
@@ -355,7 +370,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 108
+        y: 144
         width: 36
         height: 36
       alignment: 0
@@ -376,7 +391,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 72
+        y: 108
         width: 36
         height: 36
       alignment: 0
@@ -397,7 +412,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 72
+        y: 108
         width: 36
         height: 36
       alignment: 0
@@ -418,7 +433,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 72
+        y: 108
         width: 36
         height: 36
       alignment: 0
@@ -439,7 +454,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 108
-        y: 72
+        y: 108
         width: 36
         height: 36
       alignment: 0
@@ -460,7 +475,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 72
+        y: 108
         width: 36
         height: 36
       alignment: 0
@@ -481,7 +496,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 36
+        y: 72
         width: 36
         height: 36
       alignment: 0
@@ -502,7 +517,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 36
+        y: 72
         width: 36
         height: 36
       alignment: 0
@@ -523,7 +538,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 36
+        y: 72
         width: 36
         height: 36
       alignment: 0
@@ -544,7 +559,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 108
-        y: 36
+        y: 72
         width: 36
         height: 36
       alignment: 0
@@ -565,7 +580,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 36
+        y: 72
         width: 36
         height: 36
       alignment: 0
@@ -586,7 +601,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 36
         width: 36
         height: 36
       alignment: 0
@@ -607,7 +622,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 36
-        y: 0
+        y: 36
         width: 36
         height: 36
       alignment: 0
@@ -628,7 +643,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 0
+        y: 36
         width: 36
         height: 36
       alignment: 0
@@ -649,7 +664,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 108
-        y: 0
+        y: 36
         width: 36
         height: 36
       alignment: 0
@@ -670,7 +685,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 0
+        y: 36
         width: 36
         height: 36
       alignment: 0
@@ -682,6 +697,111 @@ TextureImporter:
       bones: []
       spriteID: 3a354eade015f41f0800000000000000
       internalID: -1058538263164988509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd78fe23a4ae66bc0800000000000000
+      internalID: -3790084431982655524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_26
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62ea4b66787285630800000000000000
+      internalID: 3915923338495831590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_27
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffda2f0e13fcb59a0800000000000000
+      internalID: -6243168645284712961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_28
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae4116258400555d0800000000000000
+      internalID: -3074550859990756118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_fenris_29
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882f9387b26291500800000000000000
+      internalID: 367366812749918856
       vertices: []
       indices: 
       edges: []

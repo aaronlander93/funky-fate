@@ -38,7 +38,7 @@ MonoBehaviour:
   Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637538451930897486
+  lastModified: 637538617032804414
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -59,7 +59,7 @@ MonoBehaviour:
   Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637538451930897486
+  lastModified: 637538617032794405
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
   - {fileID: -3831003151537793496}
   StringsBanks:
   - {fileID: -5575456432573928866}
-  stringsBankWriteTime: 637538451930897486
+  stringsBankWriteTime: 637538617032804414
   cacheVersion: 6
 --- !u!114 &338723213550657214
 MonoBehaviour:
