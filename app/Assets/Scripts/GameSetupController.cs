@@ -13,6 +13,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject hecklerPrefab;
 
+    public MusicManager musicManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,8 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
+
+        musicManager.StartMusic();
     }
 
     void CreatePlayer()
