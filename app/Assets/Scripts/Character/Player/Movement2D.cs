@@ -229,7 +229,7 @@ public class Movement2D : MonoBehaviour
             {
                 Jump(Vector2.up);
                 JumpSound.SetActive (true);
-                JumpSound.SetActive(false);
+                JumpSound.SetActive (false);
             }
         }
         if (_canCornerCorrect) CornerCorrect(_rb.velocity.y);
