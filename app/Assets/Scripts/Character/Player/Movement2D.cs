@@ -128,8 +128,10 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
+    [Header("Audio")]
+    public GameObject JumpSound;
    
-
+    [Header("Photon")]
     public PhotonView _pv;
     public PhotonTransformViewClassic _ptv;
 
@@ -226,6 +228,8 @@ public class Movement2D : MonoBehaviour
             else
             {
                 Jump(Vector2.up);
+                JumpSound.SetActive (true);
+                JumpSound.SetActive(false);
             }
         }
         if (_canCornerCorrect) CornerCorrect(_rb.velocity.y);
