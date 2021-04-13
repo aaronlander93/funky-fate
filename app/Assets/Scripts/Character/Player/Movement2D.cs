@@ -106,7 +106,9 @@ public class Movement2D : MonoBehaviour
     [SerializeField] private float _dashForce = 15f;
     [SerializeField] private float _dashLength = .15f;
     [SerializeField] private float _dashBufferLength = .1f;
+    [SerializeField] private float cooldown = 2f;
     private float _dashBufferCounter;
+    private float _nextDashTime = 0f;
     private bool _isDashing;
     private bool _canDash => !_isDashing && _dashBufferCounter > 0f;
 
@@ -240,7 +242,12 @@ public class Movement2D : MonoBehaviour
             if (_wallRun) WallRun();
             if (_onWall && !_onGround) StickToWall();
         }
-        if (_canDash) Dash(_horizontalDirection, _verticalDirection); 
+        if(Time.time > _nextDashTime){
+        if (_canDash){
+            Dash(_horizontalDirection, _verticalDirection);
+            _nextDashTime = Time.time + cooldown; 
+            }
+        }
     }
 
     private Vector2 GetInput()
