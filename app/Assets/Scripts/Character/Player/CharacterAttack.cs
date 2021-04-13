@@ -8,6 +8,8 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private float attackRangeHorizontal;
     [SerializeField] private float attackRangeVertical;
     private GameSetupController gsc;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private string button = "Attack";
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +20,14 @@ public class CharacterAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButton(button))
         {
             Attack();
+            _anim.SetBool("isAttacking", true);
+        }
+        if(Input.GetButtonUp(button))
+        {
+            _anim.SetBool("isAttacking", false);
         }
     }
 

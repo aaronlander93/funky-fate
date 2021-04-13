@@ -268,6 +268,7 @@ MonoBehaviour:
   _dashForce: 10
   _dashLength: 0.07
   _dashBufferLength: 0.1
+  cooldown: 2
   _groundRaycastLength: 0.53
   _groundRaycastOffset: {x: 0.11, y: 0, z: 0}
   _wallRaycastLength: 0
@@ -308,8 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8dc835ee42627445a25d0bf7fa5c668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRangeHorizontal: 5
+  attackRangeHorizontal: 1
   attackRangeVertical: 1
+  _anim: {fileID: 7469038050537146829}
+  button: Attack
 --- !u!70 &7469038050541897836
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
