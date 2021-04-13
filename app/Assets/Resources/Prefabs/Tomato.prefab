@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5011152338796570481}
   - component: {fileID: 3559668032256767582}
   - component: {fileID: -5903109771535276198}
+  - component: {fileID: 7600568277223947023}
   m_Layer: 8
   m_Name: Tomato
   m_TagString: projectile
@@ -145,3 +146,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22126389, y: 0.22218907}
   m_EdgeRadius: 0
+--- !u!114 &7600568277223947023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275661090174896577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/SFX_Heckler_Tomato
+  PlayEvent: 2
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
