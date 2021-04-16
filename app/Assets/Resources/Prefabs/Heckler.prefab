@@ -190,6 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dead: 0
   health: 5
+  _deathFX: {fileID: 2216845646370645302, guid: f3a840c733fa3cf468f47c738bb93055,
+    type: 3}
 --- !u!114 &3591210828445902649
 MonoBehaviour:
   m_ObjectHideFlags: 0

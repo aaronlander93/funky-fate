@@ -14,9 +14,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health = 5;
     private Rigidbody2D rb;
 
+    private Animator _anim;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -38,14 +41,19 @@ public class Enemy : MonoBehaviour
     }
     
 
-    private void Die()
+    private void triggerDeath()
     {
         dead = true;
 
-        gameObject.transform.Rotate(0, 0, 90);
+        // gameObject.transform.Rotate(0, 0, 90);
         //animate death
         //either destroy enemy object or leave no collider object
-        Destroy(GetComponent<EnemyAI>());
+        // Destroy(GetComponent<EnemyAI>());
+        _anim.SetTrigger("death");
+    }
+    private void death()
+    {
+        Destroy(gameObject);
     }
 
     public bool isDead()
@@ -59,7 +67,7 @@ public class Enemy : MonoBehaviour
         
         if(health <= 0)
         {
-            Die();
+            triggerDeath();
         }
         else
         {
