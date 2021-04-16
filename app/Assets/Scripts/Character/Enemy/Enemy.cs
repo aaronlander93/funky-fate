@@ -63,6 +63,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage (int damage, bool damageFromRight)
     {
+        _anim.SetTrigger("hurt");
         health -= damage;
         
         if(health <= 0)
