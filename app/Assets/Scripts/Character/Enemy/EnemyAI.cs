@@ -191,9 +191,4 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
-
-    void animate() 
-    {
-        
-    }
 }

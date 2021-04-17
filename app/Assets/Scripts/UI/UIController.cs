@@ -4,6 +4,8 @@ This script controls all assets on the UI, including loading
 or changing any image or animation.
 */
 
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public PhotonView photonView;
+
     [SerializeField] private Image m_UIHealth;
     [SerializeField] private Sprite[] m_HealthImages;
     [SerializeField] private CharacterHealth m_CharacterHealth;
@@ -19,6 +23,10 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!photonView.IsMine) 
+        {
+            Destroy(this);
+        }
     }
 
     // Update is called once per frame
@@ -39,6 +47,6 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthImage()
     {
-        m_UIHealth.sprite = m_HealthImages[m_healthIndex];
+        m_UIHealth.sprite = m_HealthImages[m_healthIndex - 1];
     }
 }

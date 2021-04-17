@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     private Vector2 direction;
     public float moveSpeed;
     public float yOffset;
+    public float flightTime;
 
     void Awake()
     {
@@ -39,17 +40,33 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if(collision.gameObject.tag =="Player")
         {
             Debug.Log("Hit");
+            //damage player
+            collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
             Destroy(gameObject);
         }
-        if (collision.gameObject.tag == "ground")
+        else if (collision.gameObject.tag == "ground")
         {
             Debug.Log("Hit the ground");
             Destroy(gameObject);
         }
- 
+        else if (screenPos.y > Screen.height || screenPos.y < 0)
+        {
+            Debug.Log("Left cam");
+            Destroy(gameObject);
+        }
+        else if (flightTime < 0)    //was meant to destroy projectile after a certain amount of time, but somehow destroyed it on collision with ground
+        {
+            Debug.Log("Hit the ground");
+            Destroy(gameObject);
+        }
+        else
+        {
+            flightTime -= Time.deltaTime;
+        }
     }
 
     private void FindNearestPlayer()
