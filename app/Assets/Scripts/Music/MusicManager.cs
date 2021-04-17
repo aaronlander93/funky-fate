@@ -31,10 +31,6 @@ public class MusicManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (!GameConfig.Multiplayer)
-        {
-            Movement2D.JumpEvent += PlaySound;
-        }
         else
         {
             BeatSystem.OnBeat += MarkBeat;
@@ -42,6 +38,11 @@ public class MusicManager : MonoBehaviour
 
             StartMusic();
         }
+
+        if (!GameConfig.Multiplayer)
+        {
+            Movement2D.JumpEvent += PlaySound;
+        }    
     }
 
     private void OnDisable()
