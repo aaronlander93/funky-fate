@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Math.Abs(xDist) < aggroRange)
         {
-            Debug.Log(xDist);
+            // Debug.Log(xDist);
             //face player in range
             if (xDist < 0)
             {
@@ -66,12 +66,12 @@ public class EnemyAI : MonoBehaviour
                 _anim.SetBool("isWalking", true);
                 WalkTowardsPlayer();
             }
-            // else if (Math.Abs(xDist) < retreatRange)
-            // {
-            //     // Debug.Log("running from player");
-            //     _anim.SetBool("isWalking", true);
-            //     Retreat();
-            // }
+            else if (Math.Abs(xDist) < retreatRange)
+            {
+                // Debug.Log("running from player");
+                _anim.SetBool("isWalking", true);
+                Retreat();
+            }
             else
             {
                 // Debug.Log(attCooldown);
@@ -149,21 +149,21 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // private void Retreat()
-    // {
-    //     if (xDist < 0)
-    //     {
-    //         // Walk to the right
-    //         Vector2 target = new Vector2(-xDist, rb.position.y);
-    //         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-    //     }
-    //     else
-    //     {
-    //         // Walk to the left
-    //         Vector2 target = new Vector2(xDist, rb.position.y);
-    //         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-    //     }
-    // }
+    private void Retreat()
+    {
+        if (xDist < 0)
+        {
+            // Walk to the right
+            Vector2 target = new Vector2(rb.position.x - retreatRange, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+        else
+        {
+            // Walk to the left
+            Vector2 target = new Vector2(rb.position.x + retreatRange, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+    }
 
     private void Idle()
     {

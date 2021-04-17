@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameSetupController gsc;
     Rigidbody2D _rb;
-    private GameObject[] players;
-    private GameObject closestPlayer;
+    private Rigidbody2D closestPlayer;
 
     private Vector2 direction;
     public float moveSpeed;
@@ -16,8 +16,8 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         _rb = GetComponent<Rigidbody2D>();
-        players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Start is called before the first frame update
@@ -71,14 +71,18 @@ public class Projectile : MonoBehaviour
 
     private void FindNearestPlayer()
     {
-        float dist;
-        float closestDist = float.MaxValue;
+        List<Rigidbody2D> players = gsc.GetPlayers();
 
-        foreach(GameObject player in players)
+        float closestDist = Mathf.Infinity;
+
+        foreach (Rigidbody2D player in players)
         {
-            dist = gameObject.transform.position.x - player.transform.position.x;
-            if (Math.Abs(dist) < Math.Abs(closestDist))
+            // dist = rb.position.x - player.transform.position.x;
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+
+            if (dist < closestDist)
             {
+                closestDist = dist;
                 closestPlayer = player;
             }
         }
