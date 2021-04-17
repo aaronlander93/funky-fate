@@ -54,14 +54,18 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     {
         if (!GameConfig.Multiplayer)
         {
-            // Hard-coding this for now
-            var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
+            // // Hard-coding this for now
+            // var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
 
-            enemy.GetComponentInChildren<PhotonView>().enabled = false;
-            enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
-            enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
-            enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            nonMultiplayerEnemy(17f, 2f);
+            nonMultiplayerEnemy(0f, 2f);
+            nonMultiplayerEnemy(25f, 2f);
+
         }
         else if (PhotonNetwork.IsMasterClient)
         {
@@ -69,6 +73,17 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
             enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
         }
+    }
+    void nonMultiplayerEnemy(float x, float y)
+    {
+        // Hard-coding this for now
+        var enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
+
+        enemy.GetComponentInChildren<PhotonView>().enabled = false;
+        enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
+        enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
 
     void CreateBoss()

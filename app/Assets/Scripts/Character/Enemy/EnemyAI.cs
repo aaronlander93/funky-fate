@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D closestPlayer;
     private float closestDist;
     private float xDist;
+    private int closestI;   //debugging purposes
 
     private float aimlessDist = 2;
 
@@ -48,6 +49,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Math.Abs(xDist) < aggroRange)
         {
+            Debug.Log("Closest player is " + (closestI + 1));
             // Debug.Log(xDist);
             //face player in range
             if (xDist < 0)
@@ -98,6 +100,7 @@ public class EnemyAI : MonoBehaviour
         closestDist = Mathf.Infinity;
         xDist = Mathf.Infinity;
 
+        int index = 0;  //for debugging purposes
         foreach (Rigidbody2D player in players)
         {
             // dist = rb.position.x - player.transform.position.x;
@@ -108,7 +111,9 @@ public class EnemyAI : MonoBehaviour
                 closestDist = dist;
                 closestPlayer = player;
                 xDist = rb.position.x - player.transform.position.x;
+                closestI = index;
             }
+            index++;
         }
     }
 
