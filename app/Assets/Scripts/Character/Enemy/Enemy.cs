@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     private Animator _anim;
 
+    public GameObject Explosion;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -50,7 +52,12 @@ public class Enemy : MonoBehaviour
         //either destroy enemy object or leave no collider object
         // Destroy(GetComponent<EnemyAI>());
         _anim.SetTrigger("death");
+
+        //prefab not working yet
+        // Instantiate(Explosion, transform.position, Quaternion.identity);
+        // Destroy(gameObject);
     }
+
     private void death()
     {
         Destroy(gameObject);

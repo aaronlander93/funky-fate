@@ -9,9 +9,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 {
     private List<Rigidbody2D> players;
     private List<Rigidbody2D> enemies;
+    private Rigidbody2D boss;
 
     public GameObject playerPrefab;
     public GameObject hecklerPrefab;
+    public GameObject bossPrefab;
 
     public MusicManager musicManager;
     // Start is called before the first frame update
@@ -70,6 +72,16 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
 
             enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+        }
+    }
+
+    void CreateBoss()
+    {
+        if (!GameConfig.Multiplayer)
+        {
+            var boss1 = Instantiate(bossPrefab, new Vector2(5f, .6f), Quaternion.identity);
+
+            
         }
     }
 

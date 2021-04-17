@@ -27,11 +27,12 @@ public class CharacterHealth : MonoBehaviour
         
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int dmgNum)
     {
-        characterHealth--;
+        characterHealth-= dmgNum;
 
-        if(characterHealth == 0)
+        Debug.Log("playerhealth = " + characterHealth);
+        if(characterHealth <= 0)
         {
             // Death animation will go here in the future
             Destroy(gameObject);
