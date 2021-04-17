@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0941ae85109444f969c78b54212826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 1642426809078068347}
   m_UIHealth: {fileID: 6949364521108037039}
   m_HealthImages:
   - {fileID: 21300000, guid: 523e6f473d2368540a1531e2a532ca2c, type: 3}
