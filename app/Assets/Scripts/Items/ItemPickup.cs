@@ -7,26 +7,35 @@ public class ItemPickup : MonoBehaviour
     private Rigidbody2D rb;
     private bool isPickedUp = false;
     private bool isFollowing = false;
-    private GameObject player;
+    private GameObject player; // Player who picked up the item
 
-    public void AnimateItemPickup(GameObject player)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isPickedUp == false)
+        // When a player picks up an item
+        // !!! Sound effect goes here !!!
+        if (collision.gameObject.tag == "Player" && !isPickedUp)
         {
-            rb = (Rigidbody2D)gameObject.AddComponent<Rigidbody2D>();
-            rb.AddForce(new Vector2(0, 10.0f), ForceMode2D.Impulse);
+            this.player = collision.gameObject;
             isPickedUp = true;
-            StartCoroutine(StartFollow());
+            PickupItem(player);
         }
-
-        this.player = player;
     }
 
+    // Initially kicks the item up in the air and then coroutine starts player follow
+    public void PickupItem(GameObject player)
+    {
+        rb = (Rigidbody2D)gameObject.AddComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(0, 12.0f), ForceMode2D.Impulse); // Kick item up in air
+        rb.gravityScale = 2.0f; // Heavy gravity to come back down faster
+        StartCoroutine(StartFollow());
+    }
+
+    // Follow the player
     IEnumerator StartFollow()
     {
-        yield return new WaitForSeconds(0.5f);
-        gameObject.layer = 11;
-        rb.gravityScale = 0.0f;
+        yield return new WaitForSeconds(0.7f); // Allow time for item to fly up
+        gameObject.layer = 11; // Switch to physics layer that does not interact with other objects
+        rb.gravityScale = 0.0f; // No gravity
         isFollowing = true;
     }
 
@@ -34,8 +43,9 @@ public class ItemPickup : MonoBehaviour
     {
         if (isFollowing)
         {
-            rb.AddForce((player.transform.position - transform.position) * 15.0f);
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 5.0f);
+            rb.AddForce((player.transform.position - transform.position) * 15.0f); // Add force towards player
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 5.0f); // Limit velocity of floating item
+            transform.Rotate(Vector3.forward * -2.0f); // Slowly rotate item
         }
     }
 }

@@ -84,7 +84,6 @@ GameObject:
   - component: {fileID: 4576218035295100940}
   - component: {fileID: 6744845166112750618}
   - component: {fileID: 6611304181531051801}
-  - component: {fileID: 1428898798533686864}
   m_Layer: 8
   m_Name: MainPlayer
   m_TagString: Player
@@ -457,18 +456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Event: event:/SFX/SFX_Footsteps
   PlayOnAwake: 0
---- !u!114 &1428898798533686864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979396586606236451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b99eabc527fc814fbd918c42131b2d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
