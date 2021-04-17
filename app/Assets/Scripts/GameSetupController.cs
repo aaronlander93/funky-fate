@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameSetupController : MonoBehaviourPunCallbacks
@@ -13,7 +14,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject hecklerPrefab;
 
-    public MusicManager musicManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +22,10 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
-
-        musicManager.StartMusic();
     }
 
     void CreatePlayer()
     {
-        
-
         if (!GameConfig.Multiplayer)
         {
             var player = Instantiate(playerPrefab, new Vector3(5f, .6f, 0f), Quaternion.identity);
@@ -39,6 +35,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             player.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
             player.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
             player.GetComponentInChildren<MovementLagSync>().enabled = false;
+            player.GetComponentInChildren<AudioNetwork>().enabled = false;
 
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         }
@@ -53,7 +50,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
     void CreateEnemies()
     {
-
         if (!GameConfig.Multiplayer)
         {
             // Hard-coding this for now
@@ -77,6 +73,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     {
         var allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
+        
         foreach(var player in allPlayers)
         {
             var rb = player.GetComponentInChildren<Rigidbody2D>();
