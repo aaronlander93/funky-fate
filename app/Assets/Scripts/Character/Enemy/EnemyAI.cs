@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
 
     public float speed;
     public float attackRange;
+    public float retreatRange;
     public float aggroRange;
     private float idleTime;
     //time between attacks
@@ -47,6 +48,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Math.Abs(xDist) < aggroRange)
         {
+            Debug.Log(xDist);
             //face player in range
             if (xDist < 0)
             {
@@ -58,17 +60,23 @@ public class EnemyAI : MonoBehaviour
             }
 
             //attack or approach player depending on distance
-            if (Math.Abs(xDist) < 5)
-            {
-                // Debug.Log(attCooldown);
-                _anim.SetBool("isWalking", false);
-                AttackPlayer();
-            }
-            else
+            if (Math.Abs(xDist) > attackRange)
             {
                 // Debug.Log("tracking player");
                 _anim.SetBool("isWalking", true);
                 WalkTowardsPlayer();
+            }
+            else if (Math.Abs(xDist) < retreatRange)
+            {
+                // Debug.Log("running from player");
+                _anim.SetBool("isWalking", true);
+                Retreat();
+            }
+            else
+            {
+                // Debug.Log(attCooldown);
+                _anim.SetBool("isWalking", false);
+                AttackPlayer();
             }
         }
         else if (idle)
@@ -80,6 +88,27 @@ public class EnemyAI : MonoBehaviour
         {
             _anim.SetBool("isWalking", true);
             WalkAimlessly();
+        }
+    }
+
+    private void FindNearestPlayer()
+    {
+        List<Rigidbody2D> players = gsc.GetPlayers();
+
+        closestDist = Mathf.Infinity;
+        xDist = Mathf.Infinity;
+
+        foreach (Rigidbody2D player in players)
+        {
+            // dist = rb.position.x - player.transform.position.x;
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                closestPlayer = player;
+                xDist = rb.position.x - player.transform.position.x;
+            }
         }
     }
 
@@ -104,24 +133,35 @@ public class EnemyAI : MonoBehaviour
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
 
-    private void FindNearestPlayer()
+    private void WalkTowardsPlayer()
     {
-        List<Rigidbody2D> players = gsc.GetPlayers();
-
-        closestDist = Mathf.Infinity;
-        xDist = Mathf.Infinity;
-
-        foreach (Rigidbody2D player in players)
+        if (xDist < 0)
         {
-            // dist = rb.position.x - player.transform.position.x;
-            float dist = Vector2.Distance(transform.position, player.transform.position);
+            // Walk to the left
+            Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+        else
+        {
+            // Walk to the right
+            Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+    }
 
-            if (dist < closestDist)
-            {
-                closestDist = dist;
-                closestPlayer = player;
-                xDist = rb.position.x - player.transform.position.x;
-            }
+    private void Retreat()
+    {
+        if (xDist < 0)
+        {
+            // Walk to the right
+            Vector2 target = new Vector2(-xDist, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+        else
+        {
+            // Walk to the left
+            Vector2 target = new Vector2(xDist, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
     }
 
@@ -144,58 +184,24 @@ public class EnemyAI : MonoBehaviour
         if (aimlessDist < .3f && aimlessDist > -.3f)
         {
             // Determine distance
-
             aimlessDist = (float)rand.Next(-2, 3);
-
             idle = true;
         }
         else
         {
-            // float currX = rb.position.x;
-            // float currY = rb.position.y;
-
             // Move
             if (aimlessDist < 0)
             {
-                Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
                 // Walk to the left
                 gameObject.transform.localScale = new Vector3(-1, 1, 1);
-                // gameObject.transform.position = new Vector2(currX - speed, currY);
-                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                // aimlessDist += speed;
             }
             else
             {
-                Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
                 // Walk to the right
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
-                // gameObject.transform.position = new Vector2(currX + speed, currY);
-                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                // aimlessDist -= speed;
             }
-        }
-    }
-
-    private void WalkTowardsPlayer()
-    {
-        // float currX = rb.position.x;
-        // float currY = rb.position.y;
-
-        
-        if (xDist < 0)
-        {
-            Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
-            // Walk to the right
-            // gameObject.transform.position = new Vector2(currX + speed, currY);
+            Vector2 target = new Vector2(aimlessDist, rb.position.y);
             transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
-        else
-        {
-            // Walk to the left
-            // gameObject.transform.position = new Vector2(currX - speed, currY);
-            Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        }
-
     }
 }

@@ -170,8 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gsc: {fileID: 0}
-  speed: 3
-  attackRange: 4
+  speed: 2.4
+  attackRange: 5
+  retreatRange: 4
   aggroRange: 7
   initCooldownTime: 3
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
