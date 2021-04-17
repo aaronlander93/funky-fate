@@ -48,17 +48,17 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
             Destroy(gameObject);
         }
-        // else if (collision.gameObject.tag == "ground")
-        // {
-        //     Debug.Log("Hit the ground");
-        //     Destroy(gameObject);
-        // }
+        else if (collision.gameObject.tag == "ground")
+        {
+            Debug.Log("Hit the ground");
+            Destroy(gameObject);
+        }
         else if (screenPos.y > Screen.height || screenPos.y < 0)
         {
             Debug.Log("Left cam");
             Destroy(gameObject);
         }
-        else if (flightTime < 0)
+        else if (flightTime < 0)    //was meant to destroy projectile after a certain amount of time, but somehow destroyed it on collision with ground
         {
             Debug.Log("Hit the ground");
             Destroy(gameObject);
