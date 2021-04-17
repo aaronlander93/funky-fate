@@ -291,5 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e0844166743b34e952a55073668ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: event:/SFX/SFX_Heckler_Toss
-  PlayOnAwake: 0
+  mm: {fileID: 0}
+  run: 
+  jump: 

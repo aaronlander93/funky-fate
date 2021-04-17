@@ -9,9 +9,9 @@ public class Conductor : MonoBehaviour
 
     private static BeatSystem bS;
 
-    void Start()
+    void Awake()
     {
-        bS = GetComponent<BeatSystem>();
+        bS = GameObject.Find("BeatSystem").GetComponent<BeatSystem>();
     }
 
     public static void CreateBeatInstance(string song)
@@ -33,6 +33,13 @@ public class Conductor : MonoBehaviour
         _sfx.release();
     }
 
+    public static void PlaySFX(string sfx, float volume)
+    {
+        CreateSFXInstance(sfx);
+        _sfx.setParameterByName("Volume", volume);
+        _sfx.start();
+        _sfx.release();
+    }
     public static void StartMusic()
     {
         _instance.start();
