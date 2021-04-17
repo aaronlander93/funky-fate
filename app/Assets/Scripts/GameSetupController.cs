@@ -55,7 +55,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         if (!GameConfig.Multiplayer)
         {
             // Hard-coding this for now
-            var enemy = Instantiate(hecklerPrefab, new Vector2(5f, .6f), Quaternion.identity);
+            var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
 
             enemy.GetComponentInChildren<PhotonView>().enabled = false;
             enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
