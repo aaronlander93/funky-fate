@@ -34,6 +34,7 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Heckler_Tomato
   guid: 989bea2b3a992c4c8304833901be9bc3
   Banks:
+  - {fileID: 3031216196892285782}
   - {fileID: 5091295147882112518}
   IsStream: 0
   Is3D: 0
@@ -246,6 +247,7 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Heckler_Toss
   guid: c6784efbdc69164e8e2468ce664138f5
   Banks:
+  - {fileID: 3031216196892285782}
   - {fileID: 5091295147882112518}
   IsStream: 0
   Is3D: 0
@@ -313,7 +315,7 @@ MonoBehaviour:
   Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Build/Master.strings.bank
   Name: Build/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637539003965149701
+  lastModified: 637539054757854807
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -414,6 +416,7 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -1686690213876334193}
   - {fileID: 5091295147882112518}
+  - {fileID: 3031216196892285782}
   EditorEvents:
   - {fileID: 1051539615685859561}
   - {fileID: 5222304762736007200}
@@ -423,9 +426,10 @@ MonoBehaviour:
   EditorParameters: []
   MasterBanks:
   - {fileID: 5091295147882112518}
+  - {fileID: 3031216196892285782}
   StringsBanks:
   - {fileID: -1686690213876334193}
-  stringsBankWriteTime: 637539003965149701
+  stringsBankWriteTime: 637539054757854807
   cacheVersion: 6
 --- !u!114 &338723213550657214
 MonoBehaviour:
@@ -466,6 +470,7 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Footsteps
   guid: 2556e7a8c4d99a4ebb809bfaa697834d
   Banks:
+  - {fileID: 3031216196892285782}
   - {fileID: 5091295147882112518}
   IsStream: 0
   Is3D: 0
@@ -600,6 +605,25 @@ MonoBehaviour:
   - Name: 
     Value: 814
   Exists: 1
+--- !u!114 &3031216196892285782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637539054757904817
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &4368831645191882814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +686,7 @@ MonoBehaviour:
   Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Build/Master.bank
   Name: Build/Master
   StudioPath: bank:/Master
-  lastModified: 637539003965119793
+  lastModified: 637539054757824798
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -681,6 +705,7 @@ MonoBehaviour:
   Path: event:/Music/Music_Lvl1
   guid: 46e54fa8af76104f98fefcd7785213c7
   Banks:
+  - {fileID: 3031216196892285782}
   - {fileID: 5091295147882112518}
   IsStream: 1
   Is3D: 0
@@ -791,6 +816,7 @@ MonoBehaviour:
   Path: event:/SFX/SFX_GuitarJump
   guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
   Banks:
+  - {fileID: 3031216196892285782}
   - {fileID: 5091295147882112518}
   IsStream: 0
   Is3D: 0
