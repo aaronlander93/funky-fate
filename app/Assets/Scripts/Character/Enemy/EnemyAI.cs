@@ -7,26 +7,26 @@ public class EnemyAI : MonoBehaviour
 {
     public GameSetupController gsc;
 
+    public float speed;
     public float attackRange;
     public float aggroRange;
-    public float speed;
+    private float idleTime;
+    //time between attacks
+    public float initCooldownTime;
+    private float attCooldown;
     
-
     private bool idle = true;
-
-    private int idleTime = 0;
 
     private Rigidbody2D closestPlayer;
     private float closestDist;
+    private float xDist;
+
     private float aimlessDist = 2;
 
     private Rigidbody2D rb;
 
     private System.Random rand;
 
-    //time between attacks
-    public float initCooldownTime;
-    private float attCooldown;
 
     public GameObject projectile;
     private Animator _anim;
@@ -45,14 +45,10 @@ public class EnemyAI : MonoBehaviour
     {
         FindNearestPlayer();
 
-        if(Math.Abs(closestDist) < attackRange)
-        {
-            AttackPlayer();
-        }
-        else if (Math.Abs(closestDist) < aggroRange)
+        if (Math.Abs(xDist) < aggroRange)
         {
             //face player in range
-            if (closestDist < 0)
+            if (xDist < 0)
             {
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
             }
@@ -62,7 +58,7 @@ public class EnemyAI : MonoBehaviour
             }
 
             //attack or approach player depending on distance
-            if (Math.Abs(closestDist) < 5)
+            if (Math.Abs(xDist) < 5)
             {
                 // Debug.Log(attCooldown);
                 _anim.SetBool("isWalking", false);
@@ -112,17 +108,19 @@ public class EnemyAI : MonoBehaviour
     {
         List<Rigidbody2D> players = gsc.GetPlayers();
 
-        float dist;
-        closestDist = float.MaxValue;
+        closestDist = Mathf.Infinity;
+        xDist = Mathf.Infinity;
 
         foreach (Rigidbody2D player in players)
         {
-            dist = rb.position.x - player.transform.position.x;
+            // dist = rb.position.x - player.transform.position.x;
+            float dist = Vector2.Distance(transform.position, player.transform.position);
 
-            if (Math.Abs(dist) < Math.Abs(closestDist))
+            if (dist < closestDist)
             {
                 closestDist = dist;
                 closestPlayer = player;
+                xDist = rb.position.x - player.transform.position.x;
             }
         }
     }
@@ -153,41 +151,50 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            float currX = rb.position.x;
-            float currY = rb.position.y;
+            // float currX = rb.position.x;
+            // float currY = rb.position.y;
 
             // Move
             if (aimlessDist < 0)
             {
+                Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
                 // Walk to the left
                 gameObject.transform.localScale = new Vector3(-1, 1, 1);
-                gameObject.transform.position = new Vector2(currX - speed, currY);
-                aimlessDist += speed;
+                // gameObject.transform.position = new Vector2(currX - speed, currY);
+                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                // aimlessDist += speed;
             }
             else
             {
+                Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
                 // Walk to the right
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
-                gameObject.transform.position = new Vector2(currX + speed, currY);
-                aimlessDist -= speed;
+                // gameObject.transform.position = new Vector2(currX + speed, currY);
+                transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                // aimlessDist -= speed;
             }
         }
     }
 
     private void WalkTowardsPlayer()
     {
-        float currX = rb.position.x;
-        float currY = rb.position.y;
+        // float currX = rb.position.x;
+        // float currY = rb.position.y;
 
-        if (closestDist < 0)
+        
+        if (xDist < 0)
         {
+            Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
             // Walk to the right
-            gameObject.transform.position = new Vector2(currX + speed, currY);
+            // gameObject.transform.position = new Vector2(currX + speed, currY);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
         else
         {
             // Walk to the left
-            gameObject.transform.position = new Vector2(currX - speed, currY);
+            // gameObject.transform.position = new Vector2(currX - speed, currY);
+            Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
 
     }
