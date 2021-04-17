@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System;
+using Photon.Pun;
 
 public class MusicManager : MonoBehaviour
 {
+    public PhotonView pv;
+
     public static float keyDownTime;
 
     public float forgiveness;
 
     [FMODUnity.EventRef]
     public string song;
+
+    [FMODUnity.EventRef]
+    public string jumpSFX;
+
+    [FMODUnity.EventRef]
+    public string walkSFX;
 
     public delegate void NoteTiming();
     public static event NoteTiming ValidHit;
@@ -18,13 +27,54 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        BeatSystem.OnBeat += MarkBeat;
-        MusicInputController.ActionOnePressed += CheckForValidHit;
+        if(GameConfig.Multiplayer && !pv.IsMine)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            BeatSystem.OnBeat += MarkBeat;
+            MusicInputController.ActionOnePressed += CheckForValidHit;
+
+            StartMusic();
+        }
+
+        if (!GameConfig.Multiplayer)
+        {
+            Movement2D.JumpEvent += PlaySound;
+        }    
     }
 
     private void OnDisable()
     {
         MusicInputController.ActionOnePressed -= CheckForValidHit;
+    }
+
+    private void MarkBeat()
+    {
+        beatTick = DateTime.Now.Ticks;
+    }
+
+    public void PlaySound(string sound)
+    {
+        switch (sound)
+        {
+            case "Jump":
+                Conductor.PlaySFX(jumpSFX);
+                break;
+        }
+        
+    }
+
+    public void PlaySound(string sound, float volume)
+    {
+        switch (sound)
+        {
+            case "Jump":
+                Conductor.PlaySFX(jumpSFX, volume);
+                break;
+        }
+
     }
 
     public void CheckForValidHit()
@@ -40,11 +90,6 @@ public class MusicManager : MonoBehaviour
         {
             Debug.Log("OFF BEAT");
         }
-    }
-
-    public void MarkBeat()
-    {
-        beatTick = DateTime.Now.Ticks;
     }
 
     public void StartMusic()
