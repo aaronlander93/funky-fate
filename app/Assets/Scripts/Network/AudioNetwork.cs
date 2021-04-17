@@ -23,8 +23,6 @@ public class AudioNetwork : MonoBehaviour
         {
             photonView.RPC("PlaySound", RpcTarget.All, sound);
         }
-        
-        
     }
 
     [PunRPC]
