@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9124552577367954692
+--- !u!114 &-6677971932326077215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538383585528940
+  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637542519974452396
   LoadResult: 0
-  FileSizes: []
+  FileSizes:
+  - Name: 
+    Value: 1004
   Exists: 1
---- !u!114 &-9095637589611564531
+--- !u!114 &-4543431549237848258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,8 +36,8 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Heckler_Tomato
   guid: 989bea2b3a992c4c8304833901be9bc3
   Banks:
-  - {fileID: 3031216196892285782}
-  - {fileID: 5091295147882112518}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -43,196 +45,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 519
---- !u!114 &-9042791348887622707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: 6700766663879717610}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &-6282642200607848205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: 2133635341735000862}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-6001066530117747698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538992415450421
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 956
-  Exists: 1
---- !u!114 &-5814886427177396872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538992415360659
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5575456432573928866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637537602263985375
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 0
---- !u!114 &-5169679023345527993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: 2170883981130908672}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &-3831003151537793496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637537602263975489
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-3535030263577670386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538418806923481
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 1
---- !u!114 &-2671615548720198548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538400808691827
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-2044577221356047233
+--- !u!114 &-3206573094089676852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,8 +60,8 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Heckler_Toss
   guid: c6784efbdc69164e8e2468ce664138f5
   Banks:
-  - {fileID: 3031216196892285782}
-  - {fileID: 5091295147882112518}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -256,151 +69,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 133
---- !u!114 &-1812347856167254374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538417366128865
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 1
---- !u!114 &-1731823197276158200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: 1435873828176356245}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-1686690213876334193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Build/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Build/Master.strings.bank
-  Name: Build/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637539054757854807
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 956
-  Exists: 1
---- !u!114 &-1145778168562457996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538529618862889
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 0
---- !u!114 &-905063781915524168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538417366128865
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 1
---- !u!114 &-516999492097203633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637538992415430654
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-277743297340499606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637537602263975489
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,24 +82,108 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -1686690213876334193}
-  - {fileID: 5091295147882112518}
-  - {fileID: 3031216196892285782}
+  - {fileID: -6677971932326077215}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   EditorEvents:
-  - {fileID: 1051539615685859561}
-  - {fileID: 5222304762736007200}
-  - {fileID: 7374796355620347625}
-  - {fileID: -9095637589611564531}
-  - {fileID: -2044577221356047233}
+  - {fileID: 6573389866590658283}
+  - {fileID: 3117460647133581672}
+  - {fileID: 3222863249604436986}
+  - {fileID: -4543431549237848258}
+  - {fileID: -3206573094089676852}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5091295147882112518}
-  - {fileID: 3031216196892285782}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   StringsBanks:
-  - {fileID: -1686690213876334193}
-  stringsBankWriteTime: 637539054757854807
+  - {fileID: -6677971932326077215}
+  stringsBankWriteTime: 637542519974452396
   cacheVersion: 6
---- !u!114 &338723213550657214
+--- !u!114 &2077967360221576952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SFX_GuitarJump/Volume
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2941699004102719341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SFX_GuitarJump/Volume
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &3117460647133581672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Music_Lvl1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Music_Lvl1
+  guid: 46e54fa8af76104f98fefcd7785213c7
+  Banks:
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 45019
+--- !u!114 &3218879548741689707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SFX_GuitarJump/Volume
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &3222863249604436986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -446,16 +198,56 @@ MonoBehaviour:
   Path: event:/SFX/SFX_GuitarJump
   guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
   Banks:
-  - {fileID: -3831003151537793496}
-  - {fileID: -9124552577367954692}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 2077967360221576952}
   MinDistance: 0
   MaxDistance: 0
-  Length: 0
---- !u!114 &1051539615685859561
+  Length: 356
+--- !u!114 &4918085513639999887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SFX_GuitarJump/Volume
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &5361837671617839102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637542519974442425
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6573389866590658283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -470,8 +262,8 @@ MonoBehaviour:
   Path: event:/SFX/SFX_Footsteps
   guid: 2556e7a8c4d99a4ebb809bfaa697834d
   Banks:
-  - {fileID: 3031216196892285782}
-  - {fileID: 5091295147882112518}
+  - {fileID: 5361837671617839102}
+  - {fileID: 6660761139642394354}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -479,199 +271,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 314
---- !u!114 &1292104462415361433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: -516999492097203633}
-  - {fileID: -5814886427177396872}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &1435873828176356245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538417366098942
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &2133635341735000862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538417366098942
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &2170883981130908672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538398307231281
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &2226464683981571451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: -3831003151537793496}
-  - {fileID: -9124552577367954692}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &2962788719917672569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538400808711779
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 1
---- !u!114 &3031216196892285782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637539054757904817
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &4368831645191882814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: 1435873828176356245}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &4519824166091897506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: -277743297340499606}
-  - {fileID: -2671615548720198548}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &5091295147882112518
+--- !u!114 &6660761139642394354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -686,233 +286,7 @@ MonoBehaviour:
   Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Build/Master.bank
   Name: Build/Master
   StudioPath: bank:/Master
-  lastModified: 637539054757824798
+  lastModified: 637542519974392558
   LoadResult: 0
   FileSizes: []
-  Exists: 1
---- !u!114 &5222304762736007200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: 3031216196892285782}
-  - {fileID: 5091295147882112518}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 45019
---- !u!114 &5759960031904909268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538398307251223
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
-  Exists: 1
---- !u!114 &5942276374052949899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: -277743297340499606}
-  - {fileID: -2671615548720198548}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &6332269822005777784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: 2133635341735000862}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 44995
---- !u!114 &6700766663879717610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 637538418806893562
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &7374796355620347625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: 3031216196892285782}
-  - {fileID: 5091295147882112518}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 356
---- !u!114 &7501253289730745241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Music_Lvl1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Music_Lvl1
-  guid: 46e54fa8af76104f98fefcd7785213c7
-  Banks:
-  - {fileID: -516999492097203633}
-  - {fileID: -5814886427177396872}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 45019
---- !u!114 &7610935934173248758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: 2170883981130908672}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &8503659765660330783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/SFX_GuitarJump
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/SFX_GuitarJump
-  guid: 6cdbe2a1ab1c39498c5dc7b77f6d6b10
-  Banks:
-  - {fileID: 6700766663879717610}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &8641975326476625573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/FMOD_Soundbank/FMOD_Session/FunkyFate/Build/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637538383585558853
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 814
   Exists: 1

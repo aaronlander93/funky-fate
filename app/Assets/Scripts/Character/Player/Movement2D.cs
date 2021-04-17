@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,8 @@ Subject to Change:
 //Add a 2D Collider (Any will do, but 2D box collider)
 //Define the ground and wall mask layers (In the script and in the GameObjects)
 //Adjust and play around with the other variables (Some require you to activate gizmos in order to visualize)
+
+
 
 public class Movement2D : MonoBehaviour
 {
@@ -75,9 +78,6 @@ public class Movement2D : MonoBehaviour
     private Vector2 capsuleColliderSize;
     private CapsuleCollider2D _cc;
     private Vector2 newVelocity;
-
-
-
 
     [Header("Jump Variables")]
     [SerializeField] private float _jumpForce = 12f;
@@ -130,8 +130,8 @@ public class Movement2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
     //public BoolEvent OnCrouchEvent;
 
-    [Header("Audio")]
-    public GameObject JumpSound;
+    public delegate void MovementEvent(string type);
+    public static event MovementEvent JumpEvent;
    
     [Header("Photon")]
     public PhotonView _pv;
@@ -143,19 +143,14 @@ public class Movement2D : MonoBehaviour
     }
     private void Start()
     {
+        if (_pv && !_pv.IsMine)
+        {
+            Destroy(this);
+        }
+
         _rb = GetComponent<Rigidbody2D>();
         _cc = GetComponent<CapsuleCollider2D>();
         _anim = GetComponent<Animator>();
-
-        if (GameConfig.Multiplayer && !_pv.IsMine)
-        {
-            Destroy(gameObject.GetComponent<Movement2D>());
-            
-            foreach(Transform child in gameObject.transform)
-            {
-                Destroy(child.gameObject);
-            }
-        }
 
         capsuleColliderSize = _cc.size;
     }
@@ -230,8 +225,6 @@ public class Movement2D : MonoBehaviour
             else
             {
                 Jump(Vector2.up);
-                JumpSound.SetActive (true);
-                JumpSound.SetActive (false);
             }
         }
         if (_canCornerCorrect) CornerCorrect(_rb.velocity.y);
@@ -257,22 +250,22 @@ public class Movement2D : MonoBehaviour
 
     private void MoveCharacter()
     {
-        
-       //only control the player if grounded or airControl is turned on
+
+        //only control the player if grounded or airControl is turned on
         if (_onGround || m_AirControl)
         {
             if (!crouch)
-        {
-            // If the character has a ceiling preventing them from standing up, keep them crouching
-            if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, _groundLayer))
             {
-                crouch = true;
+                // If the character has a ceiling preventing them from standing up, keep them crouching
+                if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, _groundLayer))
+                {
+                    crouch = true;
+                }
+                else
+                {
+                    crouch = false;
+                }
             }
-            else
-            {
-                crouch = false;
-            }
-        }
 
             // If crouching
             if (crouch)
@@ -296,33 +289,35 @@ public class Movement2D : MonoBehaviour
                 if (m_CrouchDisableCollider != null)
                     m_CrouchDisableCollider.enabled = true;
 
-                    
+
                 if (m_wasCrouching)
                 {
                     m_wasCrouching = false;
                     //OnCrouchEvent.Invoke(false);
                 }
             }
+        }
 
-    }
-    if(_onGround && !isOnSlope && !_isJumping){
-    _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+        if (_onGround && !isOnSlope && !_isJumping)
+        {
 
-        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
-    }
-    else if (_onGround && isOnSlope && canWalkOnSlope && !_isJumping) //If on slope
+            _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+
+            if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
+                _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+        }
+        else if (_onGround && isOnSlope && canWalkOnSlope && !_isJumping) //If on slope
         {
             newVelocity.Set(_maxMoveSpeed * slopeNormalPerp.x * -_horizontalDirection, _maxMoveSpeed * slopeNormalPerp.y * -_horizontalDirection);
             _rb.velocity = newVelocity;
         }
-    else if (!_onGround) //If in air
-    {
-_rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
+        else if (!_onGround) //If in air
+        {
+            _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
 
-        if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
-    }
+            if (Mathf.Abs(_rb.velocity.x) > _maxMoveSpeed && !_isDashing)
+                _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _maxMoveSpeed, _rb.velocity.y);
+        }
     }
     private void SlopeCheck()
     {
@@ -433,6 +428,8 @@ _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
         _hangTimeCounter = 0f;
         _jumpBufferCounter = 0f;
         _isJumping = true;
+
+        JumpEvent("Jump");
     }
 
     private void WallJump()
