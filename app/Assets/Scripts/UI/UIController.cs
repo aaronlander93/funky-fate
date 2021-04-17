@@ -39,6 +39,6 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthImage()
     {
-        m_UIHealth.sprite = m_HealthImages[m_healthIndex];
+        m_UIHealth.sprite = m_HealthImages[m_healthIndex - 1];
     }
 }
