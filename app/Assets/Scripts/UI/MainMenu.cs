@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject mainMenuUI;
+    public GameObject optionsMenuUI;
+
     public void OnStartGameClick()
     {
         Debug.Log("Start Game clicked");
@@ -24,7 +27,13 @@ public class MainMenu : MonoBehaviour
 
     public void OnOptionsClick()
     {
+        mainMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(true);
+    }
 
+    public void OnBackClick() {
+        optionsMenuUI.SetActive(false);
+        mainMenuUI.SetActive(true);
     }
 
     public void OnQuitGameClick()
