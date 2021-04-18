@@ -11,6 +11,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     public GameObject createRoomButton;
     public GameObject joinRoomButton;
     public InputField roomNameInput;
+    public InputField nickNameInput;
 
     public int roomSize;
 
@@ -19,6 +20,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     void Start()
     {
         roomNameInput.onEndEdit.AddListener(SubmitRoom);
+        nickNameInput.onEndEdit.AddListener(SubmitName);
     }
 
     public override void OnConnectedToMaster()
@@ -46,6 +48,11 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private void SubmitRoom(string room)
     {
         this.roomName = room;
+    }
+
+    private void SubmitName(string name)
+    {
+        GameConfig.Nickname = name;
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
