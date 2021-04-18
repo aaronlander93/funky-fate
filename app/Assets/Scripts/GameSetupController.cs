@@ -41,6 +41,9 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             player.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
             player.GetComponentInChildren<MovementLagSync>().enabled = false;
             player.GetComponentInChildren<AudioNetwork>().enabled = false;
+            player.GetComponentInChildren<ChatManager>().enabled = false;
+
+            Destroy(GameObject.Find("Chatbox"));
 
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         }
@@ -49,6 +52,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             // Game is in multiplayer
             var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), new Vector2(5f, .6f), Quaternion.identity);
 
+            // Set player nickname
+            player.GetComponentInChildren<PhotonView>().Owner.NickName = GameConfig.Nickname;
+
+            // Alert chat that player has joined
+            player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
+
+            // Add player's rigidbody to the list
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         } 
     }
