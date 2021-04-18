@@ -16,6 +16,9 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public GameObject hecklerPrefab;
     public GameObject bossPrefab;
 
+    //prevents enemies from moving in sync
+    private System.Random rand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,19 +73,32 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         }
         else if (PhotonNetwork.IsMasterClient)
         {
-            var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
+            // var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
 
-            enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            
+            multiplayerEnemy(17f, 2f);
+            multiplayerEnemy(0f, 2f);
+            multiplayerEnemy(25f, 2f);
+            multiplayerEnemy(-26f, -2f);
         }
     }
     void nonMultiplayerEnemy(float x, float y)
     {
         // Hard-coding this for now
-        var enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
+        GameObject enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
 
         enemy.GetComponentInChildren<PhotonView>().enabled = false;
         enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
         enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+
+        // enemy.GetComponent<EnemyAI>().randHandler = (float)rand.Next(0, 50);
+
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+    }
+    void multiplayerEnemy(float x, float y)
+    {
+        var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
@@ -92,15 +108,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         enemies.Remove(enemyDefeated);
     }
 
-    void CreateBoss()
-    {
-        if (!GameConfig.Multiplayer)
-        {
-            var boss1 = Instantiate(bossPrefab, new Vector2(5f, .6f), Quaternion.identity);
+    // void CreateBoss()
+    // {
+    //     if (!GameConfig.Multiplayer)
+    //     {
+    //         var boss1 = Instantiate(bossPrefab, new Vector2(5f, .6f), Quaternion.identity);
 
-            
-        }
-    }
+    //     }
+    // }
 
     private void UpdatePlayerList()
     {

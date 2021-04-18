@@ -172,9 +172,10 @@ MonoBehaviour:
   gsc: {fileID: 0}
   speed: 2.4
   attackRange: 5
-  retreatRange: 4
+  retreatRange: 3
   aggroRange: 7
   initCooldownTime: 2.4
+  randHandler: 0
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
     type: 3}
 --- !u!114 &-8537439814938549050
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dead: 0
   health: 5
+  gsc: {fileID: 0}
   Explosion: {fileID: 8913530428682412085, guid: 605579a17ac8b1949b9e46f6cc60bf6e,
     type: 3}
 --- !u!114 &3591210828445902649

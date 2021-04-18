@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
 
     private System.Random rand;
+    public float randHandler;
 
 
     public GameObject projectile;
@@ -49,7 +50,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Math.Abs(xDist) < aggroRange)
         {
-            Debug.Log("Closest player is " + (closestI + 1));
+            // Debug.Log("Closest player is " + (closestI + 1));
             // Debug.Log(xDist);
             //face player in range
             if (xDist < 0)
@@ -134,7 +135,7 @@ public class EnemyAI : MonoBehaviour
 
     private void throwTomato()
     {
-        Debug.Log("tomato thrown!");
+        // Debug.Log("tomato thrown!");
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
 
@@ -174,7 +175,7 @@ public class EnemyAI : MonoBehaviour
     {
         if(idleTime == 0)
         {
-            idleTime = rand.Next(50, 200);
+            idleTime = rand.Next(50, 200); // * randHandler;
 
             idle = false;
         }
@@ -189,7 +190,7 @@ public class EnemyAI : MonoBehaviour
         if (aimlessDist < .3f && aimlessDist > -.3f)
         {
             // Determine distance
-            aimlessDist = (float)rand.Next(-50, 49);
+            aimlessDist = (float)rand.Next(-50, 49); // * randHandler;
             idle = true;
         }
         else
