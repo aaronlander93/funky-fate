@@ -65,6 +65,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             nonMultiplayerEnemy(17f, 2f);
             nonMultiplayerEnemy(0f, 2f);
             nonMultiplayerEnemy(25f, 2f);
+            nonMultiplayerEnemy(-26f, -2f);
 
         }
         else if (PhotonNetwork.IsMasterClient)
@@ -84,6 +85,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+    }
+
+    public void removeEnemy(Rigidbody2D enemyDefeated)
+    {
+        enemies.Remove(enemyDefeated);
     }
 
     void CreateBoss()
