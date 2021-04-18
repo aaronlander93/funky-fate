@@ -67,7 +67,7 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
             Destroy(gameObject);
         }
-        else if (collision.transform.parent.tag == "ground")
+        else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
         {
             Debug.Log("Hit the ground");
             Destroy(gameObject);
