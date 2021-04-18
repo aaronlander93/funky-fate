@@ -14,12 +14,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health = 5;
     private Rigidbody2D rb;
 
+    public GameSetupController gsc;
     private Animator _anim;
 
     public GameObject Explosion;
 
     private void Start()
     {
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
@@ -60,6 +62,7 @@ public class Enemy : MonoBehaviour
 
     private void death()
     {
+        gsc.removeEnemy(rb);
         Destroy(gameObject);
     }
 
