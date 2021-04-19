@@ -27,9 +27,10 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("DestroyProjectile", lifeTime);
         FindNearestPlayer();
         
+        Invoke("DestroyProjectile", lifeTime);
+        //error with direction spawning tomato in same spot in singleplayer
         direction = (closestPlayer.transform.position - transform.position).normalized * moveSpeed;
         _rb.velocity = new Vector2(direction.x, direction.y + yOffset);
     }
@@ -46,6 +47,7 @@ public class Projectile : MonoBehaviour
 
         float closestDist = Mathf.Infinity;
 
+        int index = 0;  //for debugging purposes
         foreach (Rigidbody2D player in players)
         {
             // dist = rb.position.x - player.transform.position.x;
@@ -64,7 +66,7 @@ public class Projectile : MonoBehaviour
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if(collision.gameObject.tag =="Player")
         {
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             //damage player
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
             // Destroy(gameObject);
@@ -72,13 +74,13 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
         {
-            Debug.Log("Hit the ground");
+            // Debug.Log("Hit the ground");
             // Destroy(gameObject);
             DestroyProjectile();
         }
         else if (screenPos.y > Screen.height || screenPos.y < 0)
         {
-            Debug.Log("Left cam");
+            // Debug.Log("Left cam");
             // Destroy(gameObject);
             DestroyProjectile();
         }
