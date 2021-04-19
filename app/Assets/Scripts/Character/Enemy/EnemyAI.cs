@@ -142,9 +142,13 @@ public class EnemyAI : MonoBehaviour
     {
         // Debug.Log("tomato thrown!");
         if (!GameConfig.Multiplayer)
+        {
             Instantiate(projectile, transform.position, Quaternion.identity);
+        }
         else
+        {
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
+        }
     }
 
     private void WalkTowardsPlayer()

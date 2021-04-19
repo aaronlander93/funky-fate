@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour
         FindNearestPlayer();
         
         direction = (closestPlayer.transform.position - transform.position).normalized * moveSpeed;
+        Debug.Log(direction);
         _rb.velocity = new Vector2(direction.x, direction.y + yOffset);
     }
 
@@ -64,7 +65,7 @@ public class Projectile : MonoBehaviour
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if(collision.gameObject.tag =="Player")
         {
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             //damage player
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
             // Destroy(gameObject);
@@ -72,13 +73,13 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
         {
-            Debug.Log("Hit the ground");
+            // Debug.Log("Hit the ground");
             // Destroy(gameObject);
             DestroyProjectile();
         }
         else if (screenPos.y > Screen.height || screenPos.y < 0)
         {
-            Debug.Log("Left cam");
+            // Debug.Log("Left cam");
             // Destroy(gameObject);
             DestroyProjectile();
         }

@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
         _anim.SetTrigger("death");
 
         //prefab not working yet
+
         // Instantiate(Explosion, transform.position, Quaternion.identity);
         // Destroy(gameObject);
     }
