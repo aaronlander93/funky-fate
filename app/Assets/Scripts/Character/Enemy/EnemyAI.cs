@@ -1,7 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -136,7 +141,10 @@ public class EnemyAI : MonoBehaviour
     private void throwTomato()
     {
         // Debug.Log("tomato thrown!");
-        Instantiate(projectile, transform.position, Quaternion.identity);
+        if (!GameConfig.Multiplayer)
+            Instantiate(projectile, transform.position, Quaternion.identity);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
     }
 
     private void WalkTowardsPlayer()

@@ -7,6 +7,8 @@ Gives points to players.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Enemy : MonoBehaviour
 {
@@ -63,7 +65,11 @@ public class Enemy : MonoBehaviour
     private void death()
     {
         gsc.removeEnemy(rb);
-        Destroy(gameObject);
+        
+        if (!GameConfig.Multiplayer)
+            Destroy(gameObject);
+        else
+            PhotonNetwork.Destroy(gameObject);
     }
 
     public bool isDead()

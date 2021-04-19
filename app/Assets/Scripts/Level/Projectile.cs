@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Projectile : MonoBehaviour
 {
@@ -65,19 +67,28 @@ public class Projectile : MonoBehaviour
             Debug.Log("Hit");
             //damage player
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            DestroyProjectile();
         }
         else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
         {
             Debug.Log("Hit the ground");
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            DestroyProjectile();
         }
         else if (screenPos.y > Screen.height || screenPos.y < 0)
         {
             Debug.Log("Left cam");
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            DestroyProjectile();
         }
     }
 
-    void DestroyProjectile() { Destroy(gameObject); }
+    void DestroyProjectile() 
+    { 
+        if (!GameConfig.Multiplayer)
+            Destroy(gameObject);
+        else
+            PhotonNetwork.Destroy(gameObject);
+    }
 }

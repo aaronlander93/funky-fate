@@ -112,7 +112,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     }
     void multiplayerEnemy(float x, float y)
     {
-        var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
+        GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
