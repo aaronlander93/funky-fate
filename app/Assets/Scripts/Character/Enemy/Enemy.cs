@@ -4,9 +4,13 @@ Enemy can get damaged code for testing purposes.
 Gives points to players.
 */
 
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -55,12 +59,15 @@ public class Enemy : MonoBehaviour
         //animate death
         //either destroy enemy object or leave no collider object
         // Destroy(GetComponent<EnemyAI>());
-        _anim.SetTrigger("death");
+        // _anim.SetTrigger("death");
 
-        //prefab not working yet
-
-        // Instantiate(Explosion, transform.position, Quaternion.identity);
+        //adding the PhotonNetwork changes the transform in singleplayer
+        if (!GameConfig.Multiplayer)
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
         // Destroy(gameObject);
+        death();
     }
 
     private void death()

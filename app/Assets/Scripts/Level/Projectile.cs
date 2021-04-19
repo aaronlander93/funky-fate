@@ -27,11 +27,11 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("DestroyProjectile", lifeTime);
         FindNearestPlayer();
         
+        Invoke("DestroyProjectile", lifeTime);
+        //error with direction spawning tomato in same spot in singleplayer
         direction = (closestPlayer.transform.position - transform.position).normalized * moveSpeed;
-        Debug.Log(direction);
         _rb.velocity = new Vector2(direction.x, direction.y + yOffset);
     }
 
@@ -47,6 +47,7 @@ public class Projectile : MonoBehaviour
 
         float closestDist = Mathf.Infinity;
 
+        int index = 0;  //for debugging purposes
         foreach (Rigidbody2D player in players)
         {
             // dist = rb.position.x - player.transform.position.x;
