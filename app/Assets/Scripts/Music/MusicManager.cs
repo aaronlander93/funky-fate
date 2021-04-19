@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using Photon.Pun;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class MusicManager : MonoBehaviour
 {
     public PhotonView pv;
+    public Renderer rend;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
+
+    public Material playerMat;
+    public Material onBeatMat;
+    public Material offBeatMat;
+
+    private Color origColor;
+    private Color onBeatColor = new Color(.278f, 1.0f, .043f, 1.0f);
+    private Color offBeatColor = new Color(.87f, 0f, .067f, 1.0f);
 
     public static float keyDownTime;
 
@@ -25,6 +37,8 @@ public class MusicManager : MonoBehaviour
 
     private static long beatTick;
 
+    private bool validHit;
+
     private void Start()
     {
         if(GameConfig.Multiplayer && !pv.IsMine)
@@ -35,6 +49,7 @@ public class MusicManager : MonoBehaviour
         {
             BeatSystem.OnBeat += MarkBeat;
             MusicInputController.ActionOnePressed += CheckForValidHit;
+            MusicInputController.ActionOneReleased += ToggleColor;
 
             StartMusic();
         }
@@ -42,7 +57,9 @@ public class MusicManager : MonoBehaviour
         if (!GameConfig.Multiplayer)
         {
             Movement2D.JumpEvent += PlaySound;
-        }    
+        }
+
+        origColor = light2D.color;
     }
 
     private void OnDisable()
@@ -53,6 +70,31 @@ public class MusicManager : MonoBehaviour
     private void MarkBeat()
     {
         beatTick = DateTime.Now.Ticks;
+    }
+
+    private void ToggleColor()
+    {
+        if(validHit)
+        {
+            rend.material = onBeatMat;
+            light2D.color = onBeatColor;
+        }
+        else
+        {
+            rend.material = offBeatMat;
+            light2D.color = offBeatColor;
+        }
+
+        StartCoroutine(ApplyOriginalMaterial());
+    }
+
+    // Puts back the original material after .3 seconds
+    IEnumerator ApplyOriginalMaterial()
+    {
+        yield return new WaitForSeconds(.4f);
+
+        rend.material = playerMat;
+        light2D.color = origColor;
     }
 
     public void PlaySound(string sound)
@@ -84,11 +126,11 @@ public class MusicManager : MonoBehaviour
 
         if(span.TotalSeconds <  forgiveness || BeatSystem.secPerBeat - span.TotalSeconds < forgiveness)
         {
-            Debug.Log("ON BEAT");
+            validHit = true;
         }
         else
         {
-            Debug.Log("OFF BEAT");
+            validHit = false;
         }
     }
 
