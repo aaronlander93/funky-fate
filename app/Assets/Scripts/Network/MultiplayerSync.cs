@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Photon.Pun;
 
 // Author:      Aaron
@@ -6,8 +7,13 @@ using Photon.Pun;
 // Stolen from: https://doc.photonengine.com/en-us/pun/v1/demos-and-tutorials/package-demos/rpg-movement#extrapolate_options
 // Changelog:   4/7/2021 - created
 
-public class MovementLagSync : MonoBehaviourPun, IPunObservable
+public class MultiplayerSync : MonoBehaviourPun, IPunObservable
 {
+    public PhotonView pv;
+
+    public Material[] materials = new Material[4];
+    public Color[] colors = new Color[4];
+
     //Values that will be synced over network
     Vector3 latestPos;
     Quaternion latestRot;
@@ -54,5 +60,42 @@ public class MovementLagSync : MonoBehaviourPun, IPunObservable
             transform.position = Vector3.Lerp(positionAtLastPacket, latestPos, (float)(currentTime / timeToReachGoal));
             transform.rotation = latestRot;
         }
+    }
+
+    public void SetMaterialMessage(int playerNum)
+    {
+        if (pv.IsMine)
+        {
+            pv.RPC("SetMaterial", RpcTarget.AllBuffered, playerNum);
+        }
+    }
+
+    [PunRPC]
+    void SetMaterial(int playerNum)
+    {
+        Material mat = materials[playerNum];
+        Color color = colors[playerNum];
+
+        GameObject player = null;
+        if (pv.IsMine)
+        {
+            player = gameObject;
+        }
+        else
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach(var p in players)
+            {
+                if(p.GetComponentInChildren<PhotonView>().ViewID == pv.ViewID)
+                {
+                    player = p;
+                    break;
+                }
+            }
+        }
+        
+        player.GetComponent<Renderer>().material = mat;
+        player.GetComponent<Light2D>().color = color;
     }
 }
