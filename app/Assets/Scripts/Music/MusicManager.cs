@@ -85,6 +85,8 @@ public class MusicManager : MonoBehaviour
             light2D.color = offBeatColor;
         }
 
+        light2D.intensity = 3;
+
         StartCoroutine(ApplyOriginalMaterial());
     }
 

@@ -96,6 +96,9 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
         }
         
         player.GetComponent<Renderer>().material = mat;
-        player.GetComponent<Light2D>().color = color;
+
+        Light2D light2D = player.GetComponent<Light2D>();
+        light2D.color = color;
+        light2D.intensity = 3;
     }
 }
