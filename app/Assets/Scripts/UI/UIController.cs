@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour
     {
         if(!photonView.IsMine) 
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 

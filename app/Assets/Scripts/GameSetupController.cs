@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class GameSetupController : MonoBehaviourPunCallbacks
 {
@@ -39,7 +40,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             player.GetComponentInChildren<PhotonView>().enabled = false;
             player.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
             player.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
-            player.GetComponentInChildren<MovementLagSync>().enabled = false;
+            player.GetComponentInChildren<MultiplayerSync>().enabled = false;
             player.GetComponentInChildren<AudioNetwork>().enabled = false;
             player.GetComponentInChildren<ChatManager>().enabled = false;
 
@@ -54,6 +55,9 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
             // Set player nickname
             player.GetComponentInChildren<PhotonView>().Owner.NickName = GameConfig.Nickname;
+
+            // Set player material and sync it with other players
+            player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
 
             // Alert chat that player has joined
             player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
