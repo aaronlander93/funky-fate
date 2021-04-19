@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Math.Abs(xDist) < aggroRange)
         {
-            // Debug.Log("Closest player is " + (closestI + 1));
+            Debug.Log("Closest player is " + (closestI + 1));
             // Debug.Log(xDist);
             //face player in range
             if (xDist < 0)
