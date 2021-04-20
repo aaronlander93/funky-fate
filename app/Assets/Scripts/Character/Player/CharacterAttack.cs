@@ -2,30 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 
 public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private float attackRangeHorizontal;
     [SerializeField] private float attackRangeVertical;
-    private GameSetupController gsc;
+    
     [SerializeField] private Animator _anim;
     [SerializeField] private string button = "Attack";
+
+    public PhotonView pv;
+    private GameSetupController gsc;
+
+    private bool enemiesSynced;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!pv.IsMine)
+        {
+            Destroy(this);
+        }
+
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+
+        if(GameConfig.Multiplayer && !PhotonNetwork.IsMasterClient)
+            gsc.FindEnemies();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton(button))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             Attack();
             _anim.SetBool("isAttacking", true);
         }
-        if(Input.GetButtonUp(button))
+        if(Input.GetKeyUp(KeyCode.J))
         {
             _anim.SetBool("isAttacking", false);
         }
@@ -62,7 +76,6 @@ public class CharacterAttack : MonoBehaviour
                 {
                     enemiesWithinRange.Add(enemy);
                 }
-
             }
             else
             {
@@ -77,6 +90,9 @@ public class CharacterAttack : MonoBehaviour
         foreach(Rigidbody2D enemy in enemiesWithinRange)
         {
             enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
+
+            if (GameConfig.Multiplayer)
+                gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
         }
     }
 }

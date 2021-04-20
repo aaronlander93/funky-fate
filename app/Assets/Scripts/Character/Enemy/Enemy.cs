@@ -50,39 +50,41 @@ public class Enemy : MonoBehaviour
         
     }
     
-
     private void triggerDeath()
     {
         dead = true;
 
-        // gameObject.transform.Rotate(0, 0, 90);
-        //animate death
-        //either destroy enemy object or leave no collider object
-        // Destroy(GetComponent<EnemyAI>());
-        // _anim.SetTrigger("death");
-
-        //adding the PhotonNetwork changes the transform in singleplayer
         if (!GameConfig.Multiplayer)
             Instantiate(Explosion, transform.position, Quaternion.identity);
         else
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
-        // Destroy(gameObject);
+
         death();
     }
 
     private void death()
     {
         gsc.removeEnemy(rb);
-        
+
         if (!GameConfig.Multiplayer)
             Destroy(gameObject);
-        else
+        else if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.Destroy(gameObject);
     }
 
     public bool isDead()
     {
         return dead;
+    }
+
+    public void AdjustHealth(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            death();
+        }
     }
 
     public void TakeDamage (int damage, bool damageFromRight)
@@ -99,6 +101,4 @@ public class Enemy : MonoBehaviour
             BounceBack(damageFromRight);
         }
     }
-
-    
 }
