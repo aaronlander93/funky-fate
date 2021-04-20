@@ -563,7 +563,7 @@ public class Movement2D : MonoBehaviour
         {
             _anim.SetBool("isGrounded", true);
             _anim.SetBool("isFalling", false);
-            _anim.SetBool("WallGrab", false);
+            // _anim.SetBool("WallGrab", false);
             _anim.SetFloat("Speed", Mathf.Abs(_horizontalDirection));
             _anim.SetBool("isCrouching", crouch);
         }
@@ -575,8 +575,8 @@ public class Movement2D : MonoBehaviour
         {
             _anim.SetBool("isJumping", true);
             _anim.SetBool("isFalling", false);
-            _anim.SetBool("WallGrab", false);
-            _anim.SetFloat("verticalDirection", 0f);
+            // _anim.SetBool("WallGrab", false);
+            // _anim.SetFloat("verticalDirection", 0f);
         }
         else
         {
@@ -584,21 +584,21 @@ public class Movement2D : MonoBehaviour
 
             if (_wallGrab || _wallSlide)
             {
-                _anim.SetBool("WallGrab", true);
+                // _anim.SetBool("WallGrab", true);
                 _anim.SetBool("isFalling", false);
-                _anim.SetFloat("verticalDirection", 0f);
+                // _anim.SetFloat("verticalDirection", 0f);
             }
             else if (_rb.velocity.y < -0.1f)
             {
                 _anim.SetBool("isFalling", true);
-                _anim.SetBool("WallGrab", false);
-                _anim.SetFloat("verticalDirection", 0f);
+                // _anim.SetBool("WallGrab", false);
+                // _anim.SetFloat("verticalDirection", 0f);
             }
             if (_wallRun)
             {
                 _anim.SetBool("isFalling", false);
-                _anim.SetBool("WallGrab", false);
-                _anim.SetFloat("verticalDirection", Mathf.Abs(_verticalDirection));
+                // _anim.SetBool("WallGrab", false);
+                // _anim.SetFloat("verticalDirection", Mathf.Abs(_verticalDirection));
             }
         }
         if(_isDashing)
