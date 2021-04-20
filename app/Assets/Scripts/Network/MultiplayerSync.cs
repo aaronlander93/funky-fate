@@ -11,6 +11,8 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
 {
     public PhotonView pv;
 
+    public GameSetupController gsc;
+
     public Material[] materials = new Material[4];
     public Color[] colors = new Color[4];
 
@@ -23,6 +25,11 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
     double lastPacketTime = 0;
     Vector3 positionAtLastPacket = Vector3.zero;
     Quaternion rotationAtLastPacket = Quaternion.identity;
+
+    void Start()
+    {
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -59,6 +66,56 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
             //Update remote player
             transform.position = Vector3.Lerp(positionAtLastPacket, latestPos, (float)(currentTime / timeToReachGoal));
             transform.rotation = latestRot;
+        }
+    }
+
+    public void EnemyDamageMessage(int id, int damage)
+    {
+        if (pv.IsMine)
+        {
+            pv.RPC("EnemyDamage", RpcTarget.Others, id, damage);
+        }
+    }
+
+    [PunRPC]
+    void EnemyDamage(int id, int damage)
+    {
+        if (!pv.IsMine)
+        {
+            GameObject enemy = null;
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var e in enemies)
+            {
+                if (e.GetComponent<PhotonView>().ViewID == id)
+                {
+                    e.GetComponent<Enemy>().AdjustHealth(damage);
+                }
+            }
+        }
+    }
+
+    public void EnemyDeadMessage(int id)
+    {
+        if (pv.IsMine)
+        {
+            pv.RPC("EnemyDead", RpcTarget.All, id);
+        }
+    }
+
+    [PunRPC]
+    void EnemyDead(int id)
+    {
+        GameObject enemy = null;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var e in enemies)
+        {
+            if (e.GetComponent<PhotonView>().ViewID == id)
+            {
+                gsc.removeEnemy(e.GetComponent<Rigidbody2D>());
+                break;
+            }
         }
     }
 

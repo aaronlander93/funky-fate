@@ -17,6 +17,8 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public GameObject hecklerPrefab;
     public GameObject bossPrefab;
 
+    public PhotonView pv;
+
     //prevents enemies from moving in sync
     private System.Random rand;
 
@@ -53,8 +55,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             // Game is in multiplayer
             var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), new Vector2(5f, .6f), Quaternion.identity);
 
+            PhotonView photonView = player.GetComponentInChildren<PhotonView>();
+
             // Set player nickname
-            player.GetComponentInChildren<PhotonView>().Owner.NickName = GameConfig.Nickname;
+            photonView.Owner.NickName = GameConfig.Nickname;
+
+            // Save photon view if it's mine
+            if (photonView.IsMine)
+                pv = photonView;
 
             // Set player material and sync it with other players
             player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
@@ -117,6 +125,16 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
 
+    public void FindEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(var enemy in allEnemies)
+        {
+            enemies.Add(enemy.GetComponent<Rigidbody2D>());
+        }
+    }
+
     public void removeEnemy(Rigidbody2D enemyDefeated)
     {
         enemies.Remove(enemyDefeated);
@@ -135,7 +153,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     {
         var allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
-        
         foreach(var player in allPlayers)
         {
             var rb = player.GetComponentInChildren<Rigidbody2D>();

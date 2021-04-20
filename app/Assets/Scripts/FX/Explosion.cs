@@ -10,7 +10,7 @@ public class Explosion : MonoBehaviour
     {
         if (!GameConfig.Multiplayer)
             Destroy(gameObject);
-        else
+        else if (gameObject.GetComponent<PhotonView>().IsMine)
             PhotonNetwork.Destroy(gameObject);
     }
 }

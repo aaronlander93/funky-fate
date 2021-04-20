@@ -283,6 +283,7 @@ MonoBehaviour:
   attackRangeVertical: 1
   _anim: {fileID: 7469038050537146829}
   button: Attack
+  pv: {fileID: 1642426809078068347}
 --- !u!70 &7469038050541897836
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -412,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: 1642426809078068347}
+  gsc: {fileID: 0}
   materials:
   - {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   - {fileID: 2100000, guid: 299cf81147b68c049876a850a3d003f8, type: 2}
