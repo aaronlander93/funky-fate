@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: 0}
+  gsc: {fileID: 0}
   materials:
   - {fileID: 0}
   - {fileID: 0}

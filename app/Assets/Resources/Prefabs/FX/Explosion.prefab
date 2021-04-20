@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 6979837708479946434}
   - component: {fileID: 4118010465651182272}
   - component: {fileID: 7890280514030886528}
-  - component: {fileID: 3240156504512834593}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Explosion
   m_TagString: projectile
   m_Icon: {fileID: 0}
@@ -137,7 +136,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7890280514030886528}
-  - {fileID: 3240156504512834593}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -174,26 +172,3 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &3240156504512834593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913530428682412085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8a6c6710d6f0346ae8da8ed88b4dd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pv: {fileID: 0}
-  materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  colors:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
