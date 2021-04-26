@@ -3,17 +3,25 @@ using Photon.Realtime;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class GameSetupController : MonoBehaviourPunCallbacks
 {
     private List<Rigidbody2D> players;
     private List<Rigidbody2D> enemies;
+    private Rigidbody2D boss;
 
     public GameObject playerPrefab;
     public GameObject hecklerPrefab;
+    public GameObject bossPrefab;
 
-    public MusicManager musicManager;
+    public PhotonView pv;
+
+    //prevents enemies from moving in sync
+    private System.Random rand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +30,10 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
-
-        musicManager.StartMusic();
     }
 
     void CreatePlayer()
     {
-        
-
         if (!GameConfig.Multiplayer)
         {
             var player = Instantiate(playerPrefab, new Vector3(5f, .6f, 0f), Quaternion.identity);
@@ -38,7 +42,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             player.GetComponentInChildren<PhotonView>().enabled = false;
             player.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
             player.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
-            player.GetComponentInChildren<MovementLagSync>().enabled = false;
+            player.GetComponentInChildren<MultiplayerSync>().enabled = false;
+            player.GetComponentInChildren<AudioNetwork>().enabled = false;
+            player.GetComponentInChildren<ChatManager>().enabled = false;
+
+            Destroy(GameObject.Find("Chatbox"));
 
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         }
@@ -47,31 +55,99 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             // Game is in multiplayer
             var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), new Vector2(5f, .6f), Quaternion.identity);
 
+            PhotonView photonView = player.GetComponentInChildren<PhotonView>();
+
+            // Set player nickname
+            photonView.Owner.NickName = GameConfig.Nickname;
+
+            // Save photon view if it's mine
+            if (photonView.IsMine)
+                pv = photonView;
+
+            // Set player material and sync it with other players
+            player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
+
+            // Alert chat that player has joined
+            player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
+
+            // Add player's rigidbody to the list
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         } 
     }
 
     void CreateEnemies()
     {
-
         if (!GameConfig.Multiplayer)
         {
-            // Hard-coding this for now
-            var enemy = Instantiate(hecklerPrefab, new Vector2(5f, .6f), Quaternion.identity);
+            // // Hard-coding this for now
+            // var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
 
-            enemy.GetComponentInChildren<PhotonView>().enabled = false;
-            enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
-            enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
-            enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            nonMultiplayerEnemy(17f, 2f);
+            nonMultiplayerEnemy(0f, 2f);
+            nonMultiplayerEnemy(25f, 2f);
+            nonMultiplayerEnemy(-26f, -2f);
+
         }
         else if (PhotonNetwork.IsMasterClient)
         {
-            var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
+            // var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
 
-            enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            
+            multiplayerEnemy(17f, 2f);
+            multiplayerEnemy(0f, 2f);
+            multiplayerEnemy(25f, 2f);
+            multiplayerEnemy(-26f, -2f);
         }
     }
+    void nonMultiplayerEnemy(float x, float y)
+    {
+        // Hard-coding this for now
+        GameObject enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
+
+        enemy.GetComponentInChildren<PhotonView>().enabled = false;
+        enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
+        enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+
+        // enemy.GetComponent<EnemyAI>().randHandler = (float)rand.Next(0, 50);
+
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+    }
+    void multiplayerEnemy(float x, float y)
+    {
+        GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
+
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+    }
+
+    public void FindEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(var enemy in allEnemies)
+        {
+            enemies.Add(enemy.GetComponent<Rigidbody2D>());
+        }
+    }
+
+    public void removeEnemy(Rigidbody2D enemyDefeated)
+    {
+        enemies.Remove(enemyDefeated);
+    }
+
+    // void CreateBoss()
+    // {
+    //     if (!GameConfig.Multiplayer)
+    //     {
+    //         var boss1 = Instantiate(bossPrefab, new Vector2(5f, .6f), Quaternion.identity);
+
+    //     }
+    // }
 
     private void UpdatePlayerList()
     {

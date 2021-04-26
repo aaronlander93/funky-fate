@@ -7,6 +7,8 @@ TagManager:
   - ground
   - Music
   - Enemy
+  - projectile
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Player
   - ground
   - wall
-  - 
+  - Item
   - 
   - 
   - 
