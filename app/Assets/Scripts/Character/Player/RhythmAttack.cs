@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+Code By: Aaron Lander
+
+This file keeps track of on-beat combos, and triggers a rhythm attack when
+combos are hit.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
