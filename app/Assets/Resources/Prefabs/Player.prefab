@@ -237,9 +237,9 @@ MonoBehaviour:
   _wallRunModifier: 0.85
   _wallJumpXVelocityHaltDelay: 0.2
   _dashForce: 10
-  _dashLength: 0.07
-  _dashBufferLength: 0.1
-  cooldown: 2
+  _dashLength: 0.2
+  _dashBufferLength: 0.4
+  cooldown: 1.2
   _groundRaycastLength: 0.53
   _groundRaycastOffset: {x: 0.11, y: 0, z: 0}
   _wallRaycastLength: 0
@@ -1573,7 +1573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 235, y: 119.6499}
+  m_AnchoredPosition: {x: 235, y: 119.65039}
   m_SizeDelta: {x: 425.5255, y: 137.30188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1822304785523285892
