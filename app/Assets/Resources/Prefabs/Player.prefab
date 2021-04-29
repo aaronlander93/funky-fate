@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 3263036551965066938}
   - component: {fileID: 555431285520150818}
   - component: {fileID: 3288180118954256684}
+  - component: {fileID: 5091453868550744084}
   m_Layer: 8
   m_Name: MainPlayer
   m_TagString: Player
@@ -514,6 +515,23 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &5091453868550744084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979396586606236451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa5b8b3da263cf4c82350397c358c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 979396586606236501}
+  light2D: {fileID: 3288180118954256684}
+  playerMat: {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
+  onBeatMat: {fileID: 2100000, guid: bcbd64935cb42ef4093e0809a26d7ecc, type: 2}
+  offBeatMat: {fileID: 2100000, guid: 13c7431e9cd260b4f883fa6e06c0274f, type: 2}
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,11 +717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: 1642426809078068347}
-  rend: {fileID: 979396586606236501}
-  light2D: {fileID: 3288180118954256684}
-  playerMat: {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
-  onBeatMat: {fileID: 2100000, guid: bcbd64935cb42ef4093e0809a26d7ecc, type: 2}
-  offBeatMat: {fileID: 2100000, guid: 13c7431e9cd260b4f883fa6e06c0274f, type: 2}
   forgiveness: 0.075
   song: event:/Music/Music_Lvl1
   jumpSFX: event:/SFX/SFX_GuitarJump
