@@ -15,8 +15,7 @@ public class ParalaxBackground : MonoBehaviour {
     private Vector3 lastCameraPosition;
 
     void Start() {
-        cameraTransform = Camera.main.transform;
-        lastCameraPosition = cameraTransform.position;
+
     }
 
     void LateUpdate() {
