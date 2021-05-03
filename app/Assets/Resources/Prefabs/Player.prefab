@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth: 8
+  maxPlayerHealth: 0
+  dead: 0
 --- !u!114 &979396586606236463
 MonoBehaviour:
   m_ObjectHideFlags: 0

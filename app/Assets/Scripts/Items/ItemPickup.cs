@@ -34,7 +34,7 @@ public class ItemPickup : MonoBehaviour
     private bool isFollowing = false;
     private GameObject player; // Player who picked up the item
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // When a player picks up an item
         // !!! Sound effect goes here !!!
