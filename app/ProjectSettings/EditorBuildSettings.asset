@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiplayerMenu.unity
     guid: ae281b50499bb894eb9fc4cf39b60274
+  - enabled: 1
+    path: Assets/Scenes/LVL01-Boss.unity
+    guid: 65854858c28f96c489e7721c4140e24c
   m_configObjects: {}

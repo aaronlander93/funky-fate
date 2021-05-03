@@ -1,6 +1,16 @@
-﻿using System.Collections;
+/*
+Code By: ???
+This script unlocks a door with two locks
+It will render a new image when the key gets used up
+
+Worked on (Andrew Sha)
+Added in scene loading when the locks are gone.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LockedDoor : MonoBehaviour
 {
@@ -15,11 +25,13 @@ public class LockedDoor : MonoBehaviour
     // should have one additional lock on the sprite
     [SerializeField]
     private Sprite[] doorSprites;
-
+    public GameObject uiObject;
     private int numLocks;
+    public string scene;
 
     void Start()
     {
+        // uiObject.SetActive(false);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         numLocks = keyObjects.Length;
 
@@ -34,7 +46,7 @@ public class LockedDoor : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Key" && numLocks > 0)
         {
@@ -47,6 +59,27 @@ public class LockedDoor : MonoBehaviour
                     spriteRenderer.sprite = doorSprites[numLocks];
                 }
             }
+        }
+
+    }
+    void OnTriggerStay2D(Collider2D plyr)
+    {
+        if(plyr.gameObject.tag == "Player" && numLocks <= 0 && Input.GetKeyDown(KeyCode.W))
+        {
+            SceneManager.LoadScene(scene);
+            Debug.Log("loading Scene");
+            Destroy(uiObject);
+        }
+        if(plyr.tag == "Player" && numLocks == 0)
+        {
+            uiObject.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D plyr){
+        if(plyr.tag == "Player")
+        {
+        uiObject.SetActive(false);
         }
     }
 }
