@@ -19,12 +19,12 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private int characterHealth = 5;
     public int maxPlayerHealth;
     public bool dead = false;
-    private GameManager gameManager;
+    // private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         maxPlayerHealth = characterHealth;
-        gameManager = FindObjectOfType<GameManager>();
+        // gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class CharacterHealth : MonoBehaviour
         if (characterHealth <= 0)
         {
             characterHealth = 0;
-            gameManager.RespawnPlayer();
+            // gameManager.RespawnPlayer();
             dead = true;
         }
     }
