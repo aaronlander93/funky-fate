@@ -26,7 +26,7 @@ public class LockedDoor : MonoBehaviour
     [SerializeField]
     private Sprite[] doorSprites;
     public GameObject uiObject;
-    public GameObject musicDie;
+    // public GameObject musicDie;
     private int numLocks;
     public string scene;
 
@@ -65,10 +65,10 @@ public class LockedDoor : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D plyr)
     {
-        if(plyr.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.W))
+        if(plyr.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.W) && numLocks <= 0)
         {
-            //  && numLocks <= 0
-            DestroyImmediate(musicDie);
+            // 
+            // Destroy(musicDie);
             Destroy(uiObject);
             SceneManager.LoadScene(scene);
             Debug.Log("loading Scene");

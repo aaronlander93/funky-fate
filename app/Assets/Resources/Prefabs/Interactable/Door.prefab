@@ -103,8 +103,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: abe6b0da62d3a594688c2b6e5f248b37, type: 3}
   - {fileID: 21300000, guid: c9de4a08d4009964793915bbf3e0902e, type: 3}
   uiObject: {fileID: 0}
-  musicDie: {fileID: 6393483158543109020, guid: 7c4d608ef04bbf64e857db19622c08bd,
-    type: 3}
   scene: LVL01-Boss
 --- !u!61 &1037254344521854464
 BoxCollider2D:

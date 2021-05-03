@@ -95,4 +95,10 @@ public class MusicManager : MonoBehaviour
         Conductor.CreateBeatInstance(song);
         Conductor.StartMusic();
     }
+    
+    void OnDestroy()
+    {
+        Conductor.StopAndClear();
+        Movement2D.JumpEvent -= PlaySound;
+    }
 }
