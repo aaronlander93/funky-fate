@@ -5450,6 +5450,10 @@ PrefabInstance:
       value: LVL01-Boss
       objectReference: {fileID: 0}
     - target: {fileID: 1691866978, guid: a3c87a8e6afda54429853a1d1f92113d, type: 3}
+      propertyPath: musicDie
+      value: 
+      objectReference: {fileID: 923122059}
+    - target: {fileID: 1691866978, guid: a3c87a8e6afda54429853a1d1f92113d, type: 3}
       propertyPath: uiObject
       value: 
       objectReference: {fileID: 2048587195}
