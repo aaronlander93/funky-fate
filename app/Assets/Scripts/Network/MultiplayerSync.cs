@@ -113,7 +113,7 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
         {
             if (e.GetComponent<PhotonView>().ViewID == id)
             {
-                gsc.removeEnemy(e.GetComponent<Rigidbody2D>());
+                gsc.RemoveEnemy(e.GetComponent<Rigidbody2D>());
                 break;
             }
         }

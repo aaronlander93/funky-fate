@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
     private void death()
     {
-        gsc.removeEnemy(rb);
+        gsc.RemoveEnemy(rb);
 
         if (!GameConfig.Multiplayer)
             Destroy(gameObject);
