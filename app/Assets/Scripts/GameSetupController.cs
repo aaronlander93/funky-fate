@@ -1,11 +1,13 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class GameSetupController : MonoBehaviourPunCallbacks
 {
@@ -30,6 +32,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if(sceneName == "LVL01-Boss")
+        {
+            CreateBoss();
+        }
     }
 
     void CreatePlayer()
@@ -87,10 +96,10 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
             // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
-            nonMultiplayerEnemy(17f, 2f);
-            nonMultiplayerEnemy(0f, 2f);
-            nonMultiplayerEnemy(25f, 2f);
-            nonMultiplayerEnemy(-26f, -2f);
+            NonMultiplayerEnemy(17f, 2f);
+            NonMultiplayerEnemy(0f, 2f);
+            NonMultiplayerEnemy(25f, 2f);
+            NonMultiplayerEnemy(-26f, -2f);
 
         }
         else if (PhotonNetwork.IsMasterClient)
@@ -99,13 +108,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
             // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
             
-            multiplayerEnemy(17f, 2f);
-            multiplayerEnemy(0f, 2f);
-            multiplayerEnemy(25f, 2f);
-            multiplayerEnemy(-26f, -2f);
+            MultiplayerEnemy(17f, 2f);
+            MultiplayerEnemy(0f, 2f);
+            MultiplayerEnemy(25f, 2f);
+            MultiplayerEnemy(-26f, -2f);
         }
     }
-    void nonMultiplayerEnemy(float x, float y)
+    void NonMultiplayerEnemy(float x, float y)
     {
         // Hard-coding this for now
         GameObject enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
@@ -118,7 +127,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
-    void multiplayerEnemy(float x, float y)
+    void MultiplayerEnemy(float x, float y)
     {
         GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
 
@@ -135,19 +144,18 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         }
     }
 
-    public void removeEnemy(Rigidbody2D enemyDefeated)
+    public void RemoveEnemy(Rigidbody2D enemyDefeated)
     {
         enemies.Remove(enemyDefeated);
     }
 
-    // void CreateBoss()
-    // {
-    //     if (!GameConfig.Multiplayer)
-    //     {
-    //         var boss1 = Instantiate(bossPrefab, new Vector2(5f, .6f), Quaternion.identity);
-
-    //     }
-    // }
+     void CreateBoss()
+     {
+         if (!GameConfig.Multiplayer)
+         {
+             var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
+         }
+     }
 
     private void UpdatePlayerList()
     {
