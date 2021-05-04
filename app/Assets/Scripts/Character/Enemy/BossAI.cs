@@ -176,6 +176,7 @@ public class BossAI : MonoBehaviour
         if(numAttacksLeft > 0)
         {
             // Attack player
+            _anim.SetTrigger("attack1");
             numAttacksLeft -= 1;
         }
         else if(attackCooldown > 0)
@@ -190,6 +191,25 @@ public class BossAI : MonoBehaviour
             meleePhase = false;
             throwingPhase = true; 
         }
+    }
+
+    private void Attack1()
+    {
+
+    }
+    private void TomatoRain()
+    {
+        
+    }
+
+    private void Attack2()
+    {
+        
+    }
+
+    private void Attack3()
+    {
+        
     }
 
     private void ThrowProjectile()
@@ -251,22 +271,6 @@ public class BossAI : MonoBehaviour
             throwingPhase = true;
         }
         
-    }
-
-    private void WalkTowardsPlayer()
-    {
-        if (xDist < 0)
-        {
-            // Walk to the left
-            Vector2 target = new Vector2(closestPlayer.position.x, rb.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        }
-        else
-        {
-            // Walk to the right
-            Vector2 target = new Vector2(-closestPlayer.position.x, rb.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        }
     }
 
     private void JumpTowardsPlayer()
