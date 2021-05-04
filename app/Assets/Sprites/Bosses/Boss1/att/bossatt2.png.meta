@@ -53,6 +53,12 @@ TextureImporter:
   - first:
       213: -1859600697564099623
     second: bossatt2_16
+  - first:
+      213: 5696418094428819468
+    second: bossatt2_17
+  - first:
+      213: 5656449829922654189
+    second: bossatt2_18
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -562,6 +568,48 @@ TextureImporter:
       bones: []
       spriteID: 9db8f95a40f5136e0800000000000000
       internalID: -1859600697564099623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bossatt2_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.3, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c009982731ebd0f40800000000000000
+      internalID: 5696418094428819468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bossatt2_18
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.3, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de7cb52b62fbf7e40800000000000000
+      internalID: 5656449829922654189
       vertices: []
       indices: 
       edges: []
