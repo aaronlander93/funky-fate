@@ -129,7 +129,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         Vector2 spawnLoc = default;
         switch (sceneName)
         {
-            case "LVL00-Backstage":
+            case "LV00-Backstage":
                 spawnLoc = new Vector2(5f, .6f);
                 break;
             case "LVL01-Boss":
