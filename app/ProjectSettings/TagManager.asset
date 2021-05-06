@@ -76,3 +76,6 @@ TagManager:
   - name: Items
     uniqueID: 612876105
     locked: 0
+  - name: Environment Close
+    uniqueID: 1809372361
+    locked: 0
