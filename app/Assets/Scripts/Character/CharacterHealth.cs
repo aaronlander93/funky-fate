@@ -9,6 +9,8 @@ Added in maxplayer health to give character max health when respawn
 Added in GameManager variable to respawn character
 */
 
+using Photon.Pun;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +18,18 @@ using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour
 {
-    [SerializeField] private int characterHealth = 5;
+    public GameSetupController gsc;
+    public GameObject player;
+    public GameObject explosion;
     public int maxPlayerHealth;
-    public bool dead = false;
-    //private GameManager gameManager;
+
+    private int characterHealth;
+
     // Start is called before the first frame update
     void Start()
     {
-        maxPlayerHealth = characterHealth;
-        //gameManager = FindObjectOfType<GameManager>();
+        gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+        characterHealth = maxPlayerHealth;
     }
 
     // Update is called once per frame
@@ -33,22 +38,23 @@ public class CharacterHealth : MonoBehaviour
         if (characterHealth <= 0)
         {
             characterHealth = 0;
-            //gameManager.RespawnPlayer();
-            dead = true;
         }
     }
 
     public void TakeDamage(int dmgNum)
     {
-        characterHealth-= dmgNum;
-
-        Debug.Log("playerhealth = " + characterHealth);
-        if(characterHealth <= 0)
+        // Prevents health from going below 0
+        if(characterHealth > 0)
         {
-            // Death animation will go here in the future
-            // gameManager.RespawnPlayer();
-            // Destroy(gameObject);
-        }
+            characterHealth -= dmgNum;
+
+            // Player is dead
+            if (characterHealth <= 0)
+            {
+                characterHealth = 0;
+                TriggerDeath();
+            }
+        }   
     }
 
     public int GetCharacterHealth()
@@ -59,5 +65,32 @@ public class CharacterHealth : MonoBehaviour
     public void FullHealth()
     {
         characterHealth = maxPlayerHealth;
+    }
+
+    private void TriggerDeath()
+    {
+        if (!GameConfig.Multiplayer)
+            Instantiate(explosion, transform.position, Quaternion.identity);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
+        
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn()
+    {
+        // Turn off animation and disable movement
+        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        player.GetComponentInChildren<Movement2D>().enabled = false;
+
+        // Pause briefly after death to let player process what happened
+        yield return new WaitForSeconds(2f);
+
+        // Respawn player
+        gsc.RespawnPlayer();
+
+        // Turn animation and movement back on
+        player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        player.GetComponentInChildren<Movement2D>().enabled = true;
     }
 }
