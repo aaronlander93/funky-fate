@@ -95,14 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747a34f52ed466d4494eefc712041b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyObjects:
-  - {fileID: 0}
-  - {fileID: 0}
   doorSprites:
   - {fileID: 21300000, guid: 2327f5c3e0a940743876e137a22a6b9e, type: 3}
   - {fileID: 21300000, guid: abe6b0da62d3a594688c2b6e5f248b37, type: 3}
   - {fileID: 21300000, guid: c9de4a08d4009964793915bbf3e0902e, type: 3}
-  uiObject: {fileID: 0}
+  promptText: {fileID: 0}
+  numLocks: 0
   scene: LVL01-Boss
 --- !u!61 &1037254344521854464
 BoxCollider2D:

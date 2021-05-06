@@ -23,6 +23,9 @@ public class CharacterHealth : MonoBehaviour
     public GameObject explosion;
     public int maxPlayerHealth;
 
+    public delegate void DeathEvent();
+    public event DeathEvent PlayerDeath = delegate { };
+
     private int characterHealth;
 
     // Start is called before the first frame update
@@ -75,6 +78,7 @@ public class CharacterHealth : MonoBehaviour
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
         
         StartCoroutine(Respawn());
+        PlayerDeath();
     }
 
     IEnumerator Respawn()

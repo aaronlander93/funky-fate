@@ -18,6 +18,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject hecklerPrefab;
     public GameObject bossPrefab;
+    public GameObject keyPrefab;
 
     public PhotonView pv;
 
@@ -36,7 +37,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         CreatePlayer();
         CreateEnemies();
 
-        if(sceneName == "LVL01-Boss")
+        if(sceneName == "LV00-Backstage")
+        {
+            CreateKeys();
+        }
+        else if(sceneName == "LVL01-Boss")
         {
             CreateBoss();
         }
@@ -122,6 +127,15 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         {
             var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
         }
+    }
+
+    void CreateKeys()
+    {
+        var key = Instantiate(keyPrefab, new Vector2(-28.297f, -4.439f), Quaternion.identity);
+        key.GetComponentInChildren<ItemPickup>().KeyID = 0;
+
+        key = Instantiate(keyPrefab, new Vector2(19.8f, -22.83f), Quaternion.identity);
+        key.GetComponentInChildren<ItemPickup>().KeyID = 1;
     }
 
     Vector2 GetPlayerSpawn()
