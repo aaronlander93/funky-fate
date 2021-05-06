@@ -24,16 +24,17 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     //prevents enemies from moving in sync
     private System.Random rand;
 
+    private string sceneName;
     // Start is called before the first frame update
     void Start()
     {
         players = new List<Rigidbody2D>();
         enemies = new List<Rigidbody2D>();
 
+        sceneName = SceneManager.GetActiveScene().name;
+
         CreatePlayer();
         CreateEnemies();
-
-        string sceneName = SceneManager.GetActiveScene().name;
 
         if(sceneName == "LVL01-Boss")
         {
@@ -45,7 +46,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     {
         if (!GameConfig.Multiplayer)
         {
-            var player = Instantiate(playerPrefab, new Vector3(5f, .6f, 0f), Quaternion.identity);
+            var player = Instantiate(playerPrefab, GetPlayerSpawn(), Quaternion.identity);
 
             // Game is not in multiplayer, disable multiplayer components.
             player.GetComponentInChildren<PhotonView>().enabled = false;
@@ -62,7 +63,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         else
         {
             // Game is in multiplayer
-            var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), new Vector2(5f, .6f), Quaternion.identity);
+            var player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player"), GetPlayerSpawn(), Quaternion.identity);
 
             PhotonView photonView = player.GetComponentInChildren<PhotonView>();
 
@@ -123,6 +124,22 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         }
     }
 
+    Vector2 GetPlayerSpawn()
+    {
+        Vector2 spawnLoc = default;
+        switch (sceneName)
+        {
+            case "LVL00-Backstage":
+                spawnLoc = new Vector2(5f, .6f);
+                break;
+            case "LVL01-Boss":
+                spawnLoc = new Vector2(10f, 2f);
+                break;
+        }
+
+        return spawnLoc;
+    }
+
     void NonMultiplayerEnemy(float x, float y)
     {
         // Hard-coding this for now
@@ -160,7 +177,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
     public void RespawnPlayer()
     {
-        GameObject myPlayer = null;
+        GameObject myPlayer = default;
 
         if (GameConfig.Multiplayer)
         {
@@ -180,7 +197,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             myPlayer = GameObject.FindGameObjectWithTag("Player");
         }
 
-        myPlayer.GetComponentInChildren<Rigidbody2D>().position = new Vector3(5f, .6f, 0f);
+        myPlayer.GetComponentInChildren<Rigidbody2D>().position = GetPlayerSpawn();
         myPlayer.GetComponentInChildren<CharacterHealth>().FullHealth();
     }
 
