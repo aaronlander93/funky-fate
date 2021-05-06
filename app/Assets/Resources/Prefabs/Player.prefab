@@ -197,9 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcd7dbbe5a9be349b6ca5544c81ae02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterHealth: 8
-  maxPlayerHealth: 0
-  dead: 0
+  gsc: {fileID: 0}
+  player: {fileID: 979396586606236451}
+  explosion: {fileID: 8913530428682412085, guid: 605579a17ac8b1949b9e46f6cc60bf6e,
+    type: 3}
+  maxPlayerHealth: 8
 --- !u!114 &979396586606236463
 MonoBehaviour:
   m_ObjectHideFlags: 0
