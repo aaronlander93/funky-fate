@@ -3,6 +3,10 @@ Code By: Aaron Lander
 
 This file keeps track of on-beat combos, and triggers a rhythm attack when
 combos are hit.
+
+Worked on by Andrew Sha
+Made it so it would play a different animation when offbeat,
+Fires a weak or a strong bullet
 */
 
 using System.Collections;

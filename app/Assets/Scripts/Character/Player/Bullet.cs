@@ -1,3 +1,9 @@
+/*
+Code By: Andrew Sha
+
+This code damages the enemy when getting hit by this bullet
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
