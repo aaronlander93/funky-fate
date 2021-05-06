@@ -47,6 +47,9 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthImage()
     {
-        m_UIHealth.sprite = m_HealthImages[m_healthIndex - 1];
+        if(m_healthIndex > 0)
+        {
+            m_UIHealth.sprite = m_HealthImages[m_healthIndex - 1];
+        }
     }
 }

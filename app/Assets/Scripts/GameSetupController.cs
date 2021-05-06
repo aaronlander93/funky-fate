@@ -114,6 +114,15 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             MultiplayerEnemy(-26f, -2f);
         }
     }
+
+    void CreateBoss()
+    {
+        if (!GameConfig.Multiplayer)
+        {
+            var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
+        }
+    }
+
     void NonMultiplayerEnemy(float x, float y)
     {
         // Hard-coding this for now
@@ -149,13 +158,31 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         enemies.Remove(enemyDefeated);
     }
 
-     void CreateBoss()
-     {
-         if (!GameConfig.Multiplayer)
-         {
-             var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
-         }
-     }
+    public void RespawnPlayer()
+    {
+        GameObject myPlayer = null;
+
+        if (GameConfig.Multiplayer)
+        {
+            // Find my player
+            var allPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach(var player in allPlayers)
+            {
+                if(player.GetComponentInChildren<PhotonView>().IsMine)
+                {
+                    myPlayer = player;
+                }
+            }    
+        }
+        else
+        {
+            myPlayer = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        myPlayer.GetComponentInChildren<Rigidbody2D>().position = new Vector3(5f, .6f, 0f);
+        myPlayer.GetComponentInChildren<CharacterHealth>().FullHealth();
+    }
 
     private void UpdatePlayerList()
     {
