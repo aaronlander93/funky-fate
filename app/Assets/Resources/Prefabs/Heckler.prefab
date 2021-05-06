@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -7618948013159543021}
   - component: {fileID: 7074335137464957361}
   - component: {fileID: 6069507008249389503}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Heckler
   m_TagString: Enemy
   m_Icon: {fileID: 0}

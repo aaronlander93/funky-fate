@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5685835885547071913}
   - component: {fileID: 8463983591952158863}
   - component: {fileID: 1747400192129408887}
-  - component: {fileID: 2511580186932672564}
   m_Layer: 12
   m_Name: Guitar
   m_TagString: Bullet
@@ -50,7 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1207141695
   m_SortingLayer: 12
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_Sprite: {fileID: 21300000, guid: f4afbfff419bacb49ac91aa17571c0f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.62352943}
   m_FlipX: 0
@@ -149,15 +148,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 0.82}
   m_EdgeRadius: 0
---- !u!114 &2511580186932672564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933756298054153090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9be6dacca0da64b9075c89d569703a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
