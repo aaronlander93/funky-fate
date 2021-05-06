@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979396586143723850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.126, y: -0.027, z: -2.167016}
+  m_LocalPosition: {x: 0.777, y: -0.027, z: -2.167016}
   m_LocalScale: {x: 0.07020008, y: 0.07020008, z: 0.07020008}
   m_Children: []
   m_Father: {fileID: 979396586606236461}
@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 979396586606236501}
   - component: {fileID: 979396586606236457}
   - component: {fileID: 979396586606236459}
-  - component: {fileID: 979396586606236460}
   - component: {fileID: 979396586606236462}
   - component: {fileID: 979396586606236463}
   - component: {fileID: 7469038050537146829}
@@ -170,21 +169,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &979396586606236460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979396586606236451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1c4eeb8aa02da47acd97806bd6be3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 7469038050537146829}
-  shotDelay: 0
-  button: specialAttack
 --- !u!114 &979396586606236462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,9 +347,6 @@ MonoBehaviour:
     Name: isFalling
   - Type: 4
     SynchronizeType: 1
-    Name: isSpecial
-  - Type: 4
-    SynchronizeType: 1
     Name: isDashing
   - Type: 4
     SynchronizeType: 0
@@ -532,11 +513,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa5b8b3da263cf4c82350397c358c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootPoint: {fileID: 979396586143723851}
+  weakPrefab: {fileID: 1458720738467379938, guid: 68aabc6aa5b72f645a559244624d56e3,
+    type: 3}
+  strongPrefab: {fileID: 4933756298054153090, guid: 2ca69fc6e05d9264b9e9383dd3c1ab4c,
+    type: 3}
   rend: {fileID: 979396586606236501}
   light2D: {fileID: 3288180118954256684}
   playerMat: {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   onBeatMat: {fileID: 2100000, guid: bcbd64935cb42ef4093e0809a26d7ecc, type: 2}
   offBeatMat: {fileID: 2100000, guid: 13c7431e9cd260b4f883fa6e06c0274f, type: 2}
+  shotDelay: 0
+  animator: {fileID: 7469038050537146829}
+  button: specialAttack
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
