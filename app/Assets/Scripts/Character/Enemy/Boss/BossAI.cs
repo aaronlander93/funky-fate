@@ -37,8 +37,11 @@ public class BossAI : MonoBehaviour
     public float horizontalForce = 5.0f;
     public float jumpForce = 10.0f;
     public bool groundPound = true;
+    public float jumpVelocity = 10.0f;
     private bool cameraShake;
     private bool isGrounded = false;
+    private float lastPos;
+    private Vector2 jumpTo;
 
     [Header("Attacks")]
     public float initcycleCooldown = 3f;
@@ -98,6 +101,7 @@ public class BossAI : MonoBehaviour
             if (isGrounded)
             {
                 groundPound = true;
+                lastPos = -xDist;
 
                 // Turn towards player
                 if (xDist < 0)
@@ -113,8 +117,9 @@ public class BossAI : MonoBehaviour
                 Attack();
             }
             // boss drops on player
-            else if (Math.Abs(xDist) < 0.1f && groundPound)
+            else if (/*transform.position.x == lastPos*/ Math.Abs(xDist) < 0.1f && groundPound)
             {
+                Debug.Log(lastPos);
                 groundPound = false;
                 rb.velocity = Vector2.zero;
                 // can be used to drop over player faster
@@ -191,6 +196,8 @@ public class BossAI : MonoBehaviour
     private void JumpTowardsPlayer()
     {
         rb.AddForce(new Vector2((-xDist * 7), jumpForce), ForceMode2D.Impulse);
+        // jumpTo = new Vector2(lastPos, 60);
+        // transform.position = Vector2.MoveTowards(transform.position, jumpTo, jumpVelocity * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

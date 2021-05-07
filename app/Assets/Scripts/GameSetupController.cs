@@ -35,10 +35,10 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         sceneName = SceneManager.GetActiveScene().name;
 
         CreatePlayer();
-        CreateEnemies();
 
         if(sceneName == "LV00-Backstage")
         {
+            CreateEnemies();
             CreateKeys();
         }
         else if(sceneName == "LVL01-Boss")

@@ -203,11 +203,11 @@ MonoBehaviour:
     m_Bits: 512
   boxSize: {x: 1, y: 0.1}
   horizontalForce: 5
-  jumpForce: 75
+  jumpForce: 64
   groundPound: 1
-  cycleCooldown: 3
-  initattCooldown: 2.4
-  attCooldown: 2.4
+  jumpVelocity: 10
+  initcycleCooldown: 2
+  initattCooldown: 1
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
     type: 3}
 --- !u!114 &7315218657970814162
