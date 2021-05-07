@@ -10,7 +10,7 @@ public class BossManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        walls = transform.FindChild("Bosswalls").GetComponentsInChildren<BoxCollider2D>();
+        walls = transform.Find("Bosswalls").GetComponentsInChildren<BoxCollider2D>();
     }
 
     // Update is called once per frame

@@ -191,7 +191,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
     public void RemoveBoss(Rigidbody2D boss)
     {
-        boss.enabled = false;
+        // boss.enabled = false;
     }
 
     public void RespawnPlayer()

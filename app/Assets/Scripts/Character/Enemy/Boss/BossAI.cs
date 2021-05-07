@@ -41,9 +41,10 @@ public class BossAI : MonoBehaviour
     private bool isGrounded = false;
 
     [Header("Attacks")]
-    public float cycleCooldown = 3f;    //time between attack cycles
-    public float initCooldownTime;
-    public float attCooldown;      //time between attacks in a cycle
+    public float initcycleCooldown = 3f;
+    private float cycleCooldown;    //time between attack cycles
+    public float initattCooldown = 2.4f;
+    private float attCooldown;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
 
@@ -144,7 +145,7 @@ public class BossAI : MonoBehaviour
 
     private void Attack()
     {
-        if (attackCooldown > 0)
+        if (attCooldown > 0)
         {
             attCooldown -= Time.deltaTime;
         }
@@ -153,7 +154,7 @@ public class BossAI : MonoBehaviour
             JumpTowardsPlayer();
             Attack1();
             Attack3();
-            attCooldown = initCooldownTime;
+            attCooldown = initattCooldown;
         }
     }
 
