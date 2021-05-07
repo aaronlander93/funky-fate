@@ -1,5 +1,5 @@
 /*
-Code By: ???
+Code By: Joseph Babel
 This script unlocks a door with two locks
 It will render a new image when the key gets used up
 
