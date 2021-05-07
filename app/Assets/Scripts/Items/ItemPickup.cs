@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
+    public GameObject keyPrefab;
+    public Rigidbody2D rb; // Enable rigidbody after picked up
+
     // On pickup kick item up into air
     [SerializeField]
     private float kickUpForce = 12.0f;
@@ -29,18 +32,30 @@ public class ItemPickup : MonoBehaviour
     [SerializeField]
     private float rotateSpeed = -2.0f;
 
-    private Rigidbody2D rb; // Add rigidbody after picked up
     private bool isPickedUp = false;
     private bool isFollowing = false;
     private GameObject player; // Player who picked up the item
+    private int keyID;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void Start()
+    {
+        rb.isKinematic = true;
+    }
+
+    public int KeyID
+    {
+        set { keyID = value; }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // When a player picks up an item
         // !!! Sound effect goes here !!!
         if (collision.gameObject.tag == "Player" && !isPickedUp)
         {
             this.player = collision.gameObject;
+            // Subscribe to PlayerDeath event so key can be respawned when player dies
+            player.GetComponentInChildren<CharacterHealth>().PlayerDeath += RespawnKey;
             isPickedUp = true;
             PickupItem(player);
         }
@@ -49,7 +64,7 @@ public class ItemPickup : MonoBehaviour
     // Initially kicks the item up in the air and then coroutine starts player follow
     public void PickupItem(GameObject player)
     {
-        rb = (Rigidbody2D)gameObject.AddComponent<Rigidbody2D>(); // Add rigidbody after picked up
+        rb.isKinematic = false;
         rb.AddForce(new Vector2(0, kickUpForce), ForceMode2D.Impulse); // Kick item up in air
         rb.gravityScale = initialItemGravity; // Heavy gravity to come back down faster
         StartCoroutine(StartFollow()); // Follow player
@@ -72,5 +87,34 @@ public class ItemPickup : MonoBehaviour
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxFollowVelocity); // Limit velocity of floating item
             transform.Rotate(Vector3.forward * rotateSpeed); // Slowly rotate item
         }
+    }
+
+    void RespawnKey()
+    {
+        var key = Instantiate(keyPrefab, GetKeySpawn(), Quaternion.identity); // Create new key
+        key.GetComponentInChildren<ItemPickup>().KeyID = keyID; // Set new key's id
+        Destroy(gameObject); // Destroy this key
+    }
+
+    Vector2 GetKeySpawn()
+    {
+        Vector2 spawnLoc = default;
+
+        switch(keyID)
+        {
+            case 0:
+                spawnLoc = new Vector2(-28.297f, -4.439f);
+                break;
+            case 1:
+                spawnLoc = new Vector2(19.8f, -22.83f);
+                break;
+        }
+
+        return spawnLoc;
+    }
+
+    void OnDestroy()
+    {
+        player.GetComponentInChildren<CharacterHealth>().PlayerDeath -= RespawnKey;
     }
 }

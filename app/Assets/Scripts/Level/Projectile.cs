@@ -27,18 +27,25 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GameConfig.Multiplayer)
+        {
+            Destroy(gameObject.GetComponent<PhotonView>());
+            Destroy(gameObject.GetComponent<PhotonTransformViewClassic>());
+            Destroy(gameObject.GetComponent<MultiplayerSync>());
+        }
+
         FindNearestPlayer();
         
         Invoke("DestroyProjectile", lifeTime);
         //error with direction spawning tomato in same spot in singleplayer
-        direction = (closestPlayer.transform.position - transform.position).normalized * moveSpeed;
+        direction = (closestPlayer.position - _rb.position).normalized * moveSpeed;
         _rb.velocity = new Vector2(direction.x, direction.y + yOffset);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+;
     }
 
     private void FindNearestPlayer()
@@ -51,7 +58,7 @@ public class Projectile : MonoBehaviour
         foreach (Rigidbody2D player in players)
         {
             // dist = rb.position.x - player.transform.position.x;
-            float dist = Vector2.Distance(transform.position, player.transform.position);
+            float dist = Vector2.Distance(transform.position, player.position);
 
             if (dist < closestDist)
             {

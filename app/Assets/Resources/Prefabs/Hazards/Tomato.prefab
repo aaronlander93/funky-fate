@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7600568277223947023}
   - component: {fileID: 2699817216864039737}
   - component: {fileID: 6764984355412783820}
-  - component: {fileID: 2625110241489252356}
+  - component: {fileID: 3153771242300332874}
   m_Layer: 8
   m_Name: Tomato
   m_TagString: projectile
@@ -198,7 +198,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6764984355412783820}
-  - {fileID: 2625110241489252356}
+  - {fileID: 3153771242300332874}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &2625110241489252356
+--- !u!114 &3153771242300332874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8a6c6710d6f0346ae8da8ed88b4dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pv: {fileID: 0}
+  pv: {fileID: 2699817216864039737}
   gsc: {fileID: 0}
   materials:
   - {fileID: 0}

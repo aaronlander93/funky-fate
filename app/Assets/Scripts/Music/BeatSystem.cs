@@ -48,6 +48,11 @@ class BeatSystem : MonoBehaviour
     public static int beat;
 
     /// <summary>
+    ///  Returns the beat index of the song.
+    /// </summary>  
+    public static int beatIndex = 0;
+
+    /// <summary>
     ///  Returns a string of the most recent marker passed. 
     /// </summary>     
     public static string marker;
@@ -154,6 +159,8 @@ class BeatSystem : MonoBehaviour
                         var parameter = (FMOD.Studio.TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr, typeof(FMOD.Studio.TIMELINE_BEAT_PROPERTIES));
                         timelineInfo.currentMusicBeat = parameter.beat;
                         beat = timelineInfo.currentMusicBeat;
+                        beatIndex += 1;
+
                         bpm = parameter.tempo;
                         secPerBeat = 60f / bpm;
 
