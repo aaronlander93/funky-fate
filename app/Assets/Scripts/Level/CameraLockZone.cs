@@ -22,12 +22,5 @@ public class CameraLockZone : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            // Call UnlockCamera from CameraController of player who exits this zone
-            collision.gameObject.transform.parent.Find("Main Camera").GetComponent<CameraController>().UnlockCamera();
-        }
-    }
+    
 }

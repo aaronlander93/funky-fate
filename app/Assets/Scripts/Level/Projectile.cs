@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour
             // Destroy(gameObject);
             DestroyProjectile();
         }
-        else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
+        else if (collision.transform.parent != null && collision.transform.parent.parent.tag == "ground")
         {
             // Debug.Log("Hit the ground");
             // Destroy(gameObject);

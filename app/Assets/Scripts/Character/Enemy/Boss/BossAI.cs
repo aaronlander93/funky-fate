@@ -28,25 +28,25 @@ public class BossAI : MonoBehaviour
 {
     public GameSetupController gsc;
 
+    [Header("GroundedCheck")]
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Vector2 boxSize;
+
     [Header("JumpAttack")]
     public float horizontalForce = 5.0f;
     public float jumpForce = 10.0f;
     public bool groundPound = true;
     private bool cameraShake;
-    private bool isGrounded = true;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Vector2 boxSize;
-
-    public float aggroRange;
+    private bool isGrounded = false;
 
     [Header("Attacks")]
     public float cycleCooldown = 3f;    //time between attack cycles
-    public float attCooldown = 2f;      //time between attacks in a cycle
+    public float initCooldownTime;
+    public float attCooldown;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
 
-    private bool isAggro = false;
 
     // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
@@ -73,7 +73,6 @@ public class BossAI : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         _anim = GetComponent<Animator>();
-
     }
 
     void Update()
@@ -85,14 +84,20 @@ public class BossAI : MonoBehaviour
     {
         FindNearestPlayer();
 
-        if (isAggro)
+        if(cowardPhase)
         {
-            if(cowardPhase)
+            Retreat();
+        }
+        else
+        {
+            bool landCheck = isGrounded; // Used to check if boss landed on ground
+            isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
+            _anim.SetBool("grounded", isGrounded);
+
+            if (isGrounded)
             {
-                Retreat();
-            }
-            else
-            {
+                groundPound = true;
+
                 // Turn towards player
                 if (xDist < 0)
                 {
@@ -103,29 +108,17 @@ public class BossAI : MonoBehaviour
                     gameObject.transform.localScale = new Vector3(-1, 1, 1);
                 }
 
-                bool landCheck = isGrounded; // Used to check if boss landed on ground
-                isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
-                _anim.SetBool("grounded", isGrounded);
-
-                if (isGrounded)
-                {
-                    groundPound = true;
-                    JumpTowardsPlayer();
-                }
-                // boss drops on player
-                else if (Math.Abs(xDist) < 0.1f && groundPound)
-                {
-                    groundPound = false;
-                    rb.velocity = Vector2.zero;
-                    // rb.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
-                }
-                
+                // cycle through to attacks
+                Attack();
             }
-        }
-        else if(Math.Abs(xDist) < aggroRange)
-        {
-            // Boss is now aggro'd and will always be aggro'd until death
-            isAggro = true;
+            // boss drops on player
+            else if (Math.Abs(xDist) < 0.1f && groundPound)
+            {
+                groundPound = false;
+                rb.velocity = Vector2.zero;
+                // can be used to drop over player faster
+                // rb.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
+            }
         }
     }
 
@@ -146,6 +139,21 @@ public class BossAI : MonoBehaviour
                 closestPlayer = player;
                 xDist = rb.position.x - player.transform.position.x;
             }
+        }
+    }
+
+    private void Attack()
+    {
+        if (attackCooldown > 0)
+        {
+            attCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            JumpTowardsPlayer();
+            Attack1();
+            Attack3();
+            attCooldown = initCooldownTime;
         }
     }
 
@@ -187,7 +195,7 @@ public class BossAI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //damage player if they come in contact with boss
-        if(collision.gameObject.tag =="Player")
+        if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
         }

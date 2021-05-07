@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7534783586264871396}
   - component: {fileID: -3344417719517686380}
   - component: {fileID: 4628133287247799047}
+  - component: {fileID: 7315218657970814162}
   m_Layer: 8
   m_Name: Boss1
   m_TagString: Enemy
@@ -197,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gsc: {fileID: 0}
   horizontalForce: 5
-  jumpForce: 40
+  jumpForce: 75
   groundPound: 1
   groundCheck: {fileID: 4345488761973680658}
   groundLayer:
@@ -205,5 +206,23 @@ MonoBehaviour:
     m_Bits: 512
   boxSize: {x: 1, y: 0.1}
   aggroRange: 10
+  cycleCooldown: 3
+  attCooldown: 2.4
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
     type: 3}
+--- !u!114 &7315218657970814162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038601886528365455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876d5ee00177bef46a1855d53cfdd1e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dead: 0
+  health: 50
+  gsc: {fileID: 0}
+  Explosion: {fileID: 0}
