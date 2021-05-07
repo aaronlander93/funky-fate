@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979396586143723850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.126, y: -0.027, z: -2.167016}
+  m_LocalPosition: {x: 1.136, y: -0.027, z: -2.167016}
   m_LocalScale: {x: 0.07020008, y: 0.07020008, z: 0.07020008}
   m_Children: []
   m_Father: {fileID: 979396586606236461}
@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 979396586606236501}
   - component: {fileID: 979396586606236457}
   - component: {fileID: 979396586606236459}
-  - component: {fileID: 979396586606236460}
   - component: {fileID: 979396586606236462}
   - component: {fileID: 979396586606236463}
   - component: {fileID: 7469038050537146829}
@@ -72,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979396586606236451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 979396586143723851}
@@ -170,21 +169,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &979396586606236460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979396586606236451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1c4eeb8aa02da47acd97806bd6be3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 7469038050537146829}
-  shotDelay: 0
-  button: specialAttack
 --- !u!114 &979396586606236462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,9 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcd7dbbe5a9be349b6ca5544c81ae02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterHealth: 8
-  maxPlayerHealth: 0
-  dead: 0
+  gsc: {fileID: 0}
+  player: {fileID: 979396586606236451}
+  explosion: {fileID: 8913530428682412085, guid: 605579a17ac8b1949b9e46f6cc60bf6e,
+    type: 3}
+  maxPlayerHealth: 8
 --- !u!114 &979396586606236463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,9 +345,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isFalling
-  - Type: 4
-    SynchronizeType: 1
-    Name: isSpecial
   - Type: 4
     SynchronizeType: 1
     Name: isDashing
@@ -530,11 +513,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa5b8b3da263cf4c82350397c358c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootPoint: {fileID: 979396586143723851}
+  weakPrefab: {fileID: 1458720738467379938, guid: 68aabc6aa5b72f645a559244624d56e3,
+    type: 3}
+  strongPrefab: {fileID: 4933756298054153090, guid: 2ca69fc6e05d9264b9e9383dd3c1ab4c,
+    type: 3}
   rend: {fileID: 979396586606236501}
   light2D: {fileID: 3288180118954256684}
   playerMat: {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   onBeatMat: {fileID: 2100000, guid: bcbd64935cb42ef4093e0809a26d7ecc, type: 2}
   offBeatMat: {fileID: 2100000, guid: 13c7431e9cd260b4f883fa6e06c0274f, type: 2}
+  shotDelay: 0
+  animator: {fileID: 7469038050537146829}
+  button: specialAttack
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +597,7 @@ GameObject:
   - component: {fileID: 6557903919141206548}
   - component: {fileID: 3821433755773548102}
   - component: {fileID: 4651313517779981855}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +676,7 @@ GameObject:
   - component: {fileID: 4978708904957018225}
   - component: {fileID: 5933250240432403708}
   - component: {fileID: 756071133594261894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MusicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +752,7 @@ GameObject:
   - component: {fileID: 3660217328871020085}
   - component: {fileID: 7196328631741139407}
   - component: {fileID: 3897675134599507163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -776,7 +767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3195345903949312446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.6, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7038819333816127728}
@@ -805,8 +796,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: -14
+  far clip plane: 1002
   field of view: 60
   orthographic: 1
   orthographic size: 4.5
@@ -898,7 +889,7 @@ GameObject:
   - component: {fileID: 7458218464441850628}
   - component: {fileID: 1460502586699031305}
   - component: {fileID: 1350979367594713391}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +966,7 @@ GameObject:
   - component: {fileID: 8485839385828923127}
   - component: {fileID: 5441006373049260031}
   - component: {fileID: 2133427213931062357}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1061,7 +1052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7996032820585985729}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chatbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1086,7 @@ GameObject:
   - component: {fileID: 147893348056850987}
   - component: {fileID: 7311411309966069844}
   - component: {fileID: 4055670267160239238}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1234,7 +1225,7 @@ GameObject:
   - component: {fileID: 5176843926065986938}
   - component: {fileID: 5227516378417671722}
   - component: {fileID: 6949364521108037039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1309,7 +1300,7 @@ GameObject:
   - component: {fileID: 8468592388617314416}
   - component: {fileID: 7572200905596775378}
   - component: {fileID: 9215453623448174226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,7 +1397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6881329130019729729}
   - component: {fileID: 8947425011114978764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1455,7 @@ GameObject:
   - component: {fileID: 7223818136714568361}
   - component: {fileID: 5028748892266692781}
   - component: {fileID: 4167432476889087096}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1555,7 @@ GameObject:
   - component: {fileID: 1822304785523285892}
   - component: {fileID: 904001913723147903}
   - component: {fileID: 2863116479952227848}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1669,7 +1660,7 @@ GameObject:
   - component: {fileID: 8839142171592822493}
   - component: {fileID: 754722165472861591}
   - component: {fileID: 4368379993769573085}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7038819333816127728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1779,7 +1770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5732444423372771033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WindowVersion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
