@@ -25,4 +25,10 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
         Debug.Log("Were are now connected to the " + PhotonNetwork.CloudRegion + " server.");
     }
+
+    void OnDestroy()
+    {
+        // Disconnect from photon network when leaving menu
+        PhotonNetwork.Disconnect();
+    }
 }
