@@ -1,5 +1,5 @@
 ﻿/*
-Code By: Aaron Lander
+Code By: Aaron Lander & Milo Abril
 
 This script controls the boss' decision making. 
 
@@ -31,23 +31,30 @@ public class BossAI : MonoBehaviour
     [Header("JumpAttack")]
     public float horizontalForce = 5.0f;
     public float jumpForce = 10.0f;
-    public float buildupTime;
-    publicfloat jumpTime;
+    public bool groundPound = true;
     private bool cameraShake;
-
     private bool isGrounded = true;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Vector2 boxSize;
+
     public float aggroRange;
 
     [Header("Attacks")]
-
+    public float cycleCooldown = 3f;    //time between attack cycles
+    public float attCooldown = 2f;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
 
     private bool isAggro = false;
 
+    // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
     private float closestDist;
     private float xDist;
+
+    //used to shake camera
+    private CameraController Camera;
 
     private Rigidbody2D rb;
 
@@ -105,12 +112,12 @@ public class BossAI : MonoBehaviour
                     groundPound = true;
                     JumpTowardsPlayer();
                 }
-                
-                if (xDist == 0 && groundPound)
+                // boss drops on player
+                else if (Math.Abs(xDist) < 0.1f && groundPound)
                 {
-                    rb.velocity = Vector2.zero;
-                    rb.AddForce(new Vector2(rb.position.x, dropForce));
                     groundPound = false;
+                    rb.velocity = Vector2.zero;
+                    // rb.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
                 }
                 
             }
@@ -174,6 +181,15 @@ public class BossAI : MonoBehaviour
 
     private void JumpTowardsPlayer()
     {
+        rb.AddForce(new Vector2((-xDist * 7), jumpForce), ForceMode2D.Impulse);
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //damage player if they come in contact with boss
+        if(collision.gameObject.tag =="Player")
+        {
+            collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
+        }
     }
 }

@@ -196,8 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gsc: {fileID: 0}
-  jumpHeight: 75
-  dropForce: 0
+  horizontalForce: 5
+  jumpForce: 40
+  groundPound: 1
   groundCheck: {fileID: 4345488761973680658}
   groundLayer:
     serializedVersion: 2

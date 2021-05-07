@@ -6191,6 +6191,7 @@ MonoBehaviour:
     type: 3}
   bossPrefab: {fileID: 6038601886528365455, guid: 772b2ca09966b034eb9db50a71e46476,
     type: 3}
+  keyPrefab: {fileID: 0}
   pv: {fileID: 0}
 --- !u!4 &1369355853
 Transform:
