@@ -29,36 +29,19 @@ public class BossAI : MonoBehaviour
     public GameSetupController gsc;
 
     [Header("JumpAttack")]
-    [SerializeField] float jumpHeight;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Vector2 boxSize;
-    [SerializeField] int initJumpsLeft;  // # of jumps left before cowardly phase
-    private int jumpsLeft;
+    public float horizontalForce = 5.0f;
+    public float jumpForce = 10.0f;
+    public float buildupTime;
+    publicfloat jumpTime;
+    private bool cameraShake;
 
-    private bool isGrounded;
-
-    [Header("MeleeAttack")]
-    public float speed;
-    public float attackRange;
+    private bool isGrounded = true;
     public float aggroRange;
-    public int initAttackCooldown;
-    public int initNumAttacks;
-    private int attackCooldown;
-    private int numAttacksLeft;
 
-    [Header("Throwing Attacks")]
-    public int initNumThrows;
-    public float initThrowCooldown;
-    public int initWalkTime;
-    public float walkRange;
-    private int numThrowsLeft;
-    private float throwCooldown;
+    [Header("Attacks")]
+
 
     [Header("CowardlyPhase")]
-    public float retreatRange;
-    public int initCowardlyTime;
-    private int cowardlyTime;
 
     private bool isAggro = false;
 
@@ -83,13 +66,6 @@ public class BossAI : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         _anim = GetComponent<Animator>();
-
-        numThrowsLeft = initNumThrows;
-        throwCooldown = initThrowCooldown;
-        numAttacksLeft = initNumAttacks;
-        attackCooldown = initAttackCooldown;
-        cowardlyTime = initCowardlyTime;
-        jumpsLeft = initJumpsLeft;
 
     }
 
@@ -122,26 +98,21 @@ public class BossAI : MonoBehaviour
 
                 bool landCheck = isGrounded; // Used to check if boss landed on ground
                 isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
+                _anim.SetBool("grounded", isGrounded);
 
-                // If these two are different values, we know that the boss just landed on the ground.
-                if(!landCheck && isGrounded)
+                if (isGrounded)
                 {
-                    meleePhase = true;
-                }
-
-                // Make decision based on current phase
-                if (isGrounded && meleePhase)
-                {
-                    MeleeAttack();
-                }
-                else if(isGrounded && throwingPhase)
-                {
-                    ThrowProjectile();
-                }
-                else if(isGrounded)
-                {
+                    groundPound = true;
                     JumpTowardsPlayer();
                 }
+                
+                if (xDist == 0 && groundPound)
+                {
+                    rb.velocity = Vector2.zero;
+                    rb.AddForce(new Vector2(rb.position.x, dropForce));
+                    groundPound = false;
+                }
+                
             }
         }
         else if(Math.Abs(xDist) < aggroRange)
@@ -171,38 +142,17 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    private void MeleeAttack()
-    {
-        if(numAttacksLeft > 0)
-        {
-            // Attack player
-            _anim.SetTrigger("attack1");
-            numAttacksLeft -= 1;
-        }
-        else if(attackCooldown > 0)
-        {
-            // Pausing before throwing phase begins
-            attackCooldown -= 1;
-        }
-        else
-        {
-            // Turn off melee phase and begin throwing phase
-            attackCooldown = initAttackCooldown;
-            meleePhase = false;
-            throwingPhase = true; 
-        }
-    }
-
     private void Attack1()
     {
 
     }
+
     private void TomatoRain()
     {
-        
+
     }
 
-    private void Attack2()
+    private void Attack2()  //Probably not going to be used; may be used as boss intro
     {
         
     }
@@ -214,77 +164,16 @@ public class BossAI : MonoBehaviour
 
     private void ThrowProjectile()
     {
-        if(throwCooldown <=  0)
-        {
-            throwCooldown = initThrowCooldown;
 
-            if (!GameConfig.Multiplayer)
-            {
-                Instantiate(projectile, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
-            }
-
-            numThrowsLeft -= 1;
-
-            if (numThrowsLeft == 0)
-            {
-                numThrowsLeft = initNumThrows;
-                throwingPhase = false;
-            }
-        }
-        else
-        {
-            throwCooldown -= 1;
-        }
     }
 
     private void Retreat()
     {
-        if(cowardlyTime > 0)
-        {
-            // Only retreat from player if they are within retreat range
-            if(Math.Abs(xDist) < retreatRange)
-            {
-                if (xDist < 0)
-                {
-                    // Walk to the right
-                    Vector2 target = new Vector2(rb.position.x - retreatRange, rb.position.y);
-                    transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                }
-                else
-                {
-                    // Walk to the left
-                    Vector2 target = new Vector2(rb.position.x + retreatRange, rb.position.y);
-                    transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-                }
-            }
-            cowardlyTime -= 1;
-        }
-        else
-        {
-            // Coward phase is over
-            cowardlyTime = initCowardlyTime;
-            cowardPhase = false;
-            throwingPhase = true;
-        }
         
     }
 
     private void JumpTowardsPlayer()
     {
-        if(jumpsLeft > 0)
-        {
-            rb.AddForce(new Vector2(-xDist * 5, jumpHeight), ForceMode2D.Impulse);
-            jumpsLeft -= 1;
-        } 
-        else
-        {
-            // Coward phase begins
-            cowardPhase = true;
-            jumpsLeft = initJumpsLeft;
-        }
+
     }
 }

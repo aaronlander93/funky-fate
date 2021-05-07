@@ -196,23 +196,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gsc: {fileID: 0}
-  jumpHeight: 40
+  jumpHeight: 75
+  dropForce: 0
   groundCheck: {fileID: 4345488761973680658}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
   boxSize: {x: 1, y: 0.1}
-  initJumpsLeft: 4
-  speed: 5
-  attackRange: 2
   aggroRange: 10
-  initAttackCooldown: 100
-  initNumAttacks: 1
-  initNumThrows: 5
-  initThrowCooldown: 75
-  initWalkTime: 20
-  walkRange: 3
-  retreatRange: 4
-  initCowardlyTime: 400
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
     type: 3}

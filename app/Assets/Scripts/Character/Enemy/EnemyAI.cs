@@ -1,4 +1,17 @@
-﻿using System;
+﻿/*
+Code By: Milo Abril and Aaron Lander
+
+This script controls the enemy AIs' decision making. 
+
+If an enemy is within range the enemy will be aggroed.
+so long as the enemy is aggroed, the AI will either reatreat from or approeach
+the player to a certain distance until they are within a specified range.
+When in that specified range, the AI will attack.
+
+
+*/
+
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
