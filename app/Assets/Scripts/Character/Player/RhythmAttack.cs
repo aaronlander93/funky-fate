@@ -15,6 +15,7 @@ using UnityEngine;
 
 public class RhythmAttack : MonoBehaviour
 {
+    [SerializeField] private LayerMask Enemies;
     public Transform ShootPoint;
     public GameObject weakPrefab;
     public GameObject strongPrefab;
@@ -37,6 +38,7 @@ public class RhythmAttack : MonoBehaviour
     public string button = "specialAttack";
     // Start is called before the first frame update
     private string attack = "isWeak";
+    public float circle = 4f;
     void Start()
     {
         MusicManager.OnBeat += ComboCheck;
@@ -169,6 +171,19 @@ public class RhythmAttack : MonoBehaviour
     }
     private void DoRhythmAttack()
     {
+        attack = "isAoe";
+        Aoe();
         print("RHYTHM ATTACK");
+    }
+
+    private void Aoe()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, circle, Enemies);
+        foreach(Collider2D c in colliders){
+            if(c.GetComponent<Enemy>())
+            {
+                c.GetComponent<Enemy>().TakeDamage(5, true);
+            }
+        }
     }
 }
