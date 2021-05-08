@@ -8,7 +8,6 @@ public class MusicManager : MonoBehaviour
 {
     public PhotonView pv;
     
-
     public static float keyDownTime;
 
     public float forgiveness;
@@ -98,7 +97,10 @@ public class MusicManager : MonoBehaviour
     
     void OnDestroy()
     {
-        Conductor.StopAndClear();
-        Movement2D.JumpEvent -= PlaySound;
+        if(pv.IsMine)
+        {
+            Conductor.StopAndClear();
+            Movement2D.JumpEvent -= PlaySound;
+        }
     }
 }
