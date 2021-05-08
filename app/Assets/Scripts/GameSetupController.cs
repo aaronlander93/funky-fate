@@ -36,7 +36,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
-     
+    
         if(sceneName == "LV00-Backstage")
         {
             CreateKeys();
@@ -157,6 +157,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
+
     void MultiplayerEnemy(float x, float y)
     {
         GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
@@ -177,15 +178,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public void RemoveEnemy(Rigidbody2D enemyDefeated)
     {
         enemies.Remove(enemyDefeated);
-    }
-
-    public void RemoveEnemyAI()
-    {
-        foreach(var enemy in enemies)
-        {
-            print("REMOVING AI");
-            Destroy(enemy.GetComponentInChildren<EnemyAI>());
-        }
     }
 
     public void RespawnPlayer()
@@ -224,8 +216,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         {
             players.Add(player.GetComponentInChildren<Rigidbody2D>());
         }
-
-        print(players.Count);
     }
 
     public List<Rigidbody2D> GetEnemies() { return enemies; }
