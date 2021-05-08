@@ -513,6 +513,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa5b8b3da263cf4c82350397c358c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemies:
+    serializedVersion: 2
+    m_Bits: 8192
   ShootPoint: {fileID: 979396586143723851}
   weakPrefab: {fileID: 1458720738467379938, guid: 68aabc6aa5b72f645a559244624d56e3,
     type: 3}
@@ -526,6 +529,7 @@ MonoBehaviour:
   shotDelay: 0
   animator: {fileID: 7469038050537146829}
   button: specialAttack
+  circle: 5
 --- !u!1 &979396587085116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bbfd9854ebda4488c00aa88fbd6e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orthographicCamera: {fileID: 0}
   photonView: {fileID: 1642426809078068347}
   player: {fileID: 0}
   smoothSpeed: 0.125
