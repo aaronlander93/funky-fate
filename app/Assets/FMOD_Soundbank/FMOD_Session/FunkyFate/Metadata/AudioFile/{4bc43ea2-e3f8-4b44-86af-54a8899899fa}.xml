@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{4bc43ea2-e3f8-4b44-86af-54a8899899fa}">
+		<property name="assetPath">
+			<value>SFX_Heckler_Footstep.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.22639455782312926</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3cd35742-572f-431b-a1ee-6f3983e8f761}</destination>
+		</relationship>
+	</object>
+</objects>
