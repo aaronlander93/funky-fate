@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Author: Niall (sort-of. I stole it from https://www.youtube.com/watch?v=yQgVKR6PMqo)
+This script updates the bus volumes when the in-game volume sliders are changed
+*/
+
 public class AudioSettings : MonoBehaviour {
 
     FMOD.Studio.Bus Music;
