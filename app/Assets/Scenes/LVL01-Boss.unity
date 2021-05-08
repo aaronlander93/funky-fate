@@ -5807,6 +5807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450cc0ef8eca54da58a8b874bee70256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterSlider: {fileID: 1917342848}
+  musicSlider: {fileID: 760984484}
 --- !u!1001 &1606200226
 PrefabInstance:
   m_ObjectHideFlags: 0
