@@ -36,7 +36,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         CreatePlayer();
         CreateEnemies();
-
+    
         if(sceneName == "LV00-Backstage")
         {
             CreateKeys();
@@ -82,6 +82,9 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             // Set player material and sync it with other players
             player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
 
+            // Alert other clients that player has been added
+            player.GetComponentInChildren<MultiplayerSync>().PlayerCreatedMessage();
+
             // Alert chat that player has joined
             player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
 
@@ -94,26 +97,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     {
         if (!GameConfig.Multiplayer)
         {
-            // // Hard-coding this for now
-            // var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
-
-            // enemy.GetComponentInChildren<PhotonView>().enabled = false;
-            // enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
-            // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
-
-            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
             NonMultiplayerEnemy(17f, 2f);
             NonMultiplayerEnemy(0f, 2f);
             NonMultiplayerEnemy(25f, 2f);
             NonMultiplayerEnemy(-26f, -2f);
-
         }
         else if (PhotonNetwork.IsMasterClient)
         {
-            // var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
-
-            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
-            
             MultiplayerEnemy(17f, 2f);
             MultiplayerEnemy(0f, 2f);
             MultiplayerEnemy(25f, 2f);
@@ -167,6 +157,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
+
     void MultiplayerEnemy(float x, float y)
     {
         GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
@@ -215,26 +206,19 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         myPlayer.GetComponentInChildren<CharacterHealth>().FullHealth();
     }
 
-    private void UpdatePlayerList()
+    public void UpdatePlayerList()
     {
-        var allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
+        players.Clear();
+        
         foreach(var player in allPlayers)
         {
-            var rb = player.GetComponentInChildren<Rigidbody2D>();
-            if (!players.Contains(rb))
-            {
-                players.Add(rb);
-            }
+            players.Add(player.GetComponentInChildren<Rigidbody2D>());
         }
     }
 
     public List<Rigidbody2D> GetEnemies() { return enemies; }
 
     public List<Rigidbody2D> GetPlayers() { return players; }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        UpdatePlayerList();
-    }
 }

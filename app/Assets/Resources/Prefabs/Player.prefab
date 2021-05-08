@@ -351,6 +351,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: isAttacking
+  - Type: 4
+    SynchronizeType: 0
+    Name: isStrong
+  - Type: 4
+    SynchronizeType: 0
+    Name: isWeak
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -1743,7 +1749,7 @@ GameObject:
   - component: {fileID: 7038819333816127728}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

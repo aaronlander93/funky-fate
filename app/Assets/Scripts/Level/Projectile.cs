@@ -31,7 +31,6 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<PhotonView>());
             Destroy(gameObject.GetComponent<PhotonTransformViewClassic>());
-            Destroy(gameObject.GetComponent<MultiplayerSync>());
         }
 
         FindNearestPlayer();
