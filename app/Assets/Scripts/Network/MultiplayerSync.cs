@@ -26,9 +26,17 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
     Vector3 positionAtLastPacket = Vector3.zero;
     Quaternion rotationAtLastPacket = Quaternion.identity;
 
-    void Start()
+    void Awake()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+    }
+
+    void Start()
+    {
+        if(!GameConfig.Multiplayer)
+        {
+            Destroy(this);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -66,6 +74,20 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
             //Update remote player
             transform.position = Vector3.Lerp(positionAtLastPacket, latestPos, (float)(currentTime / timeToReachGoal));
             transform.rotation = latestRot;
+        }
+    }
+
+    public void PlayerCreatedMessage()
+    {
+        pv.RPC("PlayerCreated", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void PlayerCreated()
+    {
+        if (!pv.IsMine)
+        {
+            gsc.UpdatePlayerList();
         }
     }
 

@@ -351,6 +351,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: isAttacking
+  - Type: 4
+    SynchronizeType: 0
+    Name: isStrong
+  - Type: 4
+    SynchronizeType: 0
+    Name: isWeak
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -828,6 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bbfd9854ebda4488c00aa88fbd6e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orthographicCamera: {fileID: 0}
   photonView: {fileID: 1642426809078068347}
   player: {fileID: 0}
   smoothSpeed: 0.125
@@ -1738,7 +1745,7 @@ GameObject:
   - component: {fileID: 7038819333816127728}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
