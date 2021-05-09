@@ -243,13 +243,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   boxSize: {x: 1, y: 0.1}
-  horizontalForce: 5
   jumpForce: 64
   groundPound: 1
-  jumpVelocity: 10
-  initcycleCooldown: 3
+  initcycleCooldown: 4
   initNumOfAttsInCycle: 6
-  initattCooldown: 1
+  initattCooldown: 1.5
+  speed: 3
   projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
     type: 3}
 --- !u!114 &7315218657970814162

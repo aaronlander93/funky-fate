@@ -42,20 +42,22 @@ public class BossAI : MonoBehaviour
     private int numOfJumps;
     private CameraShake cameraShake;
     private bool isShook = false;
-    private float shakeTime = 1.5f;
+    private float shakeTime = 2f;
 
     [Header("Attacks")]
     private bool hasGuitar = true;
     private int lastAtt;
-    public float initcycleCooldown = 2f;
+    public float initcycleCooldown = 4f;
     public int initNumOfAttsInCycle = 6;
     private int numOfAttsInCycle;
-    public float initattCooldown = 1f;
-    private float attCooldown;      //time between attacks in a cycle
+    public float initattCooldown = 1.5f;
+    private float attCooldown = 4f;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
     public float speed;
     private float aimlessDist;
+    private bool idle = true;
+    private float idleTime;
 
     // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
@@ -71,7 +73,7 @@ public class BossAI : MonoBehaviour
     private Animator _anim;
 
     // Boss Phases
-    private int attPhaseCounter = 3;
+    private int attPhaseCounter = 3;    //number of attack cycles before switching to damage phase
     private bool cowardPhase = false;
 
     // Start is called before the first frame update
@@ -81,9 +83,10 @@ public class BossAI : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         
-        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        gameObject.transform.localScale = new Vector3(-1, 1, 1);
 
         _anim = GetComponent<Animator>();
+        _anim.SetFloat("AirSpeedY", -1f);
     }
 
     void FixedUpdate()
@@ -95,7 +98,7 @@ public class BossAI : MonoBehaviour
         {
             dmgPhase();
         }
-        else
+        else if (hasGuitar)
         {
             bool landCheck = isGrounded;
             isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
@@ -207,6 +210,7 @@ public class BossAI : MonoBehaviour
             if (attPhaseCounter < 0)
             {
                 cowardPhase = true;
+                _anim.SetTrigger("damagePhase");
             }
         }
     }
@@ -214,6 +218,7 @@ public class BossAI : MonoBehaviour
     private void Attack1()
     {
         // Debug.Log("Attack1");
+        _anim.SetTrigger("attack1");
     }
 
     private void TomatoRain()
@@ -229,11 +234,26 @@ public class BossAI : MonoBehaviour
     private void Attack3()
     {
         // Debug.Log("Attack3");
+        _anim.SetTrigger("attack3");
+        hasGuitar = false;
     }
 
     private void ThrowProjectile()
     {
+        if (!GameConfig.Multiplayer)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
+        }
+    }
 
+    private void CatchProjectile()
+    {
+        _anim.SetTrigger("attack3p2");
+        hasGuitar = true;
     }
 
     private void dmgPhase()
@@ -246,7 +266,7 @@ public class BossAI : MonoBehaviour
         else
         {
             
-            WalkAimlessly();
+            RunAimlessly();
         }
     }
 
@@ -254,7 +274,7 @@ public class BossAI : MonoBehaviour
     {
         if(idleTime == 0)
         {
-            idleTime = rand.Next(50, 200); // * randHandler;
+            idleTime = UnityEngine.Random.Range(50, 200); // * randHandler;
 
             idle = false;
         }
@@ -266,30 +286,7 @@ public class BossAI : MonoBehaviour
 
     private void RunAimlessly()
     {
-        if (Mathf.Abs(rb.position.x - aimlessDist) < .3f)
-        {
-            // Determine distance
-            aimlessDist = UnityEngine.Random.Range(-6f, 12f); // random x location of boss stage;
-            idle = true;
-        }
-        else
-        {
-            Vector2 target;
-            // Move
-            if (aimlessDist < rb.position.x)
-            {
-                // Walk to the left
-                target = new Vector2(rb.position.x - 1, rb.position.y);
-                gameObject.transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else
-            {
-                // Walk to the right
-                target = new Vector2(rb.position.x + 1, rb.position.y);
-                gameObject.transform.localScale = new Vector3(1, 1, 1);
-            }
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        }
+        
     }
 
     private void JumpTowardsPlayer()
