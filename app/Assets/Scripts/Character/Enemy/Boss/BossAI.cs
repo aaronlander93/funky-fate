@@ -233,8 +233,8 @@ public class BossAI : MonoBehaviour
     private void Attack3()
     {
         // Debug.Log("Attack3");
-        _anim.SetTrigger("attack3");
-        hasGuitar = false;
+        // _anim.SetTrigger("attack3");
+        // hasGuitar = false;
     }
 
     private void ThrowProjectile()
@@ -251,8 +251,8 @@ public class BossAI : MonoBehaviour
 
     private void CatchProjectile()
     {
-        _anim.SetTrigger("attack3p2");
-        hasGuitar = true;
+        // _anim.SetTrigger("attack3p2");
+        // hasGuitar = true;
     }
 
     private void dmgPhase()
