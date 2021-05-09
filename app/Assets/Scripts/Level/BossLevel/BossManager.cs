@@ -32,7 +32,7 @@ public class BossManager : MonoBehaviour
         {
             var boss1 = Instantiate(bossPrefab, new Vector2(75f, 17f), Quaternion.identity);
         }
-        else
+        else if(PhotonNetwork.IsMasterClient)
         {
             var boss1 = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Boss1"), new Vector2(75f, 17f), Quaternion.identity);
         }
