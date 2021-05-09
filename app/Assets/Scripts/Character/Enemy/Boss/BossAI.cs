@@ -40,9 +40,13 @@ public class BossAI : MonoBehaviour
     private float lastPos;
     private Vector2 jumpTo;
     private int numOfJumps;
-    private bool cameraShake;
+    private CameraShake cameraShake;
+    private bool isShook = false;
+    private float shakeTime = 1.5f;
 
     [Header("Attacks")]
+    private bool hasGuitar = true;
+    private int lastAtt;
     public float initcycleCooldown = 2f;
     public int initNumOfAttsInCycle = 6;
     private int numOfAttsInCycle;
@@ -50,7 +54,8 @@ public class BossAI : MonoBehaviour
     private float attCooldown;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
-
+    public float speed;
+    private float aimlessDist;
 
     // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
@@ -61,22 +66,22 @@ public class BossAI : MonoBehaviour
     private CameraController Camera;
 
     private Rigidbody2D rb;
-    private groundSensor gSensor;
 
     public GameObject projectile;
     private Animator _anim;
 
     // Boss Phases
+    private int attPhaseCounter = 3;
     private bool cowardPhase = false;
-    private bool meleePhase = false;
-    private bool throwingPhase = false;
 
     // Start is called before the first frame update
     void Start()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        gSensor = gameObject.transform.GetChild(0).GetComponent<groundSensor>();
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
 
         _anim = GetComponent<Animator>();
     }
@@ -84,32 +89,42 @@ public class BossAI : MonoBehaviour
     void FixedUpdate()
     {
         FindNearestPlayer();
+        _anim.SetFloat("AirSpeedY", rb.velocity.y);
 
         if(cowardPhase)
         {
-            Retreat();
+            dmgPhase();
         }
         else
         {
+            bool landCheck = isGrounded;
             isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
             
-            // isGrounded = gSensor.getState();
             _anim.SetBool("grounded", isGrounded);
+
+            // If these two are different values, we know that the boss just landed on the ground.
+            if(!landCheck && isGrounded)
+            {
+                cameraShake.ShakeCamera();
+                isShook = true;
+                shakeTime = 1.5f;
+            }
+
+            if(isShook && shakeTime < 0)
+            {
+                cameraShake.StopShake();
+            }
+            else
+            {
+                shakeTime -= Time.deltaTime;
+            }
 
             if (isGrounded)
             {
                 groundPound = true;
                 lastPos = closestPlayer.transform.position.x;
 
-                // Turn towards player
-                if (xDist < 0)
-                {
-                    gameObject.transform.localScale = new Vector3(1, 1, 1);
-                }
-                else
-                {
-                    gameObject.transform.localScale = new Vector3(-1, 1, 1);
-                }
+                turnToPlayer();
 
                 // cycle through to attacks
                 Attack();
@@ -157,17 +172,23 @@ public class BossAI : MonoBehaviour
             // logic to choose attack
             if (numOfJumps > 0)
             {
-                JumpTowardsPlayer();
+                // JumpTowardsPlayer();
+                _anim.SetTrigger("jump");
                 numOfJumps--;
             }
             else
             {
                 int attack = UnityEngine.Random.Range(1, 4);
+                while (attack == lastAtt)   // get another case until new attack isn't the same as the last one
+                {
+                    attack = UnityEngine.Random.Range(1, 4);
+                }
                 switch (attack)
                 {
                     case 1:
-                        JumpTowardsPlayer();
-                        numOfJumps = UnityEngine.Random.Range(0, 2);    //number of jump attacks the boss will make
+                        // JumpTowardsPlayer();
+                        _anim.SetTrigger("jump");
+                        numOfJumps = UnityEngine.Random.Range(1, 3);    //number of jump attacks the boss will make
                         break;
                     case 2:
                         Attack1();
@@ -176,17 +197,23 @@ public class BossAI : MonoBehaviour
                         Attack3();
                         break;
                 }
-                // Debug.Log(attack);
+                lastAtt = attack;
                 numOfAttsInCycle--;
+                attPhaseCounter--;
             }
 
             attCooldown = (numOfAttsInCycle <= 0) ? initcycleCooldown : initattCooldown;
+            
+            if (attPhaseCounter < 0)
+            {
+                cowardPhase = true;
+            }
         }
     }
 
     private void Attack1()
     {
-        Debug.Log("Attack1");
+        // Debug.Log("Attack1");
     }
 
     private void TomatoRain()
@@ -201,7 +228,7 @@ public class BossAI : MonoBehaviour
 
     private void Attack3()
     {
-        Debug.Log("Attack3");
+        // Debug.Log("Attack3");
     }
 
     private void ThrowProjectile()
@@ -209,9 +236,60 @@ public class BossAI : MonoBehaviour
 
     }
 
-    private void Retreat()
+    private void dmgPhase()
     {
-        
+        if (idle)
+        {
+            
+            Idle();
+        }
+        else
+        {
+            
+            WalkAimlessly();
+        }
+    }
+
+    private void Idle()
+    {
+        if(idleTime == 0)
+        {
+            idleTime = rand.Next(50, 200); // * randHandler;
+
+            idle = false;
+        }
+        else
+        {
+            idleTime -= 1;
+        }
+    }
+
+    private void RunAimlessly()
+    {
+        if (Mathf.Abs(rb.position.x - aimlessDist) < .3f)
+        {
+            // Determine distance
+            aimlessDist = UnityEngine.Random.Range(-6f, 12f); // random x location of boss stage;
+            idle = true;
+        }
+        else
+        {
+            Vector2 target;
+            // Move
+            if (aimlessDist < rb.position.x)
+            {
+                // Walk to the left
+                target = new Vector2(rb.position.x - 1, rb.position.y);
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                // Walk to the right
+                target = new Vector2(rb.position.x + 1, rb.position.y);
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
     }
 
     private void JumpTowardsPlayer()
@@ -219,12 +297,16 @@ public class BossAI : MonoBehaviour
         rb.AddForce(new Vector2((-xDist * 7), jumpForce), ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void turnToPlayer()
     {
-        //damage player if they come in contact with boss
-        if(collision.gameObject.tag == "Player")
+        // Turn towards player
+        if (xDist < 0)
         {
-            collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
