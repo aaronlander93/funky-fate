@@ -220,7 +220,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         myPlayer.GetComponentInChildren<CharacterHealth>().FullHealth();
     }
 
-    private void UpdatePlayerList()
+    public void UpdatePlayerList()
     {
         var allPlayers = GameObject.FindGameObjectsWithTag("Player");
 

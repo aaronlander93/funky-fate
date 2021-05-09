@@ -1,6 +1,13 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using Photon.Realtime;
+using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour
 {
@@ -24,6 +31,10 @@ public class BossManager : MonoBehaviour
         if (!GameConfig.Multiplayer)
         {
             var boss1 = Instantiate(bossPrefab, new Vector2(75f, 17f), Quaternion.identity);
+        }
+        else
+        {
+            var boss1 = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Boss1"), new Vector2(75f, 17f), Quaternion.identity);
         }
     }
 
