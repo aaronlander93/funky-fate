@@ -55,6 +55,9 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameConfig.Multiplayer && !PhotonNetwork.IsMasterClient)
+            Destroy(this);
+
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         rand = new System.Random();
@@ -158,7 +161,7 @@ public class EnemyAI : MonoBehaviour
         {
             Instantiate(projectile, transform.position, Quaternion.identity);
         }
-        else
+        else if(PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
         }
