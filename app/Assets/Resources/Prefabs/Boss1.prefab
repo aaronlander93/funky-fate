@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6038601886528365455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.026, y: 2.688, z: -0.6249949}
+  m_LocalPosition: {x: 6.002, y: 2.688, z: -0.6249949}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4345488761973680658}
@@ -249,7 +249,7 @@ MonoBehaviour:
   initNumOfAttsInCycle: 6
   initattCooldown: 1.5
   speed: 3
-  projectile: {fileID: 6275661090174896577, guid: 880ae0ef7a4b04f45868124b325ad7dd,
+  projectile: {fileID: 2880423427566641831, guid: c6e386d7fcf15d1438eb8c79afee0820,
     type: 3}
 --- !u!114 &7315218657970814162
 MonoBehaviour:

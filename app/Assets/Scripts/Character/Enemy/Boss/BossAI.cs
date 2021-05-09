@@ -51,7 +51,8 @@ public class BossAI : MonoBehaviour
     public int initNumOfAttsInCycle = 6;
     private int numOfAttsInCycle;
     public float initattCooldown = 1.5f;
-    private float attCooldown = 4f;      //time between attacks in a cycle
+    //time between attacks in a cycle
+    private float attCooldown = 4f;      //instantiated variable determines time before attack after spawning
 
     [Header("CowardlyPhase")]
     public float speed;
@@ -73,7 +74,7 @@ public class BossAI : MonoBehaviour
     private Animator _anim;
 
     // Boss Phases
-    private int attPhaseCounter = 3;    //number of attack cycles before switching to damage phase
+    private int attPhaseCounter = 6;    //number of attack cycles before switching to damage phase
     private bool cowardPhase = false;
 
     // Start is called before the first frame update
@@ -108,9 +109,7 @@ public class BossAI : MonoBehaviour
             // If these two are different values, we know that the boss just landed on the ground.
             if(!landCheck && isGrounded)
             {
-                cameraShake.ShakeCamera();
-                isShook = true;
-                shakeTime = 1.5f;
+                ShakeCamFor(1.5f);
             }
 
             if(isShook && shakeTime < 0)
@@ -240,14 +239,14 @@ public class BossAI : MonoBehaviour
 
     private void ThrowProjectile()
     {
-        if (!GameConfig.Multiplayer)
-        {
-            Instantiate(projectile, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
-        }
+        // if (!GameConfig.Multiplayer)
+        // {
+        //     Instantiate(projectile, transform.position, Quaternion.identity);
+        // }
+        // else
+        // {
+        //     PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
+        // }
     }
 
     private void CatchProjectile()
@@ -305,5 +304,12 @@ public class BossAI : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    private void ShakeCamFor(float time)
+    {
+        cameraShake.ShakeCamera();
+        isShook = true;
+        shakeTime = time;
     }
 }
