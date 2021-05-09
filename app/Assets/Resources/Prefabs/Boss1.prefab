@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8183063224047683610}
   - component: {fileID: -8246192683223146365}
   - component: {fileID: 4186279589354154168}
+  - component: {fileID: 3290428481329768826}
   m_Layer: 8
   m_Name: Boss1
   m_TagString: Enemy
@@ -290,6 +291,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -8246192683223146365}
   - {fileID: 4186279589354154168}
+  - {fileID: 3290428481329768826}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -374,6 +376,30 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &3290428481329768826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038601886528365455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8a6c6710d6f0346ae8da8ed88b4dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pv: {fileID: 8183063224047683610}
+  gsc: {fileID: 0}
+  materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6098670730122400737
 GameObject:
   m_ObjectHideFlags: 0

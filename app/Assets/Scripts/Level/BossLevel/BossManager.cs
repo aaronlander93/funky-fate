@@ -31,6 +31,8 @@ public class BossManager : MonoBehaviour
         if (!GameConfig.Multiplayer)
         {
             var boss1 = Instantiate(bossPrefab, new Vector2(75f, 17f), Quaternion.identity);
+            Destroy(boss1.GetComponent<PhotonView>());
+            Destroy(boss1.GetComponent<PhotonTransformViewClassic>());
         }
         else if(PhotonNetwork.IsMasterClient)
         {
