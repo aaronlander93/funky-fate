@@ -91,6 +91,20 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
         }
     }
 
+    public void PlayerDamageMessage(int damage)
+    {
+        pv.RPC("PlayerDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void PlayerDamage(int damage)
+    {
+        if (pv.IsMine)
+        {
+            pv.gameObject.GetComponentInChildren<CharacterHealth>().TakeDamage(damage);
+        }
+    }
+
     public void EnemyDamageMessage(int id, int damage)
     {
         if (pv.IsMine)
