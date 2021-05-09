@@ -34,19 +34,19 @@ public class BossAI : MonoBehaviour
     [SerializeField] Vector2 boxSize;
 
     [Header("JumpAttack")]
-    public float horizontalForce = 5.0f;
     public float jumpForce = 10.0f;
     public bool groundPound = true;
-    public float jumpVelocity = 10.0f;
-    private bool cameraShake;
     private bool isGrounded = false;
     private float lastPos;
     private Vector2 jumpTo;
+    private int numOfJumps;
+    private bool cameraShake;
 
     [Header("Attacks")]
-    public float initcycleCooldown = 3f;
-    private float cycleCooldown;    //time between attack cycles
-    public float initattCooldown = 2.4f;
+    public float initcycleCooldown = 2f;
+    public int initNumOfAttsInCycle = 6;
+    private int numOfAttsInCycle;
+    public float initattCooldown = 1f;
     private float attCooldown;      //time between attacks in a cycle
 
     [Header("CowardlyPhase")]
@@ -61,6 +61,7 @@ public class BossAI : MonoBehaviour
     private CameraController Camera;
 
     private Rigidbody2D rb;
+    private groundSensor gSensor;
 
     public GameObject projectile;
     private Animator _anim;
@@ -75,13 +76,9 @@ public class BossAI : MonoBehaviour
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        gSensor = gameObject.transform.GetChild(0).GetComponent<groundSensor>();
 
         _anim = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        
     }
 
     void FixedUpdate()
@@ -94,14 +91,15 @@ public class BossAI : MonoBehaviour
         }
         else
         {
-            bool landCheck = isGrounded; // Used to check if boss landed on ground
             isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
+            
+            // isGrounded = gSensor.getState();
             _anim.SetBool("grounded", isGrounded);
 
             if (isGrounded)
             {
                 groundPound = true;
-                lastPos = -xDist;
+                lastPos = closestPlayer.transform.position.x;
 
                 // Turn towards player
                 if (xDist < 0)
@@ -116,14 +114,13 @@ public class BossAI : MonoBehaviour
                 // cycle through to attacks
                 Attack();
             }
-            // boss drops on player
-            else if (/*transform.position.x == lastPos*/ Math.Abs(xDist) < 0.1f && groundPound)
+            // boss drops on player's last position before leaving the ground
+            else if (Math.Abs(transform.position.x - lastPos) < 0.1f && groundPound)
             {
-                Debug.Log(lastPos);
                 groundPound = false;
                 rb.velocity = Vector2.zero;
                 // can be used to drop over player faster
-                // rb.AddForce(new Vector2(0, -jumpForce), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(0, -jumpForce/5), ForceMode2D.Impulse);
             }
         }
     }
@@ -153,19 +150,43 @@ public class BossAI : MonoBehaviour
         if (attCooldown > 0)
         {
             attCooldown -= Time.deltaTime;
+            numOfAttsInCycle = (numOfAttsInCycle <= 0) ? initNumOfAttsInCycle : numOfAttsInCycle;
         }
         else
         {
-            JumpTowardsPlayer();
-            Attack1();
-            Attack3();
-            attCooldown = initattCooldown;
+            // logic to choose attack
+            if (numOfJumps > 0)
+            {
+                JumpTowardsPlayer();
+                numOfJumps--;
+            }
+            else
+            {
+                int attack = UnityEngine.Random.Range(1, 4);
+                switch (attack)
+                {
+                    case 1:
+                        JumpTowardsPlayer();
+                        numOfJumps = UnityEngine.Random.Range(0, 2);    //number of jump attacks the boss will make
+                        break;
+                    case 2:
+                        Attack1();
+                        break;
+                    case 3:
+                        Attack3();
+                        break;
+                }
+                // Debug.Log(attack);
+                numOfAttsInCycle--;
+            }
+
+            attCooldown = (numOfAttsInCycle <= 0) ? initcycleCooldown : initattCooldown;
         }
     }
 
     private void Attack1()
     {
-
+        Debug.Log("Attack1");
     }
 
     private void TomatoRain()
@@ -175,12 +196,12 @@ public class BossAI : MonoBehaviour
 
     private void Attack2()  //Probably not going to be used; may be used as boss intro
     {
-        
+
     }
 
     private void Attack3()
     {
-        
+        Debug.Log("Attack3");
     }
 
     private void ThrowProjectile()
@@ -196,8 +217,6 @@ public class BossAI : MonoBehaviour
     private void JumpTowardsPlayer()
     {
         rb.AddForce(new Vector2((-xDist * 7), jumpForce), ForceMode2D.Impulse);
-        // jumpTo = new Vector2(lastPos, 60);
-        // transform.position = Vector2.MoveTowards(transform.position, jumpTo, jumpVelocity * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
