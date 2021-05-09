@@ -6,7 +6,9 @@ This code damages the enemy when getting hit by this bullet
 
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Photon.Pun;
 
 public class Bullet: MonoBehaviour
 {
@@ -19,22 +21,46 @@ public class Bullet: MonoBehaviour
     private GameSetupController gsc;
     void Start()
     {
-        rb.velocity = transform.right * speed;
-        Invoke("Particles",lifeTime);
-    }
-    private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
+        if (!GameConfig.Multiplayer)
         {
-            enemy.TakeDamage(damage, true);
+            Destroy(gameObject.GetComponent<PhotonView>());
+            Destroy(gameObject.GetComponent<PhotonTransformViewClassic>());
         }
-        Instantiate(Effect, transform.position, transform.rotation);
-        Destroy(gameObject);
+
+        rb.velocity = transform.right * speed;
+        Invoke("Explosion", lifeTime);
     }
 
-    void Particles(){
-        Instantiate(Effect, transform.position, transform.rotation);
-        Destroy(gameObject);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //damage player
+            if (GameConfig.Multiplayer)
+            {
+                collision.gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(collision.gameObject.GetComponent<PhotonView>().ViewID, 1);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(1, true);
+            }
+        }
+
+        Explosion();
+    }
+
+    private void Explosion()
+    {
+        if (!GameConfig.Multiplayer)
+        {
+            Instantiate(Effect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }  
+        else if(gameObject.GetComponent<PhotonView>().IsMine)
+        {
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
+            PhotonNetwork.Destroy(gameObject);
+        }
+            
     }
 }

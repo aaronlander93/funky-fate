@@ -11,10 +11,14 @@ Fires a weak or a strong bullet
 
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Photon.Pun;
 
 public class RhythmAttack : MonoBehaviour
 {
+    public PhotonView pv;
+
     [SerializeField] private LayerMask Enemies;
     public Transform ShootPoint;
     public GameObject weakPrefab;
@@ -41,11 +45,31 @@ public class RhythmAttack : MonoBehaviour
     public float circle = 4f;
     void Start()
     {
-        MusicManager.OnBeat += ComboCheck;
-        MusicManager.OnBeat += ToggleOnBeatColor;
-        
-        MusicManager.OffBeat += ComboClear;
-        MusicManager.OffBeat += ToggleOffBeatColor;
+        if(GameConfig.Multiplayer)
+        {
+            pv = gameObject.GetComponentInChildren<PhotonView>();
+
+            if(!pv.IsMine)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                MusicManager.OnBeat += ComboCheck;
+                MusicManager.OnBeat += ToggleOnBeatColor;
+
+                MusicManager.OffBeat += ComboClear;
+                MusicManager.OffBeat += ToggleOffBeatColor;
+            }
+        }
+        else
+        {
+            MusicManager.OnBeat += ComboCheck;
+            MusicManager.OnBeat += ToggleOnBeatColor;
+
+            MusicManager.OffBeat += ComboClear;
+            MusicManager.OffBeat += ToggleOffBeatColor;
+        }
 
         origColor = light2D.color;
     }
@@ -53,6 +77,7 @@ public class RhythmAttack : MonoBehaviour
     void Update(){
         ShootAnim(attack);
     }
+
     // This adds 1 to the combo counter and checks for a combo when an OnBeat
     // event happens
     private void ComboCheck()
@@ -62,7 +87,6 @@ public class RhythmAttack : MonoBehaviour
         if (beat == lastBeat)
         {
             attack = "isStrong";
-            Debug.Log("Weak");  
             // Player hit slightly before the beat, therefore the real beat is beat + 1
             lastBeat = beat + 1;
             consecOnBeats += 1;
@@ -70,7 +94,6 @@ public class RhythmAttack : MonoBehaviour
         else if (beat == lastBeat + 1)
         {
             attack = "isStrong";
-            Debug.Log("Strong");
             // Player hit on or slightly after beat
             lastBeat = beat;
             consecOnBeats += 1;
@@ -149,31 +172,27 @@ public class RhythmAttack : MonoBehaviour
         {
             animator.SetBool(attack, false);
         }
-        // if (Input.GetButton(button))
-        // {
-        //     shotDelayCounter -= Time.deltaTime;
-        //     if (shotDelayCounter <= 0)
-        //     {
-        //         shotDelayCounter = shotDelay;
-        //         // Shoot();
-
-        //     }
-        // }
     }
 
     void Weak()
     {
-        Instantiate(weakPrefab, ShootPoint.position, ShootPoint.rotation);
+        if(!GameConfig.Multiplayer)
+            Instantiate(weakPrefab, ShootPoint.position, ShootPoint.rotation);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Bullets", "Ukulele"), ShootPoint.position, ShootPoint.rotation);
     }
 
     void Strong(){
-        Instantiate(strongPrefab, ShootPoint.position, ShootPoint.rotation);
+        if (!GameConfig.Multiplayer)
+            Instantiate(strongPrefab, ShootPoint.position, ShootPoint.rotation);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Bullets", "Guitar"), ShootPoint.position, ShootPoint.rotation);
     }
+
     private void DoRhythmAttack()
     {
         attack = "isAoe";
         Aoe();
-        print("RHYTHM ATTACK");
     }
 
     private void Aoe()
