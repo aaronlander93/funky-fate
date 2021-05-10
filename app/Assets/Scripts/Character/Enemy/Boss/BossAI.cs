@@ -208,7 +208,7 @@ public class BossAI : MonoBehaviour
                         Attack1();
                         break;
                     case 3:
-                        Attack3();
+                        //Attack3();
                         break;
                 }
                 lastAtt = attack;
@@ -239,6 +239,7 @@ public class BossAI : MonoBehaviour
     {
         StartCoroutine(TomatoRain(20, 0.05f));
     }
+
     //spawns tomatoes that fall from the top of the stage
     private IEnumerator TomatoRain(int numOfTomatoes, float timeBetween)
     {
@@ -250,7 +251,7 @@ public class BossAI : MonoBehaviour
             }
             else
             {
-                PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Guitar"), new Vector2(UnityEngine.Random.Range(60f, 81f), 17f), Quaternion.identity);
+                PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "BossTomato"), new Vector2(UnityEngine.Random.Range(60f, 81f), 17f), Quaternion.identity);
             }
             yield return new WaitForSeconds(timeBetween);
         }
@@ -261,6 +262,7 @@ public class BossAI : MonoBehaviour
 
     }
 
+    /*
     private void Attack3()
     {
         // Debug.Log("Attack3");
@@ -268,6 +270,7 @@ public class BossAI : MonoBehaviour
         hasGuitar = false;
         rb.constraints = RigidbodyConstraints2D.FreezePosition; //prevents boss from being pushed during thrown state
     }
+    */
 
     private void ThrowProjectile()
     {
