@@ -107,26 +107,20 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
 
     public void EnemyDamageMessage(int id, int damage)
     {
-        if (pv.IsMine)
-        {
-            pv.RPC("EnemyDamage", RpcTarget.Others, id, damage);
-        }
+        pv.RPC("EnemyDamage", RpcTarget.All, id, damage);
     }
 
     [PunRPC]
     void EnemyDamage(int id, int damage)
     {
-        if (!pv.IsMine)
-        {
-            GameObject enemy = null;
+        GameObject enemy = null;
 
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var e in enemies)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var e in enemies)
+        {
+            if (e.GetComponent<PhotonView>().ViewID == id)
             {
-                if (e.GetComponent<PhotonView>().ViewID == id)
-                {
-                    e.GetComponent<Enemy>().AdjustHealth(damage);
-                }
+                e.GetComponent<Enemy>().TakeDamage(damage, true);
             }
         }
     }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3591210828445902649}
   - component: {fileID: 7074335137464957361}
   - component: {fileID: -7618948013159543021}
+  - component: {fileID: 4118897991943752572}
   m_Layer: 13
   m_Name: Heckler
   m_TagString: Enemy
@@ -231,6 +232,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 7074335137464957361}
   - {fileID: -7618948013159543021}
+  - {fileID: 4118897991943752572}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -297,3 +299,27 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &4118897991943752572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142108284808368476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8a6c6710d6f0346ae8da8ed88b4dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pv: {fileID: 3591210828445902649}
+  gsc: {fileID: 0}
+  materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}

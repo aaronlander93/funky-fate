@@ -122,20 +122,31 @@ public class EnemyAI : MonoBehaviour
         closestDist = Mathf.Infinity;
         xDist = Mathf.Infinity;
 
-        int index = 0;  //for debugging purposes
+        bool emptyPlayer = false;
+
         foreach (Rigidbody2D player in players)
         {
-            // dist = rb.position.x - player.transform.position.x;
-            float dist = Vector2.Distance(transform.position, player.transform.position);
-
-            if (dist < closestDist)
+            if(player)
             {
-                closestDist = dist;
-                closestPlayer = player;
-                xDist = rb.position.x - player.transform.position.x;
-                closestI = index;
+                // dist = rb.position.x - player.transform.position.x;
+                float dist = Vector2.Distance(transform.position, player.transform.position);
+
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestPlayer = player;
+                    xDist = rb.position.x - player.transform.position.x;
+                }
             }
-            index++;
+            else
+            {
+                emptyPlayer = true;
+            }
+        }
+            
+        if(emptyPlayer)
+        {
+            gsc.UpdatePlayerList();
         }
     }
 
