@@ -89,10 +89,10 @@ public class CharacterAttack : MonoBehaviour
         // Apply damage to enemies
         foreach(Rigidbody2D enemy in enemiesWithinRange)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
-
             if (GameConfig.Multiplayer)
                 gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
+            else
+                enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
         }
     }
 }

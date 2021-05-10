@@ -24,9 +24,9 @@ public class RhythmAttack : MonoBehaviour
     public GameObject weakPrefab;
     public GameObject strongPrefab;
     public Renderer rend;
-    public UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
+    private UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
 
-    public Material playerMat;
+    private Material playerMat;
     public Material onBeatMat;
     public Material offBeatMat;
 
@@ -43,6 +43,7 @@ public class RhythmAttack : MonoBehaviour
     // Start is called before the first frame update
     private string attack = "isWeak";
     public float circle = 4f;
+
     void Start()
     {
         if(GameConfig.Multiplayer)
@@ -71,6 +72,8 @@ public class RhythmAttack : MonoBehaviour
             MusicManager.OffBeat += ToggleOffBeatColor;
         }
 
+        playerMat = gameObject.GetComponentInChildren<SpriteRenderer>().material;
+        light2D = gameObject.GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>();
         origColor = light2D.color;
     }
 
