@@ -23,9 +23,12 @@ public class Boss : MonoBehaviour
     public GameSetupController gsc;
     private Animator _anim;
 
+    public GameObject explosion;
+
     private void Start()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+        gsc.FindEnemies(); // Have gsc add boss to the enemies list
         rb = gameObject.GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
@@ -47,14 +50,17 @@ public class Boss : MonoBehaviour
     {
         dead = true;
 
-        //boss will explode
+        if (!GameConfig.Multiplayer)
+            Instantiate(explosion, transform.position, Quaternion.identity);
+        else
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "FX", "Explosion"), transform.position, Quaternion.identity);
 
         death();
     }
 
     private void death()
     {
-        gsc.RemoveBoss(rb);
+        gsc.RemoveEnemy(rb);
 
         if (!GameConfig.Multiplayer)
             Destroy(gameObject);
