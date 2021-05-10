@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTransform: {fileID: 1914223353232151007}
-  shakeFrequency: 0.2
+  shakeFrequency: 0.25
 --- !u!1 &3561211357837151265
 GameObject:
   m_ObjectHideFlags: 0

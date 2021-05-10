@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] private bool dead = false;
     [SerializeField] private int health = 50;
+    private bool canTakeDmg = false;
     private Rigidbody2D rb;
 
     public GameSetupController gsc;
@@ -31,7 +32,10 @@ public class Boss : MonoBehaviour
     
     public void TakeDamage (int damage)
     {
-        health -= damage;
+        if (canTakeDmg)
+        {
+            health -= damage;
+        }
         
         if(health <= 0)
         {
@@ -61,5 +65,10 @@ public class Boss : MonoBehaviour
     public bool isDead()
     {
         return dead;
+    }
+
+    public void setDmgState(bool state)
+    {
+        canTakeDmg = state;
     }
 }

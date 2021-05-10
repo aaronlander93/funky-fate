@@ -53,6 +53,7 @@ public class BossAI : MonoBehaviour
     public float initattCooldown = 1.5f;
     //time between attacks in a cycle
     private float attCooldown = 4f;      //instantiated variable determines time before attack after spawning
+    private int direction = -1;     //-1 is left, 1 is right
 
     [Header("CowardlyPhase")]
     public float speed;
@@ -109,7 +110,7 @@ public class BossAI : MonoBehaviour
             // If these two are different values, we know that the boss just landed on the ground.
             if(!landCheck && isGrounded)
             {
-                ShakeCamFor(1.5f);
+                ShakeCamFor(2f);
             }
 
             if(isShook && shakeTime < 0)
@@ -180,10 +181,11 @@ public class BossAI : MonoBehaviour
             }
             else
             {
-                int attack = UnityEngine.Random.Range(1, 4);
+                // range is currently set to 1 or 2; 3 currently not working
+                int attack = UnityEngine.Random.Range(1, 3);
                 while (attack == lastAtt)   // get another case until new attack isn't the same as the last one
                 {
-                    attack = UnityEngine.Random.Range(1, 4);
+                    attack = UnityEngine.Random.Range(1, 3);
                 }
                 switch (attack)
                 {
@@ -233,26 +235,30 @@ public class BossAI : MonoBehaviour
     private void Attack3()
     {
         // Debug.Log("Attack3");
-        // _anim.SetTrigger("attack3");
-        // hasGuitar = false;
+        _anim.SetTrigger("attack3");
+        hasGuitar = false;
+        rb.constraints = RigidbodyConstraints2D.FreezePosition; //prevents boss from being pushed during thrown state
     }
 
     private void ThrowProjectile()
     {
-        // if (!GameConfig.Multiplayer)
-        // {
-        //     Instantiate(projectile, transform.position, Quaternion.identity);
-        // }
-        // else
-        // {
-        //     PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
-        // }
+        if (!GameConfig.Multiplayer)
+        {
+            var p = Instantiate(projectile, transform.position, Quaternion.identity);
+            p.GetComponent<Guitar>().direction = direction;
+        }
+        else
+        {
+            var p = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Guitar"), transform.position, Quaternion.identity);
+            p.GetComponent<Guitar>().direction = direction;
+        }
     }
 
     private void CatchProjectile()
     {
         // _anim.SetTrigger("attack3p2");
-        // hasGuitar = true;
+        hasGuitar = true;
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     private void dmgPhase()
@@ -298,10 +304,12 @@ public class BossAI : MonoBehaviour
         // Turn towards player
         if (xDist < 0)
         {
+            direction = 1;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
+            direction = -1;
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
@@ -311,5 +319,25 @@ public class BossAI : MonoBehaviour
         cameraShake.ShakeCamera();
         isShook = true;
         shakeTime = time;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag =="Player")
+        {
+            //damage player
+            if(GameConfig.Multiplayer)
+            {
+                collision.gameObject.GetComponent<MultiplayerSync>().PlayerDamageMessage(1);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
+            }
+        }
+        else if (collision.gameObject.tag == "projectile")
+        {
+            hasGuitar = true;
+        }
     }
 }
