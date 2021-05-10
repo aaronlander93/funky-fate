@@ -31,7 +31,6 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<PhotonView>());
             Destroy(gameObject.GetComponent<PhotonTransformViewClassic>());
-            Destroy(gameObject.GetComponent<MultiplayerSync>());
         }
 
         FindNearestPlayer();
@@ -45,7 +44,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-;
+
     }
 
     private void FindNearestPlayer()
@@ -73,13 +72,19 @@ public class Projectile : MonoBehaviour
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if(collision.gameObject.tag =="Player")
         {
-            // Debug.Log("Hit");
             //damage player
-            collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
-            // Destroy(gameObject);
+            if(GameConfig.Multiplayer)
+            {
+                collision.gameObject.GetComponent<MultiplayerSync>().PlayerDamageMessage(1);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(1);
+            }
+            
             DestroyProjectile();
         }
-        else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
+        else if (collision.transform.parent != null && collision.transform.parent.parent.tag == "ground")
         {
             // Debug.Log("Hit the ground");
             // Destroy(gameObject);

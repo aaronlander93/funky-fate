@@ -1,5 +1,5 @@
 /*
-Code By: ???
+Code By: Joseph Babel
 This script unlocks a door with two locks
 It will render a new image when the key gets used up
 
@@ -51,7 +51,7 @@ public class LockedDoor : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D plyr)
     {
-        if(plyr.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.W) && numLocks <= 0)
+        if(plyr.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.W) && numLocks <= 5)
         {
             Destroy(promptText);
             SceneManager.LoadScene(scene);

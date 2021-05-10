@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
-public class GameSetupController : MonoBehaviourPunCallbacks
+public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     private List<Rigidbody2D> players;
     private List<Rigidbody2D> enemies;
@@ -35,15 +35,15 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         sceneName = SceneManager.GetActiveScene().name;
 
         CreatePlayer();
-        CreateEnemies();
 
         if(sceneName == "LV00-Backstage")
         {
+            CreateEnemies();
             CreateKeys();
         }
         else if(sceneName == "LVL01-Boss")
         {
-            CreateBoss();
+            // CreateBoss();
         }
     }
 
@@ -80,7 +80,16 @@ public class GameSetupController : MonoBehaviourPunCallbacks
                 pv = photonView;
 
             // Set player material and sync it with other players
-            player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
+            if(GameConfig.PlayerColor != -1)
+            {
+                player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(GameConfig.PlayerColor);
+            }
+            else
+            {
+                player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
+                GameConfig.PlayerColor = PhotonNetwork.PlayerList.Length -1;
+            }
+            
 
             // Alert chat that player has joined
             player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
@@ -121,13 +130,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         }
     }
 
-    void CreateBoss()
-    {
-        if (!GameConfig.Multiplayer)
-        {
-            var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
-        }
-    }
+    // void CreateBoss()
+    // {
+    //     if (!GameConfig.Multiplayer)
+    //     {
+    //         var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
+    //     }
+    // }
 
     void CreateKeys()
     {
@@ -189,6 +198,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         enemies.Remove(enemyDefeated);
     }
 
+    public void RemoveBoss(Rigidbody2D boss)
+    {
+        // boss.enabled = false;
+    }
+
     public void RespawnPlayer()
     {
         GameObject myPlayer = default;
@@ -215,7 +229,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         myPlayer.GetComponentInChildren<CharacterHealth>().FullHealth();
     }
 
-    private void UpdatePlayerList()
+    public void UpdatePlayerList()
     {
         var allPlayers = GameObject.FindGameObjectsWithTag("Player");
 

@@ -12,7 +12,10 @@ public class AudioNetwork : MonoBehaviour
     {
         PhotonView photonView = PhotonView.Get(this);
 
-        Movement2D.JumpEvent += PlaySoundMessage;
+        if(photonView.IsMine)
+        {
+            Movement2D.JumpEvent += PlaySoundMessage;
+        }
     }
 
     public void PlaySoundMessage(string sound)
@@ -68,5 +71,15 @@ public class AudioNetwork : MonoBehaviour
         }
 
         return volume;
+    }
+
+    void OnDestroy()
+    {
+        PhotonView photonView = PhotonView.Get(this);
+
+        if (photonView.IsMine)
+        {
+            Movement2D.JumpEvent -= PlaySoundMessage;
+        }
     }
 }

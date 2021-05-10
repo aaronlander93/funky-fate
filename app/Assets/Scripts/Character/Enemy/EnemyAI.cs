@@ -1,4 +1,17 @@
-﻿using System;
+﻿/*
+Code By: Milo Abril and Aaron Lander
+
+This script controls the enemy AIs' decision making. 
+
+If an enemy is within range the enemy will be aggroed.
+so long as the enemy is aggroed, the AI will either reatreat from or approeach
+the player to a certain distance until they are within a specified range.
+When in that specified range, the AI will attack.
+
+
+*/
+
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,6 +55,9 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameConfig.Multiplayer && !PhotonNetwork.IsMasterClient)
+            Destroy(this);
+
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         rand = new System.Random();
@@ -106,20 +122,31 @@ public class EnemyAI : MonoBehaviour
         closestDist = Mathf.Infinity;
         xDist = Mathf.Infinity;
 
-        int index = 0;  //for debugging purposes
+        bool emptyPlayer = false;
+
         foreach (Rigidbody2D player in players)
         {
-            // dist = rb.position.x - player.transform.position.x;
-            float dist = Vector2.Distance(transform.position, player.transform.position);
-
-            if (dist < closestDist)
+            if(player)
             {
-                closestDist = dist;
-                closestPlayer = player;
-                xDist = rb.position.x - player.transform.position.x;
-                closestI = index;
+                // dist = rb.position.x - player.transform.position.x;
+                float dist = Vector2.Distance(transform.position, player.transform.position);
+
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestPlayer = player;
+                    xDist = rb.position.x - player.transform.position.x;
+                }
             }
-            index++;
+            else
+            {
+                emptyPlayer = true;
+            }
+        }
+            
+        if(emptyPlayer)
+        {
+            gsc.UpdatePlayerList();
         }
     }
 
@@ -145,7 +172,7 @@ public class EnemyAI : MonoBehaviour
         {
             Instantiate(projectile, transform.position, Quaternion.identity);
         }
-        else
+        else if(PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Tomato"), transform.position, Quaternion.identity);
         }

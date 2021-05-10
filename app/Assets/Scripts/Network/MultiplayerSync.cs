@@ -26,9 +26,17 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
     Vector3 positionAtLastPacket = Vector3.zero;
     Quaternion rotationAtLastPacket = Quaternion.identity;
 
-    void Start()
+    void Awake()
     {
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
+    }
+
+    void Start()
+    {
+        if(!GameConfig.Multiplayer)
+        {
+            Destroy(this);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -69,28 +77,50 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void EnemyDamageMessage(int id, int damage)
+    public void PlayerCreatedMessage()
+    {
+        pv.RPC("PlayerCreated", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void PlayerCreated()
+    {
+        if (!pv.IsMine)
+        {
+            gsc.UpdatePlayerList();
+        }
+    }
+
+    public void PlayerDamageMessage(int damage)
+    {
+        pv.RPC("PlayerDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void PlayerDamage(int damage)
     {
         if (pv.IsMine)
         {
-            pv.RPC("EnemyDamage", RpcTarget.Others, id, damage);
+            pv.gameObject.GetComponentInChildren<CharacterHealth>().TakeDamage(damage);
         }
+    }
+
+    public void EnemyDamageMessage(int id, int damage)
+    {
+        pv.RPC("EnemyDamage", RpcTarget.All, id, damage);
     }
 
     [PunRPC]
     void EnemyDamage(int id, int damage)
     {
-        if (!pv.IsMine)
-        {
-            GameObject enemy = null;
+        GameObject enemy = null;
 
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var e in enemies)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var e in enemies)
+        {
+            if (e.GetComponent<PhotonView>().ViewID == id)
             {
-                if (e.GetComponent<PhotonView>().ViewID == id)
-                {
-                    e.GetComponent<Enemy>().AdjustHealth(damage);
-                }
+                e.GetComponent<Enemy>().TakeDamage(damage, true);
             }
         }
     }

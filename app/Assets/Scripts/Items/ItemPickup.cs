@@ -115,6 +115,6 @@ public class ItemPickup : MonoBehaviour
 
     void OnDestroy()
     {
-        player.GetComponentInChildren<CharacterHealth>().PlayerDeath -= RespawnKey;
+        if(player) player.GetComponentInChildren<CharacterHealth>().PlayerDeath -= RespawnKey;
     }
 }
