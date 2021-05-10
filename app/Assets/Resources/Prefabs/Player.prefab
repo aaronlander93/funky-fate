@@ -413,8 +413,8 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   - {fileID: 2100000, guid: 299cf81147b68c049876a850a3d003f8, type: 2}
-  - {fileID: 2100000, guid: 299cf81147b68c049876a850a3d003f8, type: 2}
-  - {fileID: 2100000, guid: 299cf81147b68c049876a850a3d003f8, type: 2}
+  - {fileID: 2100000, guid: 213100fc45b322647af5f96548d23334, type: 2}
+  - {fileID: 2100000, guid: 77b2cfe49e642ad4097c45df374ec1c6, type: 2}
   colors:
   - {r: 0, g: 0.12156863, b: 0.58431375, a: 0}
   - {r: 1, g: 0.5882353, b: 0.24705882, a: 1}

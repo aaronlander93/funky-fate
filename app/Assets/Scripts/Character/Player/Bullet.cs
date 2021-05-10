@@ -35,14 +35,25 @@ public class Bullet: MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            //damage player
+            var enemy = collision.gameObject;
+
             if (GameConfig.Multiplayer)
-            {
-                collision.gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(collision.gameObject.GetComponent<PhotonView>().ViewID, 1);
-            }
+                gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
             else
             {
-                collision.gameObject.GetComponent<Enemy>().TakeDamage(1, true);
+                var healthManager = enemy.GetComponent<Enemy>();
+
+                if (healthManager)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(1, true);
+                }
+                else
+                {
+                    // Check if enemy is a boss
+                    var bossManager = enemy.GetComponent<Boss>();
+
+                    bossManager.TakeDamage(1);
+                }
             }
         }
 
