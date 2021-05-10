@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
-public class GameSetupController : MonoBehaviourPunCallbacks
+public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     private List<Rigidbody2D> players;
     private List<Rigidbody2D> enemies;
