@@ -251,6 +251,9 @@ MonoBehaviour:
   initcycleCooldown: 4
   initNumOfAttsInCycle: 6
   initattCooldown: 1.5
+  tomatoes: {fileID: 6275661090174896577, guid: 14cd19b9821151f4089af1e1ff3d9155,
+    type: 3}
+  initDmgTime: 16
   speed: 3
   projectile: {fileID: 2880423427566641831, guid: c6e386d7fcf15d1438eb8c79afee0820,
     type: 3}

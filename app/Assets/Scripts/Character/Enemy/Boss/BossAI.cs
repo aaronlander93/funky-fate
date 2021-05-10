@@ -55,14 +55,16 @@ public class BossAI : MonoBehaviour
     private float attCooldown = 4f;      //instantiated variable determines time before attack after spawning
     private int direction = -1;     //-1 is left, 1 is right
 
+    public GameObject tomatoes;
+
     [Header("CowardlyPhase")]
-    public float initDmgTime = 8f;
-    private float dmgTime;
+    public float initDmgTime = 16f;
+    private float dmgTime = 16f;
     public float speed;
     private bool idle = true;
-    private float idleTime;
+    private float idleTime = 2f;
     
-    private float aimlessDist = 2;
+    private float aimlessDist = 2f;
 
     // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
@@ -195,7 +197,7 @@ public class BossAI : MonoBehaviour
                     case 1:
                         // JumpTowardsPlayer();
                         _anim.SetTrigger("jump");
-                        numOfJumps = UnityEngine.Random.Range(1, 3);    //number of jump attacks the boss will make
+                        numOfJumps = UnityEngine.Random.Range(1, 4);    //number of jump attacks the boss will make
                         break;
                     case 2:
                         Attack1();
@@ -226,9 +228,26 @@ public class BossAI : MonoBehaviour
         _anim.SetTrigger("attack1");
     }
 
-    private void TomatoRain()
+    //called through animation event
+    private void rainEvent()
     {
-
+        StartCoroutine(TomatoRain(20, 0.05f));
+    }
+    //spawns tomatoes that fall from the top of the stage
+    private IEnumerator TomatoRain(int numOfTomatoes, float timeBetween)
+    {
+        for (int i = 0; i < numOfTomatoes; i++)
+        {
+            if (!GameConfig.Multiplayer)
+            {
+                Instantiate(tomatoes, new Vector2(UnityEngine.Random.Range(60f, 81f), 17f), Quaternion.identity);
+            }
+            else
+            {
+                PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Hazards", "Guitar"), new Vector2(UnityEngine.Random.Range(60f, 81f), 17f), Quaternion.identity);
+            }
+            yield return new WaitForSeconds(timeBetween);
+        }
     }
 
     private void Attack2()  //Probably not going to be used; may be used as boss intro
@@ -249,6 +268,8 @@ public class BossAI : MonoBehaviour
         if (!GameConfig.Multiplayer)
         {
             var p = Instantiate(projectile, transform.position, Quaternion.identity);
+            Destroy(p.GetComponent<PhotonView>());
+            Destroy(p.GetComponent<PhotonTransformViewClassic>());
             p.GetComponent<Guitar>().direction = direction;
         }
         else
@@ -271,10 +292,12 @@ public class BossAI : MonoBehaviour
         {
             if (idle)
             {
+                _anim.SetBool("running", false);
                 Idle();
             }
             else
             {
+                _anim.SetBool("running", true);
                 RunAimlessly();
             }
         }
@@ -290,13 +313,13 @@ public class BossAI : MonoBehaviour
     {
         if(idleTime <= 0)
         {
-            idleTime = UnityEngine.Random.Range(100, 200); // * randHandler;
+            idleTime = UnityEngine.Random.Range(100, 200);
 
             idle = false;
         }
         else
         {
-            idleTime -= 1;
+            idleTime -= Time.deltaTime;
             dmgTime -= Time.deltaTime;
         }
     }
@@ -306,15 +329,13 @@ public class BossAI : MonoBehaviour
         if (aimlessDist < .3f && aimlessDist > -.3f)
         {
             // Determine distance
-            aimlessDist = UnityEngine.Random.Range(-50, 49); // * randHandler;
+            aimlessDist = UnityEngine.Random.Range(-50f, 49f); // * randHandler;
             idle = true;
-            _anim.SetBool("isRunning", false);
         }
         else
         {
             Vector2 target;
             // Move
-            _anim.SetBool("isRunning", true);
             if (aimlessDist < 0)
             {
                 // Walk to the left
