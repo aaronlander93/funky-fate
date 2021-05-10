@@ -80,7 +80,16 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 pv = photonView;
 
             // Set player material and sync it with other players
-            player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
+            if(GameConfig.PlayerColor != -1)
+            {
+                player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(GameConfig.PlayerColor);
+            }
+            else
+            {
+                player.GetComponentInChildren<MultiplayerSync>().SetMaterialMessage(PhotonNetwork.PlayerList.Length - 1);
+                GameConfig.PlayerColor = PhotonNetwork.PlayerList.Length -1;
+            }
+            
 
             // Alert other clients that player has been added
             player.GetComponentInChildren<MultiplayerSync>().PlayerCreatedMessage();
