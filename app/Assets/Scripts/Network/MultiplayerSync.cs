@@ -113,14 +113,24 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
     [PunRPC]
     void EnemyDamage(int id, int damage)
     {
-        GameObject enemy = null;
-
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var e in enemies)
+
+        foreach (var enemy in enemies)
         {
-            if (e.GetComponent<PhotonView>().ViewID == id)
+            if (enemy.GetComponent<PhotonView>().ViewID == id)
             {
-                e.GetComponent<Enemy>().TakeDamage(damage, true);
+                var healthManager = enemy.GetComponent<Enemy>();
+
+                if (healthManager)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(damage, true);
+                }
+                else
+                {
+                    // Check if enemy is a boss
+                    var bossManager = enemy.GetComponent<Boss>();
+                    bossManager.TakeDamage(damage);
+                }
             }
         }
     }
@@ -136,14 +146,13 @@ public class MultiplayerSync : MonoBehaviourPun, IPunObservable
     [PunRPC]
     void EnemyDead(int id)
     {
-        GameObject enemy = null;
-
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var e in enemies)
+
+        foreach (var enemy in enemies)
         {
-            if (e.GetComponent<PhotonView>().ViewID == id)
+            if (enemy.GetComponent<PhotonView>().ViewID == id)
             {
-                gsc.RemoveEnemy(e.GetComponent<Rigidbody2D>());
+                gsc.RemoveEnemy(enemy.GetComponent<Rigidbody2D>());
                 break;
             }
         }

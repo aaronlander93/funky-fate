@@ -92,7 +92,22 @@ public class CharacterAttack : MonoBehaviour
             if (GameConfig.Multiplayer)
                 gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
             else
-                enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
+            {
+                var healthManager = enemy.GetComponent<Enemy>();
+
+                if (healthManager)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(1, facingLeft);
+                }
+                else
+                {
+                    // Check if enemy is a boss
+                    var bossManager = enemy.GetComponent<Boss>();
+
+                    bossManager.TakeDamage(1);
+                }
+            }
+                
         }
     }
 }

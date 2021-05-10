@@ -28,6 +28,8 @@ public class BossAI : MonoBehaviour
 {
     public GameSetupController gsc;
 
+    public Boss bossState;
+
     [Header("GroundedCheck")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
@@ -86,6 +88,9 @@ public class BossAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameConfig.Multiplayer && !PhotonNetwork.IsMasterClient)
+            Destroy(this);
+
         gsc = GameObject.Find("GameSetupController").GetComponent<GameSetupController>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
@@ -216,6 +221,7 @@ public class BossAI : MonoBehaviour
             if (attPhaseCounter < 0)
             {
                 cowardPhase = true;
+                bossState.setDmgState(true);
                 _anim.SetTrigger("damagePhase");
                 attPhaseCounter = 6;
             }
@@ -305,6 +311,7 @@ public class BossAI : MonoBehaviour
         {
             dmgTime = initDmgTime;
             cowardPhase = false;
+            bossState.setDmgState(false);
             _anim.SetTrigger("attackPhase");
         }
     }

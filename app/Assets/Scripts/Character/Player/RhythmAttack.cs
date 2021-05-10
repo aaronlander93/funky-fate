@@ -202,9 +202,25 @@ public class RhythmAttack : MonoBehaviour
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, circle, Enemies);
         foreach(Collider2D c in colliders){
-            if(c.GetComponent<Enemy>())
+            var enemy = c.gameObject;
+
+            if (GameConfig.Multiplayer)
+                gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 5);
+            else
             {
-                c.GetComponent<Enemy>().TakeDamage(5, true);
+                var healthManager = enemy.GetComponent<Enemy>();
+
+                if (healthManager)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(5, true);
+                }
+                else
+                {
+                    // Check if enemy is a boss
+                    var bossManager = enemy.GetComponent<Boss>();
+
+                    bossManager.TakeDamage(5);
+                }
             }
         }
     }
