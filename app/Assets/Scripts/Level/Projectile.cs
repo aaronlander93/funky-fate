@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-;
+
     }
 
     private void FindNearestPlayer()
@@ -84,7 +84,7 @@ public class Projectile : MonoBehaviour
             
             DestroyProjectile();
         }
-        else if (collision.transform.parent != null && collision.transform.parent.tag == "ground")
+        else if (collision.transform.parent != null && collision.transform.parent.parent.tag == "ground")
         {
             // Debug.Log("Hit the ground");
             // Destroy(gameObject);

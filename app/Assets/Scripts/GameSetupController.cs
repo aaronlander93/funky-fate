@@ -35,15 +35,15 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
         sceneName = SceneManager.GetActiveScene().name;
 
         CreatePlayer();
-        CreateEnemies();
-    
+
         if(sceneName == "LV00-Backstage")
         {
+            CreateEnemies();
             CreateKeys();
         }
         else if(sceneName == "LVL01-Boss")
         {
-            CreateBoss();
+            // CreateBoss();
         }
     }
 
@@ -91,9 +91,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
             }
             
 
-            // Alert other clients that player has been added
-            player.GetComponentInChildren<MultiplayerSync>().PlayerCreatedMessage();
-
             // Alert chat that player has joined
             player.GetComponentInChildren<ChatManager>().SendMessage(GameConfig.Nickname + " has entered the room.");
 
@@ -106,13 +103,26 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         if (!GameConfig.Multiplayer)
         {
+            // // Hard-coding this for now
+            // var enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
+
+            // enemy.GetComponentInChildren<PhotonView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
+            // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
+
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
             NonMultiplayerEnemy(17f, 2f);
             NonMultiplayerEnemy(0f, 2f);
             NonMultiplayerEnemy(25f, 2f);
             NonMultiplayerEnemy(-26f, -2f);
+
         }
         else if (PhotonNetwork.IsMasterClient)
         {
+            // var enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(17f, 2f), Quaternion.identity);
+
+            // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
+            
             MultiplayerEnemy(17f, 2f);
             MultiplayerEnemy(0f, 2f);
             MultiplayerEnemy(25f, 2f);
@@ -120,13 +130,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
     }
 
-    void CreateBoss()
-    {
-        if (!GameConfig.Multiplayer)
-        {
-            var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
-        }
-    }
+    // void CreateBoss()
+    // {
+    //     if (!GameConfig.Multiplayer)
+    //     {
+    //         var boss1 = Instantiate(bossPrefab, new Vector2(68f, 3f), Quaternion.identity);
+    //     }
+    // }
 
     void CreateKeys()
     {
@@ -166,7 +176,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
-
     void MultiplayerEnemy(float x, float y)
     {
         GameObject enemy = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Heckler"), new Vector2(x, y), Quaternion.identity);
@@ -187,6 +196,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public void RemoveEnemy(Rigidbody2D enemyDefeated)
     {
         enemies.Remove(enemyDefeated);
+    }
+
+    public void RemoveBoss(Rigidbody2D boss)
+    {
+        // boss.enabled = false;
     }
 
     public void RespawnPlayer()
@@ -217,17 +231,24 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public void UpdatePlayerList()
     {
-        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        var allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
-        players.Clear();
-        
         foreach(var player in allPlayers)
         {
-            players.Add(player.GetComponentInChildren<Rigidbody2D>());
+            var rb = player.GetComponentInChildren<Rigidbody2D>();
+            if (!players.Contains(rb))
+            {
+                players.Add(rb);
+            }
         }
     }
 
     public List<Rigidbody2D> GetEnemies() { return enemies; }
 
     public List<Rigidbody2D> GetPlayers() { return players; }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        UpdatePlayerList();
+    }
 }

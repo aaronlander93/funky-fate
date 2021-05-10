@@ -175,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 128
         width: 128
         height: 128
       alignment: 9
@@ -196,7 +196,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 128
         width: 128
         height: 128
       alignment: 9
@@ -216,7 +216,7 @@ TextureImporter:
       name: cowardidle_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 0
         y: 0
         width: 128
         height: 128
@@ -237,7 +237,7 @@ TextureImporter:
       name: cowardidle_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 128
         y: 0
         width: 128
         height: 128
