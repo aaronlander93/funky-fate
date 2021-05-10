@@ -38,7 +38,6 @@ public class Boss : MonoBehaviour
         if (canTakeDmg)
         {
             health -= damage;
-            print(health);
         }
         
         if(health <= 0)
