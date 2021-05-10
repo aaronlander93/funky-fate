@@ -532,8 +532,6 @@ MonoBehaviour:
   strongPrefab: {fileID: 4933756298054153090, guid: 2ca69fc6e05d9264b9e9383dd3c1ab4c,
     type: 3}
   rend: {fileID: 979396586606236501}
-  light2D: {fileID: 3288180118954256684}
-  playerMat: {fileID: 2100000, guid: edf267a4f7f5c4796aad538064f7bcc7, type: 2}
   onBeatMat: {fileID: 2100000, guid: bcbd64935cb42ef4093e0809a26d7ecc, type: 2}
   offBeatMat: {fileID: 2100000, guid: 13c7431e9cd260b4f883fa6e06c0274f, type: 2}
   shotDelay: 0

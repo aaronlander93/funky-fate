@@ -77,16 +77,6 @@ public class Enemy : MonoBehaviour
         return dead;
     }
 
-    public void AdjustHealth(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            death();
-        }
-    }
-
     public void TakeDamage (int damage, bool damageFromRight)
     {
         _anim.SetTrigger("hurt");
