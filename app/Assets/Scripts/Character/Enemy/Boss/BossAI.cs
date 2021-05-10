@@ -5,7 +5,7 @@ This script controls the boss' decision making.
 
 There are two main phases: a cowardly phase and an attacking phase. 
 
-During the cowardly phase, the boss simply runs away from the player, 
+During the cowardly phase, the boss simply runs around the stage, 
 and is vulnerable to attacks. 
 
 During the attack phase, the boss is invulnerable, and performs a combination
@@ -56,10 +56,13 @@ public class BossAI : MonoBehaviour
     private int direction = -1;     //-1 is left, 1 is right
 
     [Header("CowardlyPhase")]
+    public float initDmgTime = 8f;
+    private float dmgTime;
     public float speed;
-    private float aimlessDist;
     private bool idle = true;
     private float idleTime;
+    
+    private float aimlessDist = 2;
 
     // used to determine players in vicinity
     private Rigidbody2D closestPlayer;
@@ -212,6 +215,7 @@ public class BossAI : MonoBehaviour
             {
                 cowardPhase = true;
                 _anim.SetTrigger("damagePhase");
+                attPhaseCounter = 6;
             }
         }
     }
@@ -263,35 +267,68 @@ public class BossAI : MonoBehaviour
 
     private void dmgPhase()
     {
-        if (idle)
+        if (dmgTime > 0)
         {
-            
-            Idle();
+            if (idle)
+            {
+                Idle();
+            }
+            else
+            {
+                RunAimlessly();
+            }
         }
         else
         {
-            
-            RunAimlessly();
+            dmgTime = initDmgTime;
+            cowardPhase = false;
+            _anim.SetTrigger("attackPhase");
         }
     }
 
     private void Idle()
     {
-        if(idleTime == 0)
+        if(idleTime <= 0)
         {
-            idleTime = UnityEngine.Random.Range(50, 200); // * randHandler;
+            idleTime = UnityEngine.Random.Range(100, 200); // * randHandler;
 
             idle = false;
         }
         else
         {
             idleTime -= 1;
+            dmgTime -= Time.deltaTime;
         }
     }
 
     private void RunAimlessly()
     {
-        
+        if (aimlessDist < .3f && aimlessDist > -.3f)
+        {
+            // Determine distance
+            aimlessDist = UnityEngine.Random.Range(-50, 49); // * randHandler;
+            idle = true;
+            _anim.SetBool("isRunning", false);
+        }
+        else
+        {
+            Vector2 target;
+            // Move
+            _anim.SetBool("isRunning", true);
+            if (aimlessDist < 0)
+            {
+                // Walk to the left
+                target = new Vector2(rb.position.x + aimlessDist++, rb.position.y);
+                gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                // Walk to the right
+                target = new Vector2(rb.position.x + aimlessDist--, rb.position.y);
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
     }
 
     private void JumpTowardsPlayer()
