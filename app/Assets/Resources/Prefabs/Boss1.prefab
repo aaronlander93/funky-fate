@@ -441,41 +441,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 0
-  ShowParameterInspector: 0
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: attackPhase
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: damagePhase
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: running
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: attack1
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: attack2
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: attack3
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: attack3p2
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: jump
   - Type: 1
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: AirSpeedY
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: grounded
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!114 &4186279589354154168
 MonoBehaviour:
