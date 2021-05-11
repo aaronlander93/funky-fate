@@ -111,10 +111,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
             // enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
             // enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
-            NonMultiplayerEnemy(17f, 2f);
-            NonMultiplayerEnemy(0f, 2f);
-            NonMultiplayerEnemy(25f, 2f);
-            NonMultiplayerEnemy(-26f, -2f);
+            // NonMultiplayerEnemy(17f, 2f);
+            // NonMultiplayerEnemy(0f, 2f);
+            // NonMultiplayerEnemy(25f, 2f);
+            // NonMultiplayerEnemy(-26f, -2f);
+            StartCoroutine("NonMultiplayerEnemy");
 
         }
         else if (PhotonNetwork.IsMasterClient)
@@ -163,11 +164,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
         return spawnLoc;
     }
 
-    void NonMultiplayerEnemy(float x, float y)
+    private IEnumerator NonMultiplayerEnemy()
     {
         // Hard-coding this for now
-        GameObject enemy = Instantiate(hecklerPrefab, new Vector2(x, y), Quaternion.identity);
-
+        yield return new WaitForSeconds(0);
+        GameObject enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
+        enemy = Instantiate(hecklerPrefab, new Vector2(0f, 2f), Quaternion.identity);
+        enemy = Instantiate(hecklerPrefab, new Vector2(25f, 2f), Quaternion.identity);
+        enemy = Instantiate(hecklerPrefab, new Vector2(-26f, -2f), Quaternion.identity);
         enemy.GetComponentInChildren<PhotonView>().enabled = false;
         enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
         enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
