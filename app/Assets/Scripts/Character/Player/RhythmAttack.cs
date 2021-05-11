@@ -72,8 +72,9 @@ public class RhythmAttack : MonoBehaviour
             MusicManager.OffBeat += ToggleOffBeatColor;
         }
 
-        playerMat = gameObject.GetComponentInChildren<SpriteRenderer>().material;
-        light2D = gameObject.GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+        rend = gameObject.GetComponent<SpriteRenderer>();
+        playerMat = rend.material;
+        light2D = gameObject.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
         origColor = light2D.color;
     }
 
@@ -223,5 +224,14 @@ public class RhythmAttack : MonoBehaviour
                 }
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        MusicManager.OnBeat -= ComboCheck;
+        MusicManager.OnBeat -= ToggleOnBeatColor;
+
+        MusicManager.OffBeat -= ComboClear;
+        MusicManager.OffBeat -= ToggleOffBeatColor;
     }
 }
