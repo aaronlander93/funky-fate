@@ -65,7 +65,11 @@ public class BossAI : MonoBehaviour
     public float speed;
     private bool idle = true;
     private float idleTime = 2f;
-    
+
+    [Header("Audio")]
+    public GameObject MusicPhase1;
+    public GameObject MusicPhase2;
+
     private float aimlessDist = 2f;
 
     // used to determine players in vicinity
@@ -96,6 +100,8 @@ public class BossAI : MonoBehaviour
         cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         
         gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        MusicPhase1.SetActive(true);
+        MusicPhase1.SetActive(false);
 
         _anim = GetComponent<Animator>();
         _anim.SetFloat("AirSpeedY", -1f);
@@ -108,10 +114,14 @@ public class BossAI : MonoBehaviour
 
         if(cowardPhase)
         {
+            MusicPhase2.SetActive(true);
             dmgPhase();
+            MusicPhase2.SetActive(false);
         }
         else if (hasGuitar)
         {
+            MusicPhase1.SetActive(true);
+            MusicPhase1.SetActive(false);
             bool landCheck = isGrounded;
             isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
             

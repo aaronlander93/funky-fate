@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{248a7fa5-3e5f-43db-bfc8-dd2c73eb319b}">
+		<property name="assetPath">
+			<value>levellayers.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>78.497959183673473</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3cd35742-572f-431b-a1ee-6f3983e8f761}</destination>
+		</relationship>
+	</object>
+</objects>
