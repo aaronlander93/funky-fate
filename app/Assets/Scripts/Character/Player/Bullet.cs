@@ -38,7 +38,9 @@ public class Bullet: MonoBehaviour
             var enemy = collision.gameObject;
 
             if (GameConfig.Multiplayer)
-                gameObject.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
+            {
+                enemy.GetComponent<MultiplayerSync>().EnemyDamageMessage(enemy.GetComponent<PhotonView>().ViewID, 1);
+            }
             else
             {
                 var healthManager = enemy.GetComponent<Enemy>();
