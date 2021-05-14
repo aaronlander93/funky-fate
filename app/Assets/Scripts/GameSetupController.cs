@@ -169,16 +169,18 @@ public class GameSetupController : MonoBehaviourPunCallbacks, IInRoomCallbacks
         // Hard-coding this for now
         yield return new WaitForSeconds(0);
         GameObject enemy = Instantiate(hecklerPrefab, new Vector2(17f, 2f), Quaternion.identity);
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
         enemy = Instantiate(hecklerPrefab, new Vector2(0f, 2f), Quaternion.identity);
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
         enemy = Instantiate(hecklerPrefab, new Vector2(25f, 2f), Quaternion.identity);
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
         enemy = Instantiate(hecklerPrefab, new Vector2(-26f, -2f), Quaternion.identity);
+        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
         enemy.GetComponentInChildren<PhotonView>().enabled = false;
         enemy.GetComponentInChildren<PhotonAnimatorView>().enabled = false;
         enemy.GetComponentInChildren<PhotonTransformViewClassic>().enabled = false;
 
         // enemy.GetComponent<EnemyAI>().randHandler = (float)rand.Next(0, 50);
-
-        enemies.Add(enemy.GetComponentInChildren<Rigidbody2D>());
     }
     void MultiplayerEnemy(float x, float y)
     {
